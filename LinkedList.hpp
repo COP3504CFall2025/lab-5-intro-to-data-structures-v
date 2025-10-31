@@ -7,6 +7,12 @@ using namespace std;
 template <typename T>
 class LinkedList {
 public:
+	struct Node {
+		T data;
+		Node* prev;
+		Node* next;
+		Node(T data, Node* prev, Node* next): data(data), prev(prev), next(next) {};
+	};
 	// Behaviors
 	void printForward() const;
 	void printReverse() const;
@@ -32,17 +38,16 @@ public:
 	LinkedList<T>& operator=(const LinkedList<T>& rhs);
 
 	// Construction/Destruction
-	LinkedList();
+	LinkedList() = default;
 	LinkedList(const LinkedList<T>& list);
 	LinkedList(LinkedList<T>&& other) noexcept;
 	~LinkedList();
 
 private:
 	// Stores pointers to first and last nodes and count
-	Node* head;
-	Node* tail;
-	unsigned int count;
+	Node* head = nullptr;
+	Node* tail = nullptr;
+	unsigned int count = 0;
 
 };
-
 

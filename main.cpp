@@ -1,10 +1,10 @@
-#ifdef MAIN
+// #ifdef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
 #include "ABS.hpp"
 #include "Interfaces.hpp"
-#include "LinkedList.hpp"
+#include "LinkedList.cpp"
 #include "LLDQ.hpp"
 #include "LLQ.hpp"
 #include "LLS.hpp"
@@ -20,9 +20,14 @@
 
 int main() {
 
-
+    LinkedList<int> l;
+    l.addHead(5);
+    l.addHead(10);
+    l.addHead(15);
+    l.printReverse();
+    l.printForward();
     return 0;
 }
 
 
-#endif
+// #endif
