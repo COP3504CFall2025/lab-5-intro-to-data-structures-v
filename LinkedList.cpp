@@ -36,14 +36,32 @@ void LinkedList<T>::addHead(const T& data) {
 }
 template <typename T>
 void LinkedList<T>::addTail(const T& data) {
-    head = new Node(data, nullptr, head);
+    tail = new Node(data, tail, nullptr);
+    if (tail->prev) {
+        tail->prev->next = tail;
+    }
     if (++count == 1) {
-        tail = head;
+        head = tail;
     }
 }
 
 // // Removal
-// bool removeHead();
+template <typename T>
+bool LinkedList<T>::removeHead() {
+    if (head) {
+        Node* next = head->next;
+        if (next) {
+            delete head;
+            head = next;
+            next->prev = nullptr;
+        } else {
+            delete head;
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
 // bool removeTail();
 // void Clear();
 
@@ -87,5 +105,3 @@ template <typename T>
 const typename LinkedList<T>::Node* LinkedList<T>::getTail() const {
     return tail;
 }
-// Node* getTail();
-// const Node* getTail() const;

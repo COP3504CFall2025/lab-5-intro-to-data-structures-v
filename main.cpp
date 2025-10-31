@@ -24,8 +24,10 @@ int main() {
     l.addHead(5);
     l.addHead(10);
     l.addHead(15);
-    l.printReverse();
+    l.addTail(0);
+    l.removeHead();
     l.printForward();
+    l.printReverse();
     return 0;
 }
 
