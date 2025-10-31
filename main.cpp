@@ -25,7 +25,9 @@ int main() {
     l.addHead(10);
     l.addHead(15);
     l.addTail(0);
-    l.removeHead();
+
+    l.Clear();
+    l.addHead(10);
     l.printForward();
     l.printReverse();
     return 0;

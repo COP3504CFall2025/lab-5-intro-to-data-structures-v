@@ -62,8 +62,36 @@ bool LinkedList<T>::removeHead() {
         return false;
     }
 }
-// bool removeTail();
-// void Clear();
+template <typename T>
+bool LinkedList<T>::removeTail() {
+    if (tail) {
+        Node* prev = tail->prev;
+        if (prev) {
+            delete tail;
+            tail = prev;
+            prev->next = nullptr;
+        } else {
+            delete tail;
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
+template <typename T>
+void LinkedList<T>::Clear() {
+    Node* prev = head;
+    Node* node;
+    if (prev) {
+        while ((node = prev->next)) {
+            delete prev;
+            prev = node;
+        }
+    }
+    delete prev;
+    head = nullptr;
+    tail = nullptr;
+}
 
 // // Operators
 // LinkedList<T>& operator=(LinkedList<T>&& other) noexcept;
@@ -74,15 +102,7 @@ bool LinkedList<T>::removeHead() {
 // LinkedList(LinkedList<T>&& other) noexcept;
 template <typename T>
 LinkedList<T>::~LinkedList() {
-    Node* prev = head;
-    Node* node;
-    if (node) {
-        while ((node = prev->next)) {
-            delete prev;
-            prev = node;
-        }
-    }
-    delete prev;
+    Clear();
 }
 
 // Accessors
