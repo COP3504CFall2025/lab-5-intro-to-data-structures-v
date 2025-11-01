@@ -14,8 +14,8 @@ public:
 		Node(T data, Node* prev, Node* next): data(data), prev(prev), next(next) {};
 	};
 	// Behaviors
-	void printForward() const;
-	void printReverse() const;
+	void PrintForward() const;
+	void PrintReverse() const;
 
 	// Accessors
 	[[nodiscard]] unsigned int getCount() const;
@@ -25,12 +25,12 @@ public:
 	const Node* getTail() const;
 
 	// Insertion
-	void addHead(const T& data);
-	void addTail(const T& data);
+	void AddHead(const T& data);
+	void AddTail(const T& data);
 
 	// Removal
-	bool removeHead();
-	bool removeTail();
+	bool RemoveHead();
+	bool RemoveTail();
 	void Clear();
 
 	// Operators

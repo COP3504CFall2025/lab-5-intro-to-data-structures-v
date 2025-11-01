@@ -1,7 +1,7 @@
 #include "LinkedList.hpp"
 // Behaviors
 template <typename T>
-void LinkedList<T>::printForward() const {
+void LinkedList<T>::PrintForward() const {
     Node* node = head;
     if (node) {
         cout << node->data << " ";
@@ -12,7 +12,7 @@ void LinkedList<T>::printForward() const {
     }
 }
 template <typename T>
-void LinkedList<T>::printReverse() const {
+void LinkedList<T>::PrintReverse() const {
     Node* node = tail;
     if (node) {
         cout << node->data << " ";
@@ -25,7 +25,7 @@ void LinkedList<T>::printReverse() const {
 
 // // Insertion
 template <typename T>
-void LinkedList<T>::addHead(const T& data) {
+void LinkedList<T>::AddHead(const T& data) {
     head = new Node(data, nullptr, head);
     if (head->next) {
         head->next->prev = head;
@@ -35,7 +35,7 @@ void LinkedList<T>::addHead(const T& data) {
     }
 }
 template <typename T>
-void LinkedList<T>::addTail(const T& data) {
+void LinkedList<T>::AddTail(const T& data) {
     tail = new Node(data, tail, nullptr);
     if (tail->prev) {
         tail->prev->next = tail;
@@ -47,7 +47,7 @@ void LinkedList<T>::addTail(const T& data) {
 
 // // Removal
 template <typename T>
-bool LinkedList<T>::removeHead() {
+bool LinkedList<T>::RemoveHead() {
     if (head) {
         Node* next = head->next;
         if (next) {
@@ -63,7 +63,7 @@ bool LinkedList<T>::removeHead() {
     }
 }
 template <typename T>
-bool LinkedList<T>::removeTail() {
+bool LinkedList<T>::RemoveTail() {
     if (tail) {
         Node* prev = tail->prev;
         if (prev) {
