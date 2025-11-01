@@ -98,7 +98,21 @@ void LinkedList<T>::Clear() {
 // LinkedList<T>& operator=(const LinkedList<T>& rhs);
 
 // Construction/Destruction
-// LinkedList(const LinkedList<T>& list);
+template <typename T>
+LinkedList<T>::LinkedList(const LinkedList<T>& list) {
+    count = list.count;
+    if (list.head) {
+        head = new Node(list.head->data, nullptr, nullptr);
+        Node* current_list_node = head;
+        Node* other_list_node = list.head;
+        while ((other_list_node = other_list_node->next)) {
+            current_list_node->next = new Node(other_list_node->data, current_list_node, nullptr);
+            current_list_node = current_list_node->next;
+        }
+        // current_list_node->next = new Node(list.tail->data, current_list_node, nullptr);
+        tail = current_list_node;
+}
+}
 // LinkedList(LinkedList<T>&& other) noexcept;
 template <typename T>
 LinkedList<T>::~LinkedList() {
@@ -106,7 +120,10 @@ LinkedList<T>::~LinkedList() {
 }
 
 // Accessors
-// [[nodiscard]] unsigned int getCount() const;
+template <typename T>
+[[nodiscard]] unsigned int LinkedList<T>::getCount() const {
+    return count;
+}
 template <typename T>
 typename LinkedList<T>::Node* LinkedList<T>::getHead() {
     return head;

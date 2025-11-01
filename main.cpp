@@ -25,11 +25,10 @@ int main() {
     l.addHead(10);
     l.addHead(15);
     l.addTail(0);
-
-    l.Clear();
-    l.addHead(10);
     l.printForward();
-    l.printReverse();
+    LinkedList<int> l2 = l;
+    l2.printForward();
+    cout << l2.getTail()->data << endl;
     return 0;
 }
 
