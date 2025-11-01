@@ -20,6 +20,7 @@
 
 int main() {
 
+<<<<<<< HEAD
     // LinkedList<int> l;
     // l.addHead(5);
     // l.addHead(10);
@@ -41,6 +42,17 @@ int main() {
     //     cout << data[i] << " ";
     // }
     // cout << endl;
+=======
+    LinkedList<int> l;
+    l.addHead(5);
+    l.addHead(10);
+    l.addHead(15);
+    l.addTail(0);
+    l.printForward();
+    LinkedList<int> l2 = l;
+    l2.printForward();
+    cout << l2.getTail()->data << endl;
+>>>>>>> aaa82ab (copy constructor)
     return 0;
 }
 
