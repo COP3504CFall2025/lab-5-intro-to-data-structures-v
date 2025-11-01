@@ -96,7 +96,7 @@ void LinkedList<T>::Clear() {
 
 // // Operators
 template <typename T>
-LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& other) noexcept {
+LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& list) noexcept {
     Clear();
     head = list.head;
     tail = list.tail;
@@ -106,7 +106,7 @@ LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& other) noexcept {
     list.count = 0;
 }
 template <typename T>
-LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& other) {
+LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& list) {
     Clear();
     count = list.count;
     if (list.head) {
