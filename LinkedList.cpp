@@ -1,7 +1,7 @@
 #include "LinkedList.hpp"
 // Behaviors
 template <typename T>
-void LinkedList<T>::PrintForward() const {
+void LinkedList<T>::printForward() const {
     Node* node = head;
     if (node) {
         cout << node->data << " ";

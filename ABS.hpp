@@ -11,13 +11,13 @@ template<typename T>
 class ABS : public StackInterface<T> {
 public:
     // Big 5 + Parameterized Constructor
-    ABS();
-    explicit ABS(const size_t capacity);
+    ABS() = default;
+    explicit ABS(const size_t capacity): capacity_(capacity) {};
     ABS(const ABS& other);
     ABS& operator=(const ABS& rhs);
     ABS(ABS&& other) noexcept;
     ABS& operator=(ABS&& rhs) noexcept;
-    ~ABS() noexcept override;
+    ~ABS() noexcept;
 
     // Get the number of items in the ABS
     [[nodiscard]] size_t getSize() const noexcept override;
@@ -36,8 +36,8 @@ public:
     T pop() override;
 
 private:
-    size_t capacity_;
-    size_t curr_size_;
-    T* array_;
+    size_t capacity_ = 1;
+    size_t curr_size_ = 0;
+    T* array_ = new T[capacity_];
     static constexpr size_t scale_factor_ = 2;
 };

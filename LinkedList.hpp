@@ -14,7 +14,7 @@ public:
 		Node(T data, Node* prev, Node* next): data(data), prev(prev), next(next) {};
 	};
 	// Behaviors
-	void PrintForward() const;
+	void printForward() const;
 	void PrintReverse() const;
 
 	// Accessors

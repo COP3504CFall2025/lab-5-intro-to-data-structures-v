@@ -2,7 +2,7 @@
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
-#include "ABS.hpp"
+#include "ABS.cpp"
 #include "Interfaces.hpp"
 #include "LinkedList.cpp"
 #include "LLDQ.hpp"
@@ -20,15 +20,24 @@
 
 int main() {
 
-    LinkedList<int> l;
-    l.addHead(5);
-    l.addHead(10);
-    l.addHead(15);
-    l.addTail(0);
-    l.printForward();
-    LinkedList<int> l2 = l;
-    l2.printForward();
-    cout << l2.getTail()->data << endl;
+    // LinkedList<int> l;
+    // l.addHead(5);
+    // l.addHead(10);
+    // l.addHead(15);
+    // l.addTail(0);
+    // l.printForward();
+    // LinkedList<int> l2 = l;
+    // l2.printForward();
+    // cout << l2.getTail()->data << endl;
+
+    ABS<int> stack;
+    stack.push(5);
+    stack.push(10);
+    int* data = stack.getData();
+    for (size_t i = 0; i < stack.getSize(); i++) {
+        cout << data[i] << " ";
+    }
+    cout << endl;
     return 0;
 }
 
