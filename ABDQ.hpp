@@ -114,6 +114,10 @@ public:
   // -- Deletion --
 
   T popFront() override {
+    if (size_ == 0) {
+      throw std::runtime_error("Cannot pop from empty deque");
+    }
+
     T temp = data_[0];
 
     for (size_t i = 0; i < size_ - 1; i++) {
@@ -125,13 +129,31 @@ public:
     return temp;
   }
 
-  T popBack() override { return data_[size_--]; }
+  T popBack() override {
+    if (size_ == 0) {
+      throw std::runtime_error("Cannot pop from empty deque");
+    }
+
+    return data_[size_--];
+  }
 
   // -- Access --
 
-  const T &front() const override { return data_[0]; }
+  const T &front() const override {
+    if (size_ == 0) {
+      throw std::runtime_error("Cannot access elements from empty deque");
+    }
 
-  const T &back() const override { return data_[size_]; }
+    return data_[0];
+  }
+
+  const T &back() const override {
+    if (size_ == 0) {
+      throw std::runtime_error("Cannot access elements from empty deque");
+    }
+
+    return data_[size_];
+  }
 
   // Getters
   std::size_t getSize() const noexcept override { return size_; }
