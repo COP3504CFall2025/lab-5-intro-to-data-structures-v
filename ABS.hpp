@@ -1,43 +1,110 @@
 #pragma once
 
+#include "Interfaces.hpp"
 #include <cstddef>
 #include <stdexcept>
-#include "Interfaces.hpp"
 
 // Technically bad, but size_t isn't likely to conflict with any client code.
 using std::size_t;
 
-template<typename T>
-class ABS : public StackInterface<T> {
+template <typename T> class ABS : public StackInterface<T> {
 public:
-    // Big 5 + Parameterized Constructor
-    ABS();
-    explicit ABS(const size_t capacity);
-    ABS(const ABS& other);
-    ABS& operator=(const ABS& rhs);
-    ABS(ABS&& other) noexcept;
-    ABS& operator=(ABS&& rhs) noexcept;
-    ~ABS() noexcept override;
+  // -- Big 5 + Parameterized Constructor --
 
-    // Get the number of items in the ABS
-    [[nodiscard]] size_t getSize() const noexcept override;
+  ABS() : capacity_(1), curr_size_(0), array_(new T[1]) {}
 
-    // Get the max size of the ABS
-    [[nodiscard]] size_t getMaxCapacity() const noexcept;
+  explicit ABS(const size_t capacity)
+      : capacity_(capacity), curr_size_(0), array_(new T[capacity]) {}
 
-    // Return underlying data for the stack
-    [[nodiscard]] T* getData() const noexcept;
+  ABS(const ABS &other)
+      : capacity_(other.capacity_), curr_size_(other.curr_size_),
+        array_(new T[other.capacity_]) {
+    for (size_t i = 0; i < other.curr_size_; i++) {
+      array_[i] = other.array_[i];
+    }
+  }
 
-    // Push item onto the stack
-    void push(const T& data) override;
+  ABS &operator=(const ABS &rhs) {
+    if (this = &rhs) {
+      return *this;
+    }
 
-    T peek() const override;
+    T *temp = new T[other.capacity_];
 
-    T pop() override;
+    capacity_ = other.capacity_;
+    curr_size_ = other.curr_size_;
+    array_ = temp;
+
+    for (size_t i = 0; i < other.curr_size_; i++) {
+      array_[i] = other.array_[i];
+    }
+  }
+
+  ABS(ABS &&other) noexcept
+      : capacity_(other.capacity_), curr_size_(other.curr_size_),
+        array_(other.array_) {
+    other.capacity_ = 0;
+    other.curr_size_ = 0;
+    other.array_ = nullptr;
+  }
+
+  ABS &operator=(ABS &&rhs) noexcept {
+    if (this = &rhs) {
+      return *this;
+    }
+
+    T *temp = new T[other.capacity_];
+
+    capacity_ = other.capacity_;
+    curr_size_ = other.curr_size_;
+    array_ = temp;
+
+    for (size_t i = 0; i < other.curr_size_; i++) {
+      array_[i] = other.array_[i];
+    }
+
+    other.capacity_ = 0;
+    other.curr_size_ = 0;
+    delete[] other.array_;
+    other.array_ = nullptr;
+  }
+
+  ~ABS() noexcept override { delete[] array_; }
+
+  // Get the number of items in the ABS
+  [[nodiscard]] size_t getSize() const noexcept override { return curr_size_; }
+
+  // Get the max size of the ABS
+  [[nodiscard]] size_t getMaxCapacity() const noexcept { return capacity_; }
+
+  // Return underlying data for the stack
+  [[nodiscard]] T *getData() const noexcept { return array_; }
+
+  // Push item onto the stack
+  void push(const T &data) override {
+    if (size_ >= capacity_) {
+      capacity_ *= scale_factor_;
+
+      T *temp = new[capacity_];
+
+      for (size_t i = 0; i < curr_size_; i++) {
+        temp[i] = array_[i];
+      }
+
+      delete[] array_;
+      array_ = temp;
+    }
+
+    array_[++curr_size_] = data;
+  }
+
+  T peek() const override { return array_[curr_size_]; }
+
+  T pop() override { return array_[curr_size_--]; }
 
 private:
-    size_t capacity_;
-    size_t curr_size_;
-    T* array_;
-    static constexpr size_t scale_factor_ = 2;
+  size_t capacity_;
+  size_t curr_size_;
+  T *array_;
+  static constexpr size_t scale_factor_ = 2;
 };

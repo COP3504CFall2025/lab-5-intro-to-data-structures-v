@@ -2,26 +2,27 @@
 
 #include "Interfaces.hpp"
 #include "LinkedList.hpp"
-#include <stdlib.h>
 #include <stdexcept>
+#include <stdlib.h>
 
-template <typename T>
-class LLS : public StackInterface<T> {
-private:
-    LinkedList<T> list;
+template <typename T> class LLS : public StackInterface<T> {
 public:
-    // Constructor
-    LLS();
+  // Insertion
+  void push(const T &item) override { list.addHead(item); }
 
-    // Insertion
-    void push(const T& item) override;
+  // Deletion
+  T pop() override {
+    T temp = list.getHead();
+    list.removeHead();
+    return temp;
+  }
 
-    // Deletion
-    T pop() override;
+  // Access
+  T peek() const override { return list.getHead(); }
 
-    // Access
-    T peek() const override;
+  // Getters
+  std::size_t getSize() const noexcept override { return list.getCount(); }
 
-    //Getters
-    std::size_t getSize() const noexcept override;
+private:
+  LinkedList<T> list;
 };

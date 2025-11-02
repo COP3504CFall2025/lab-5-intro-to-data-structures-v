@@ -2,27 +2,28 @@
 
 #include "Interfaces.hpp"
 #include "LinkedList.hpp"
-#include <stdlib.h>
 #include <stdexcept>
+#include <stdlib.h>
 
-template <typename T>
-class LLQ : public QueueInterface<T> {
-private:
-    LinkedList<T> list;
+template <typename T> class LLQ : public QueueInterface<T> {
+
 public:
-    // Constructor
-    LLQ();
+  // Insertion
+  void enqueue(const T &item) override { list.addTail(item); }
 
-    // Insertion
-    void enqueue(const T& item) override;
+  // Deletion
+  T dequeue() override {
+    T temp = list.getHead();
+    list.removeHead();
+    return temp;
+  }
 
-    // Deletion
-    T dequeue() override;
+  // Access
+  T peek() const override { return list.getHead(); }
 
-    // Access
-    T peek() const override;
+  // Getter
+  std::size_t getSize() const noexcept override { return list.getCount(); }
 
-    // Getter
-    std::size_t getSize() const noexcept override;
-
+private:
+  LinkedList<T> list;
 };
