@@ -22,7 +22,7 @@ public:
 			cout << endl;
 		}
 	}
-	void PrintReverse() const {
+	void printReverse() const {
 		Node* node = tail;
 		if (node) {
 			cout << node->data << " ";
@@ -41,7 +41,7 @@ public:
 	const Node* getTail() const {return tail;}
 
 	// Insertion
-	void AddHead(const T& data) {
+	void addHead(const T& data) {
 		head = new Node(data, nullptr, head);
 		if (head->next) {
 			head->next->prev = head;
@@ -50,7 +50,7 @@ public:
 			tail = head;
 		}
 	}
-	void AddTail(const T& data) {
+	void addTail(const T& data) {
 		tail = new Node(data, tail, nullptr);
 		if (tail->prev) {
 			tail->prev->next = tail;
@@ -61,7 +61,7 @@ public:
 	}
 
 	// Removal
-	bool RemoveHead() {
+	bool removeHead() {
 		if (head) {
 			Node* next = head->next;
 			if (next) {
@@ -76,7 +76,7 @@ public:
 			return false;
 		}
 	}
-	bool RemoveTail() {
+	bool removeTail() {
 		if (tail) {
 			Node* prev = tail->prev;
 			if (prev) {
@@ -107,7 +107,7 @@ public:
 	}
 
 	// Operators
-	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
+	LinkedList<T>& operator=(LinkedList<T>&& list) noexcept {
 		Clear();
 		head = list.head;
 		tail = list.tail;
@@ -146,7 +146,7 @@ public:
 			tail = current_list_node;
 		}
 	}
-	LinkedList(LinkedList<T>&& other) noexcept {
+	LinkedList(LinkedList<T>&& list) noexcept {
 		head = list.head;
 		tail = list.tail;
 		count = list.count;
