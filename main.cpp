@@ -1,12 +1,12 @@
-// #ifdef MAIN
+#ifdef MAIN
 
-// #include "ABDQ.hpp"
-// #include "ABQ.hpp"
-// #include "ABS.hpp"
-// #include "Interfaces.hpp"
-// #include "LLDQ.hpp"
-// #include "LLQ.hpp"
-// #include "LLS.hpp"
+#include "ABDQ.hpp"
+#include "ABQ.hpp"
+#include "ABS.hpp"
+#include "Interfaces.hpp"
+#include "LLDQ.hpp"
+#include "LLQ.hpp"
+#include "LLS.hpp"
 #include "LinkedList.hpp"
 #include <iostream>
 
@@ -19,22 +19,6 @@
 
 */
 
-int main() {
-  LinkedList<int> ll;
-  ll.addHead(1);
-  ll.addHead(2);
-  ll.addHead(3);
-  ll.addTail(4);
-  std::cout << ll.getTail()->data;
-  ll.removeTail();
-  std::cout << ll.getHead()->data;
-  ll.removeHead();
-  std::cout << ll.getHead()->data;
-  ll.removeHead();
-  std::cout << ll.getHead()->data;
-  ll.removeHead();
+int main() { return 0; }
 
-  return 0;
-}
-
-// #endif
+#endif

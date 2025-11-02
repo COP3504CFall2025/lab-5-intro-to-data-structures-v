@@ -11,13 +11,13 @@ template <typename T> class ABQ : public QueueInterface<T> {
 public:
   // -- Constructors + Big 5 --
 
-  ABQ() : capacity_(1), size_(0), array_(new T[1]) {}
+  ABQ() : capacity_(1), curr_size_(0), array_(new T[1]) {}
 
   explicit ABQ(const size_t capacity)
-      : capacity_(capacity), size_(0), array_(new T[capacity]) {}
+      : capacity_(capacity), curr_size_(0), array_(new T[capacity]) {}
 
   ABQ(const ABQ &other)
-      : capacity_(other.capacity_), size_(other.size_),
+      : capacity_(other.capacity_), curr_size_(other.size_),
         array_(new T[other.capacity_]) {
     for (size_t i = 0; i < other.size_; i++) {
       array_[i] = other.array_[i];
@@ -35,14 +35,16 @@ public:
     curr_size_ = rhs.curr_size_;
     array_ = temp;
 
-    for (size_t i = 0; i < other.size_; i++) {
-      array_[i] = other.array_[i];
+    for (size_t i = 0; i < rhs.curr_size_; i++) {
+      array_[i] = rhs.array_[i];
     }
   }
 
-  ABQ(ABQ &&other)
-      : capacity_(other.capacity_), size_(other.size_),
-        array_(other.array_) noexcept {
+  ABQ(ABQ &&other) noexcept {
+    capacity_ = other.capacity_;
+    curr_size_ = other.curr_size_;
+    array_ = other.array_;
+
     other.capacity_ = 0;
     other.size_ = 0;
     other.array_ = nullptr;
@@ -74,10 +76,10 @@ public:
 
   // Insertion
   void enqueue(const T &data) override {
-    if (size_ >= capacity_) {
+    if (curr_size_ >= capacity_) {
       capacity_ *= scale_factor_;
 
-      T *temp = new[capacity_];
+      T *temp = new T[capacity_];
 
       for (size_t i = 0; i < curr_size_; i++) {
         temp[i] = array_[i];
@@ -98,7 +100,7 @@ public:
     T temp = array_[0];
 
     for (size_t i = 0; i < curr_size_ - 1; i++) {
-      array_[i] = array[i + 1];
+      array_[i] = array_[i + 1];
     }
 
     curr_size_--;

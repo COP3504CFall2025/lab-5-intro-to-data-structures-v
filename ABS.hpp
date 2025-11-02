@@ -29,20 +29,22 @@ public:
       return *this;
     }
 
-    T *temp = new T[other.capacity_];
+    T *temp = new T[rhs.capacity_];
 
-    capacity_ = other.capacity_;
-    curr_size_ = other.curr_size_;
+    capacity_ = rhs.capacity_;
+    curr_size_ = rhs.curr_size_;
     array_ = temp;
 
-    for (size_t i = 0; i < other.curr_size_; i++) {
-      array_[i] = other.array_[i];
+    for (size_t i = 0; i < rhs.curr_size_; i++) {
+      array_[i] = rhs.array_[i];
     }
   }
 
-  ABS(ABS &&other) noexcept
-      : capacity_(other.capacity_), curr_size_(other.curr_size_),
-        array_(other.array_) {
+  ABS(ABS &&other) noexcept {
+    capacity_ = other.capacity_;
+    curr_size_ = other.curr_size_;
+    array_ = other.array_;
+
     other.capacity_ = 0;
     other.curr_size_ = 0;
     other.array_ = nullptr;
@@ -53,20 +55,20 @@ public:
       return *this;
     }
 
-    T *temp = new T[other.capacity_];
+    T *temp = new T[rhs.capacity_];
 
-    capacity_ = other.capacity_;
-    curr_size_ = other.curr_size_;
+    capacity_ = rhs.capacity_;
+    curr_size_ = rhs.curr_size_;
     array_ = temp;
 
-    for (size_t i = 0; i < other.curr_size_; i++) {
-      array_[i] = other.array_[i];
+    for (size_t i = 0; i < rhs.curr_size_; i++) {
+      array_[i] = rhs.array_[i];
     }
 
-    other.capacity_ = 0;
-    other.curr_size_ = 0;
-    delete[] other.array_;
-    other.array_ = nullptr;
+    rhs.capacity_ = 0;
+    rhs.curr_size_ = 0;
+    delete[] rhs.array_;
+    rhs.array_ = nullptr;
   }
 
   ~ABS() noexcept override { delete[] array_; }
@@ -82,10 +84,10 @@ public:
 
   // Push item onto the stack
   void push(const T &data) override {
-    if (size_ >= capacity_) {
+    if (curr_size_ >= capacity_) {
       capacity_ *= scale_factor_;
 
-      T *temp = new[capacity_];
+      T *temp = new T[capacity_];
 
       for (size_t i = 0; i < curr_size_; i++) {
         temp[i] = array_[i];

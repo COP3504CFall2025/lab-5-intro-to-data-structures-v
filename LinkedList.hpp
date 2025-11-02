@@ -2,6 +2,12 @@
 #include <iostream>
 
 template <typename T> class LinkedList {
+  struct Node {
+    T data;
+    Node *prev;
+    Node *next;
+  };
+
 public:
   // -- Behaviors --
 
@@ -175,12 +181,6 @@ public:
   ~LinkedList() { clear(); }
 
 private:
-  struct Node {
-    T data;
-    Node *prev;
-    Node *next;
-  };
-
   // Stores pointers to first and last nodes and count
   Node *head;
   Node *tail;

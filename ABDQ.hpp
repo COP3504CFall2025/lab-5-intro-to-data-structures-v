@@ -45,7 +45,7 @@ public:
       temp[i] = other.data_[i];
     }
 
-    data = temp;
+    data_ = temp;
     capacity_ = other.capacity_;
     size_ = other.size_;
     front_ = other.front_;
@@ -54,12 +54,15 @@ public:
     return *this;
   }
 
-  ABDQ &operator=(ABDQ &&other) noexcept
-      : data_(other.data_), size_(other.size_), front_(other.front_),
-       back_(other.back_) {
+  ABDQ &operator=(ABDQ &&other) noexcept {
     if (this == &other) {
       return *this;
     }
+
+    data_ = other.data_;
+    size_ = other.size_;
+    front_ = other.front_;
+    back_ = other.back_;
 
     other.data_ = nullptr;
     other.capacity_ = 0;
@@ -78,7 +81,7 @@ public:
     if (size_ >= capacity_) {
       capacity_ *= SCALE_FACTOR;
 
-      T *temp = new[capacity_];
+      T *temp = new T[capacity_];
 
       for (size_t i = 0; i < size_; i++) {
         temp[i + 1] = data_[i];
@@ -88,14 +91,14 @@ public:
       data_ = temp;
     }
 
-    temp[0] = item;
+    data_[0] = item;
   }
 
   void pushBack(const T &item) override {
     if (size_ >= capacity_) {
       capacity_ *= SCALE_FACTOR;
 
-      T *temp = new[capacity_];
+      T *temp = new T[capacity_];
 
       for (size_t i = 0; i < size_; i++) {
         temp[i] = data_[i];
