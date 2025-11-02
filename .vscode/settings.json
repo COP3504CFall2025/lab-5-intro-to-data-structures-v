@@ -57,6 +57,10 @@
         "__nullptr": "cpp",
         "compare": "cpp",
         "algorithm": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "complex": "cpp",
+        "iterator": "cpp",
+        "memory_resource": "cpp",
+        "sstream": "cpp"
     }
 }
