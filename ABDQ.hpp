@@ -73,7 +73,7 @@ public:
     return *this;
   }
 
-  ~ABDQ() override { delete[] data_; }
+  ~ABDQ() { delete[] data_; }
 
   // -- Insertion --
 
