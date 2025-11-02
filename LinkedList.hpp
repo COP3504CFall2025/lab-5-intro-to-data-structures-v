@@ -115,8 +115,9 @@ public:
 		list.head = nullptr;
 		list.tail = nullptr;
 		list.count = 0;
+		return *this;
 	}
-	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
+	LinkedList<T>& operator=(const LinkedList<T>& list) {
 		Clear();
 		count = list.count;
 		if (list.head) {
@@ -129,6 +130,7 @@ public:
 			}
 			tail = current_list_node;
 		}
+		return *this;
 	}
 
 	// Construction/Destruction
@@ -154,7 +156,9 @@ public:
 		list.tail = nullptr;
 		list.count = 0;
 	}
-	~LinkedList();
+	~LinkedList() {
+		Clear();
+	}
 
 private:
 	// Stores pointers to first and last nodes and count
