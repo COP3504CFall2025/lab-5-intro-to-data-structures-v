@@ -71,6 +71,7 @@ public:
 			} else {
 				delete head;
 			}
+			count--;
 			return true;
 		} else {
 			return false;
@@ -86,6 +87,7 @@ public:
 			} else {
 				delete tail;
 			}
+			count--;
 			return true;
 		} else {
 			return false;
