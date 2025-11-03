@@ -82,8 +82,8 @@ public:
   void pushFront(const T &item) override {
     ensureCapacity();
 
-    for (size_t i = size_ - 2; i >= 0; i--) {
-      data_[i + 1] = data_[i];
+    for (size_t i = size_ - 1; i > 0; i--) {
+      data_[i] = data_[i - 1];
     }
 
     data_[0] = item;
