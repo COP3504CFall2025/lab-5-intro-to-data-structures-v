@@ -8,20 +8,20 @@
 template <typename T> class LLS : public StackInterface<T> {
 public:
   // Insertion
-  void push(const T &item) override { list.addHead(item); }
+  void push(const T &item) override { list.AddHead(item); }
 
   // Deletion
   T pop() override {
-    T temp = list.getHead();
-    list.removeHead();
+    T temp = list.GetHead();
+    list.RemoveHead();
     return temp;
   }
 
   // Access
-  T peek() const override { return list.getHead(); }
+  T peek() const override { return list.GetHead(); }
 
   // Getters
-  std::size_t getSize() const noexcept override { return list.getCount(); }
+  std::size_t getSize() const noexcept override { return list.GetCount(); }
 
 private:
   LinkedList<T> list;

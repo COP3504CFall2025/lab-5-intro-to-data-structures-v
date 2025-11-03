@@ -7,6 +7,12 @@
     "initializer_list": "cpp",
     "ranges": "cpp",
     "span": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "iostream": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "vector": "cpp",
+    "system_error": "cpp"
   }
 }

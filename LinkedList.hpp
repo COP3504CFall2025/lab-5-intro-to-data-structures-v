@@ -11,7 +11,7 @@ template <typename T> class LinkedList {
 public:
   // -- Behaviors --
 
-  void printForward() const {
+  void PrintForward() const {
     std::cout << "[" << count;
     const Node *curr = head;
 
@@ -23,7 +23,7 @@ public:
     std::cout << "]\n";
   }
 
-  void printReverse() const {
+  void PrintReverse() const {
     std::cout << "[" << count;
     const Node *curr = tail;
 
@@ -38,21 +38,21 @@ public:
   // -- Accessors --
 
   [[nodiscard]]
-  unsigned int getCount() const {
+  unsigned int GetCount() const {
     return count;
   }
 
-  Node *getHead() { return head; }
+  Node *GetHead() { return head; }
 
-  const Node *getHead() const { return head; }
+  const Node *GetHead() const { return head; }
 
-  Node *getTail() { return tail; }
+  Node *GetTail() { return tail; }
 
-  const Node *getTail() const { return tail; }
+  const Node *GetTail() const { return tail; }
 
   // -- Insertion --
 
-  void addHead(const T &data) {
+  void AddHead(const T &data) {
     if (head) {
       head->prev = new Node{data, nullptr, head};
       head = head->prev;
@@ -64,7 +64,7 @@ public:
     count++;
   }
 
-  void addTail(const T &data) {
+  void AddTail(const T &data) {
     if (tail) {
       tail->next = new Node{data, tail, nullptr};
       tail = tail->next;
@@ -78,7 +78,7 @@ public:
 
   // -- Removal --
 
-  bool removeHead() {
+  bool RemoveHead() {
     if (!head) {
       return false;
     }
@@ -97,7 +97,7 @@ public:
     return true;
   }
 
-  bool removeTail() {
+  bool RemoveTail() {
     if (!tail) {
       return false;
     }
@@ -116,9 +116,9 @@ public:
     return true;
   }
 
-  void clear() {
+  void Clear() {
     while (head) {
-      removeHead();
+      RemoveHead();
     }
   }
 
@@ -129,7 +129,7 @@ public:
       return *this;
     }
 
-    clear();
+    Clear();
 
     count = other.count;
     head = other.head;
@@ -147,7 +147,7 @@ public:
       return *this;
     }
 
-    clear();
+    Clear();
 
     const Node *curr = rhs.head;
 
@@ -180,7 +180,7 @@ public:
     other.count = 0;
   }
 
-  ~LinkedList() { clear(); }
+  ~LinkedList() { Clear(); }
 
 private:
   // Stores pointers to first and last nodes and count

@@ -9,20 +9,20 @@ template <typename T> class LLQ : public QueueInterface<T> {
 
 public:
   // Insertion
-  void enqueue(const T &item) override { list.addTail(item); }
+  void enqueue(const T &item) override { list.AddTail(item); }
 
   // Deletion
   T dequeue() override {
-    T temp = list.getHead();
-    list.removeHead();
+    T temp = list.GetHead();
+    list.RemoveHead();
     return temp;
   }
 
   // Access
-  T peek() const override { return list.getHead(); }
+  T peek() const override { return list.GetHead(); }
 
   // Getter
-  std::size_t getSize() const noexcept override { return list.getCount(); }
+  std::size_t getSize() const noexcept override { return list.GetCount(); }
 
 private:
   LinkedList<T> list;
