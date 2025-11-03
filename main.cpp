@@ -1,4 +1,4 @@
-#ifdef MAIN
+// #ifdef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -21,26 +21,25 @@
 */
 
 int main() {
+  std::cout << "ll:\n";
+
   {
     LinkedList<int> ll;
 
-    try {
-      ll.removeHead();
-      return -1;
-    } catch (...) {
-    }
+    assert(ll.getTail() == nullptr);
 
-    try {
-      ll.removeTail();
-      return -1;
-    } catch (...) {
-    }
+    ll.AddHead(1);
+    ll.RemoveTail();
 
-    ll.addTail(1);
+    assert(ll.getHead() == nullptr);
+    assert(ll.RemoveHead() == false);
+    assert(ll.RemoveTail() == false);
+
+    ll.AddTail(1);
     assert(ll.getTail()->data == 1);
     assert(ll.getHead()->data == 1);
-    ll.addTail(2);
-    ll.removeHead();
+    ll.AddTail(2);
+    ll.RemoveHead();
     assert(ll.getTail()->data == 2);
     assert(ll.getHead()->data == 2);
 
@@ -51,6 +50,8 @@ int main() {
     assert(ll3.getTail()->data == 2);
   }
 
+  std::cout << "ABDQ:\n";
+
   {
     ABDQ<int> hi;
     hi.pushFront(1);
@@ -60,8 +61,34 @@ int main() {
     assert(hi.back() == 2);
 
     hi.popFront();
-    assert(hi.front() == 1);
-    assert(hi.back() == 1);
+    assert(hi.front() == 2);
+    assert(hi.back() == 2);
+
+    hi.popBack();
+
+    try {
+      hi.popFront();
+      return 1;
+    } catch (...) {
+    }
+
+    try {
+      hi.popBack();
+      return 1;
+    } catch (...) {
+    }
+
+    try {
+      hi.front();
+      return 1;
+    } catch (...) {
+    }
+
+    try {
+      hi.back();
+      return 1;
+    } catch (...) {
+    }
   }
 
   //   ABDQ<int> hi;
@@ -78,7 +105,8 @@ int main() {
   //   std::cout << "si: " << hi.getSize() << "\n";
   //   std::cout << "fr: " << hi.front() << "\n";
 
+  std::cout << "Success!\n";
   return 0;
 }
 
-#endif
+// #endif

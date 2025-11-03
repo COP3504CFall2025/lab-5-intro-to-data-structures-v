@@ -156,7 +156,7 @@ private:
       return;
     }
 
-    capacity_ *= SCALE_FACTOR;
+    size_t temp_capacity *= SCALE_FACTOR;
 
     T *temp = new T[capacity_];
 
@@ -167,6 +167,7 @@ private:
 
     delete[] data_;
     data_ = temp;
+    capacity_ = temp_capacity;
     front_ = 0;
     back_ = size_;
   }
@@ -176,7 +177,7 @@ private:
       return;
     }
 
-    capacity_ /= SCALE_FACTOR;
+    size_t temp_capacity /= SCALE_FACTOR;
 
     T *temp = new T[capacity_];
 
@@ -187,6 +188,7 @@ private:
 
     delete[] data_;
     data_ = temp;
+    capacity_ = temp_capacity;
     front_ = 0;
     back_ = size_;
   }
