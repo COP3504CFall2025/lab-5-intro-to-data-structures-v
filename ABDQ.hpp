@@ -156,7 +156,7 @@ private:
       return;
     }
 
-    size_t temp_capacity *= SCALE_FACTOR;
+    size_t temp_capacity = capacity_ * SCALE_FACTOR;
 
     T *temp = new T[capacity_];
 
@@ -177,7 +177,7 @@ private:
       return;
     }
 
-    size_t temp_capacity /= SCALE_FACTOR;
+    size_t temp_capacity = capacity_ / SCALE_FACTOR;
 
     T *temp = new T[capacity_];
 
