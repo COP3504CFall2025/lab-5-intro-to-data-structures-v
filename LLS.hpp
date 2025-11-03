@@ -12,13 +12,13 @@ public:
 
   // Deletion
   T pop() override {
-    T temp = list.getHead();
+    T temp = *list.getHead();
     list.RemoveHead();
     return temp;
   }
 
   // Access
-  T peek() const override { return list.getHead(); }
+  T peek() const override { return *list.getHead(); }
 
   // Getters
   std::size_t getSize() const noexcept override { return list.getCount(); }

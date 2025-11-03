@@ -11,7 +11,7 @@ template <typename T> class LinkedList {
 public:
   // -- Behaviors --
 
-  void PrintForward() const {
+  void printForward() const {
     std::cout << "[" << count;
     const Node *curr = head;
 

@@ -18,22 +18,22 @@ public:
   // -- Core Removal Operations --
 
   T popFront() override {
-    T temp = list.getHead();
+    T temp = *list.getHead();
     list.RemoveHead();
     return temp;
   }
 
   T popBack() override {
-    T temp = list.getTail();
+    T temp = *list.getTail();
     list.RemoveTail();
     return temp;
   }
 
   // -- Element Accessors --
 
-  const T &front() const override { return list.getHead(); }
+  const T &front() const override { return *list.getHead(); }
 
-  const T &back() const override { return list.getTail(); }
+  const T &back() const override { return *list.getTail(); }
 
   // Getter
   std::size_t getSize() const noexcept override { return list.getCount(); }
