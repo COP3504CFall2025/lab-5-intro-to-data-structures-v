@@ -82,14 +82,14 @@ public:
 
   void pushFront(const T &item) override {
     ensureCapacity();
-    data_[front_ + 1] = item;
+    data_[front_] = item;
     front_ = (front_ - 1 + capacity_) % capacity_;
     size_++;
   }
 
   void pushBack(const T &item) override {
     ensureCapacity();
-    data_[back_ - 1] = item;
+    data_[back_] = item;
     back_ = (back_ + 1) % capacity_;
     size_++;
   }
@@ -104,7 +104,7 @@ public:
     shrinkIfNeeded();
     size_--;
 
-    T temp = data_[front_ + 1];
+    T temp = data_[front_];
     front_ = (front_ + 1) % capacity_;
     return temp;
   }
@@ -117,7 +117,7 @@ public:
     shrinkIfNeeded();
     size_--;
 
-    T temp = data_[back_ - 1];
+    T temp = data_[back_];
     back_ = (back_ - 1 + capacity_) % capacity_;
     return temp;
   }
@@ -129,7 +129,8 @@ public:
       throw std::runtime_error("Cannot access elements from empty deque");
     }
 
-    return data_[front_ + 1];
+    size_t i = (front_ + 1) % capacity_;
+    return data_[i];
   }
 
   const T &back() const override {
@@ -137,7 +138,8 @@ public:
       throw std::runtime_error("Cannot access elements from empty deque");
     }
 
-    return data_[back_ - 1];
+    size_t i = (front_ - 1 + capacity_) % capacity_;
+    return data_[i];
   }
 
   // -- Extremities --

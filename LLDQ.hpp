@@ -36,7 +36,7 @@ public:
   const T &back() const override { list.getTail(); }
 
   // Getter
-  std::size_t getSize() const noexcept override { list.getCount(); }
+  std::size_t getSize() const noexcept override { return list.getCount(); }
 
 private:
   LinkedList<T> list;
