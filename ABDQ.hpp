@@ -16,8 +16,8 @@ public:
         back_(0) {}
 
   ABDQ(const ABDQ &other)
-      : data_(new T[other.capacity_]), size_(other.size_),
-        capacity_(other.capacity_) {
+      : data_(new T[other.capacity_]), capacity_(other.capacity_),
+        size_(other.size_) {
     for (size_t i = 0; i < other.size_; i++) {
       size_t other_index = (other.front_ + i) % other.capacity_;
       data_[i] = other.data_[other_index];
@@ -28,8 +28,8 @@ public:
   }
 
   ABDQ(ABDQ &&other) noexcept
-      : data_(other.data_), size_(other.size_), front_(other.front_),
-        back_(other.back_) {
+      : data_(other.data_), capacity_(other.capacity_), size_(other.size_),
+        front_(other.front_), back_(other.back_) {
     other.data_ = nullptr;
     other.capacity_ = 0;
     other.size_ = 0;
