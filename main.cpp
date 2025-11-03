@@ -1,4 +1,4 @@
-#ifdef MAIN
+// #ifdef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -23,6 +23,19 @@
 int main() {
   {
     LinkedList<int> ll;
+
+    try {
+      ll.removeHead();
+      return -1;
+    } catch (...) {
+    }
+
+    try {
+      ll.removeTail();
+      return -1;
+    } catch (...) {
+    }
+
     ll.addTail(1);
     assert(ll.getTail()->data == 1);
     assert(ll.getHead()->data == 1);
@@ -68,4 +81,4 @@ int main() {
   return 0;
 }
 
-#endif
+// #endif

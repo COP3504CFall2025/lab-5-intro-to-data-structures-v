@@ -85,11 +85,12 @@ public:
 
     Node *next_head = head->next;
     delete head;
-    head = nullptr;
+    head = next_head;
 
-    if (next_head) {
-      head = next_head;
+    if (head) {
       head->prev = nullptr;
+    } else {
+      tail = nullptr;
     }
 
     count--;
@@ -103,11 +104,12 @@ public:
 
     Node *prev_tail = tail->prev;
     delete tail;
-    tail = nullptr;
+    tail = prev_tail;
 
-    if (prev_tail) {
-      tail = prev_tail;
+    if (tail) {
       tail->next = nullptr;
+    } else {
+      head = nullptr;
     }
 
     count--;
