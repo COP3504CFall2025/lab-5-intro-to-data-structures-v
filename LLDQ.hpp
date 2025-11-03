@@ -31,9 +31,9 @@ public:
 
   // -- Element Accessors --
 
-  const T &front() const override { list.getHead(); }
+  const T &front() const override { return list.getHead(); }
 
-  const T &back() const override { list.getTail(); }
+  const T &back() const override { return list.getTail(); }
 
   // Getter
   std::size_t getSize() const noexcept override { return list.getCount(); }
