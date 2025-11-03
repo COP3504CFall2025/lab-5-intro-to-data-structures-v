@@ -8,6 +8,7 @@
 #include "LLQ.hpp"
 #include "LLS.hpp"
 #include "LinkedList.hpp"
+#include <cassert>
 #include <iostream>
 
 /*
@@ -20,19 +21,36 @@
 */
 
 int main() {
-  ABDQ<int> hi;
+  {
+    LinkedList<int> ll;
+    ll.addTail(1);
+    assert(ll.getTail()->data == 1);
+    assert(ll.getHead()->data == 1);
+    ll.addTail(2);
+    ll.removeHead();
+    assert(ll.getTail()->data == 2);
+    assert(ll.getHead()->data == 2);
 
-  try {
-    hi.front();
-    return 1;
-  } catch (...) {
+    LinkedList<int> ll2(ll);
+    assert(ll2.getTail()->data == 2);
+
+    LinkedList<int> ll3(std::move(ll));
+    assert(ll3.getTail()->data == 2);
   }
 
-  std::cout << "si: " << hi.getSize() << "\n";
+  //   ABDQ<int> hi;
 
-  hi.pushFront(10);
-  std::cout << "si: " << hi.getSize() << "\n";
-  std::cout << "fr: " << hi.front() << "\n";
+  //   try {
+  //     hi.front();
+  //     return 1;
+  //   } catch (...) {
+  //   }
+
+  //   std::cout << "si: " << hi.getSize() << "\n";
+
+  //   hi.pushFront(10);
+  //   std::cout << "si: " << hi.getSize() << "\n";
+  //   std::cout << "fr: " << hi.front() << "\n";
 
   return 0;
 }

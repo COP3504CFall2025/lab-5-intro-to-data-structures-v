@@ -83,13 +83,13 @@ public:
       return false;
     }
 
-    if (Node *temp = head->next; temp) {
-      delete head;
-      head = temp;
+    Node *next_head = head->next;
+    delete head;
+    head = nullptr;
+
+    if (next_head) {
+      head = next_head;
       head->prev = nullptr;
-    } else {
-      delete head;
-      head = nullptr;
     }
 
     count--;
@@ -101,13 +101,13 @@ public:
       return false;
     }
 
-    if (Node *temp = tail->prev; temp) {
-      delete tail;
-      tail = temp;
+    Node *prev_tail = tail->prev;
+    delete tail;
+    tail = nullptr;
+
+    if (prev_tail) {
+      tail = prev_tail;
       tail->next = nullptr;
-    } else {
-      delete tail;
-      tail = nullptr;
     }
 
     count--;
