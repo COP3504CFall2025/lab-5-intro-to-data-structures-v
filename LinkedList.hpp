@@ -152,7 +152,7 @@ public:
     const Node *curr = rhs.head;
 
     while (curr) {
-      addTail(curr->data);
+      AddTail(curr->data);
       curr = curr->next;
     }
 
@@ -168,7 +168,7 @@ public:
     const Node *curr = list.head;
 
     while (curr) {
-      addTail(curr->data);
+      AddTail(curr->data);
       curr = curr->next;
     }
   }
