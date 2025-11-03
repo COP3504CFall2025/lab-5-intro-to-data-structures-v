@@ -87,17 +87,17 @@ public:
   // -- Insertion --
 
   void pushFront(const T &item) override {
+    size_++;
     ensureCapacity();
     front_ = (front_ - 1 + capacity_) % capacity_;
     data_[front_] = item;
-    size_++;
   }
 
   void pushBack(const T &item) override {
+    size_++;
     ensureCapacity();
     data_[back_] = item;
     back_ = (back_ + 1) % capacity_;
-    size_++;
   }
 
   // -- Deletion --
@@ -107,8 +107,8 @@ public:
       throw std::runtime_error("Cannot pop from empty deque");
     }
 
-    shrinkIfNeeded();
     size_--;
+    shrinkIfNeeded();
 
     T temp = data_[front_];
     front_ = (front_ + 1) % capacity_;
@@ -120,8 +120,8 @@ public:
       throw std::runtime_error("Cannot pop from empty deque");
     }
 
-    shrinkIfNeeded();
     size_--;
+    shrinkIfNeeded();
 
     back_ = (back_ - 1 + capacity_) % capacity_;
     T temp = data_[back_];
