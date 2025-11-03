@@ -1,5 +1,11 @@
 {
   "files.associations": {
-    "stdexcept": "cpp"
+    "stdexcept": "cpp",
+    "array": "cpp",
+    "string_view": "cpp",
+    "format": "cpp",
+    "initializer_list": "cpp",
+    "ranges": "cpp",
+    "span": "cpp"
   }
 }

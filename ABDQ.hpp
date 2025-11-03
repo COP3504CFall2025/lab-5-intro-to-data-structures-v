@@ -45,6 +45,8 @@ public:
       temp[i] = other.data_[i];
     }
 
+    delete[] data_;
+
     data_ = temp;
     capacity_ = other.capacity_;
     size_ = other.size_;
@@ -78,37 +80,20 @@ public:
   // -- Insertion --
 
   void pushFront(const T &item) override {
-    if (size_ >= capacity_) {
-      capacity_ *= SCALE_FACTOR;
+    ensureCapacity();
 
-      T *temp = new T[capacity_];
-
-      for (size_t i = 0; i < size_; i++) {
-        temp[i + 1] = data_[i];
-      }
-
-      delete[] data_;
-      data_ = temp;
+    for (size_t i = size_ - 2; i >= 0; i--) {
+      data_[i + 1] = data_[i];
     }
 
     data_[0] = item;
+    size_++;
   }
 
   void pushBack(const T &item) override {
-    if (size_ >= capacity_) {
-      capacity_ *= SCALE_FACTOR;
-
-      T *temp = new T[capacity_];
-
-      for (size_t i = 0; i < size_; i++) {
-        temp[i] = data_[i];
-      }
-
-      delete[] data_;
-      data_ = temp;
-    }
-
+    ensureCapacity();
     data_[size_] = item;
+    size_++;
   }
 
   // -- Deletion --
@@ -117,6 +102,8 @@ public:
     if (size_ == 0) {
       throw std::runtime_error("Cannot pop from empty deque");
     }
+
+    shrinkIfNeeded();
 
     T temp = data_[0];
 
@@ -134,7 +121,10 @@ public:
       throw std::runtime_error("Cannot pop from empty deque");
     }
 
-    return data_[size_--];
+    shrinkIfNeeded();
+    size--;
+
+    return data_[size_];
   }
 
   // -- Access --
@@ -153,6 +143,42 @@ public:
     }
 
     return data_[size_];
+  }
+
+  // -- Extremities --
+
+  void ensureCapacity() {
+    if (size_ < capacity_) {
+      return;
+    }
+
+    capacity_ *= SCALE_FACTOR;
+
+    T *temp = new T[capacity_];
+
+    for (size_t i = 0; i < size_; i++) {
+      temp[i] = data_[i];
+    }
+
+    delete[] data_;
+    data_ = temp;
+  }
+
+  void shrinkIfNeeded() {
+    if (size * 4 > capacity_) {
+      return;
+    }
+
+    capacity_ /= SCALE_FACTOR;
+
+    T *temp = new T[capacity_];
+
+    for (size_t i = 0; i < size_; i++) {
+      temp[i] = data_[i];
+    }
+
+    delete[] data_;
+    data_ = temp;
   }
 
   // Getters
