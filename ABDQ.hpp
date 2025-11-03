@@ -62,6 +62,7 @@ public:
     }
 
     data_ = other.data_;
+    capacity_ = other.capacity_;
     size_ = other.size_;
     front_ = other.front_;
     back_ = other.back_;
@@ -81,18 +82,15 @@ public:
 
   void pushFront(const T &item) override {
     ensureCapacity();
-
-    for (size_t i = size_ - 1; i > 0; i--) {
-      data_[i] = data_[i - 1];
-    }
-
-    data_[0] = item;
+    data_[front_ + 1] = item;
+    front_ = (front_ - 1 + capacity_) % capacity_;
     size_++;
   }
 
   void pushBack(const T &item) override {
     ensureCapacity();
-    data_[size_] = item;
+    data_[back_ - 1] = item;
+    back_ = (back_ + 1) % capacity_;
     size_++;
   }
 
@@ -104,15 +102,10 @@ public:
     }
 
     shrinkIfNeeded();
-
-    T temp = data_[0];
-
-    for (size_t i = 0; i < size_ - 1; i++) {
-      data_[i] = data_[i + 1];
-    }
-
     size_--;
 
+    T temp = data_[front_ + 1];
+    front_ = (front_ + 1) % capacity_;
     return temp;
   }
 
@@ -124,7 +117,9 @@ public:
     shrinkIfNeeded();
     size_--;
 
-    return data_[size_];
+    T temp = data_[back_ - 1];
+    back_ = (back_ - 1 + capacity_) % capacity_;
+    return temp;
   }
 
   // -- Access --
@@ -134,7 +129,7 @@ public:
       throw std::runtime_error("Cannot access elements from empty deque");
     }
 
-    return data_[0];
+    return data_[front_ + 1];
   }
 
   const T &back() const override {
@@ -142,7 +137,7 @@ public:
       throw std::runtime_error("Cannot access elements from empty deque");
     }
 
-    return data_[size_];
+    return data_[back_ - 1];
   }
 
   // -- Extremities --
@@ -157,11 +152,14 @@ public:
     T *temp = new T[capacity_];
 
     for (size_t i = 0; i < size_; i++) {
-      temp[i] = data_[i];
+      size_t index = (front_ + i) % capacity_;
+      temp[i] = data_[index];
     }
 
     delete[] data_;
     data_ = temp;
+    front_ = 0;
+    back_ = size_;
   }
 
   void shrinkIfNeeded() {
@@ -174,11 +172,14 @@ public:
     T *temp = new T[capacity_];
 
     for (size_t i = 0; i < size_; i++) {
-      temp[i] = data_[i];
+      size_t index = (front_ + i) % capacity_;
+      temp[i] = data_[index];
     }
 
     delete[] data_;
     data_ = temp;
+    front_ = 0;
+    back_ = size_;
   }
 
   // Getters

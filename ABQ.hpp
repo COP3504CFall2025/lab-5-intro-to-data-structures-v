@@ -64,7 +64,7 @@ public:
     rhs.array_ = nullptr;
   }
 
-  ~ABQ() noexcept override { delete[] array_; }
+  ~ABQ() noexcept { delete[] array_; }
 
   // -- Getters --
 
