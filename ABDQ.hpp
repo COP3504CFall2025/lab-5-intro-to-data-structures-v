@@ -65,6 +65,8 @@ public:
       return *this;
     }
 
+    delete[] data_;
+
     data_ = other.data_;
     capacity_ = other.capacity_;
     size_ = other.size_;
