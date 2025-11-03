@@ -38,17 +38,17 @@ public:
   // -- Accessors --
 
   [[nodiscard]]
-  unsigned int GetCount() const {
+  unsigned int getCount() const {
     return count;
   }
 
-  Node *GetHead() { return head; }
+  Node *getHead() { return head; }
 
-  const Node *GetHead() const { return head; }
+  const Node *getHead() const { return head; }
 
-  Node *GetTail() { return tail; }
+  Node *getTail() { return tail; }
 
-  const Node *GetTail() const { return tail; }
+  const Node *getTail() const { return tail; }
 
   // -- Insertion --
 
