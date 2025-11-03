@@ -156,18 +156,19 @@ private:
       return;
     }
 
-    size_t temp_capacity = capacity_ * SCALE_FACTOR;
+    size_t old_capacity = capacity_;
+
+    capacity_ *= SCALE_FACTOR;
 
     T *temp = new T[capacity_];
 
     for (size_t i = 0; i < size_; i++) {
-      size_t index = (front_ + i) % capacity_;
+      size_t index = (front_ + i) % old_capacity;
       temp[i] = data_[index];
     }
 
     delete[] data_;
     data_ = temp;
-    capacity_ = temp_capacity;
     front_ = 0;
     back_ = size_;
   }
@@ -177,18 +178,19 @@ private:
       return;
     }
 
-    size_t temp_capacity = capacity_ / SCALE_FACTOR;
+    size_t old_capacity = capacity_;
+
+    capacity_ /= SCALE_FACTOR;
 
     T *temp = new T[capacity_];
 
     for (size_t i = 0; i < size_; i++) {
-      size_t index = (front_ + i) % capacity_;
+      size_t index = (front_ + i) % old_capacity;
       temp[i] = data_[index];
     }
 
     delete[] data_;
     data_ = temp;
-    capacity_ = temp_capacity;
     front_ = 0;
     back_ = size_;
   }
