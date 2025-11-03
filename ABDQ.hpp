@@ -6,7 +6,6 @@
 #include <utility>
 
 template <typename T> class ABDQ : public DequeInterface<T> {
-
 public:
   // -- Big 5 --
 
@@ -17,11 +16,15 @@ public:
         back_(0) {}
 
   ABDQ(const ABDQ &other)
-      : data_(new T[other.capacity_]), size_(other.size_), front_(other.front_),
-        back_(other.back_) {
+      : data_(new T[other.capacity_]), size_(other.size_),
+        capacity_(other.capacity_) {
     for (size_t i = 0; i < other.size_; i++) {
-      data_[i] = other.data_[i];
+      size_t other_index = (other.front_ + i) % other.capacity_;
+      data_[i] = other.data_[other_index];
     }
+
+    front_ = 0;
+    back_ = size_;
   }
 
   ABDQ(ABDQ &&other) noexcept
@@ -42,7 +45,8 @@ public:
     T *temp = new T[other.capacity_];
 
     for (size_t i = 0; i < other.size_; i++) {
-      temp[i] = other.data_[i];
+      size_t other_index = (other.front_ + i) % other.capacity_;
+      temp[i] = other.data_[other_index];
     }
 
     delete[] data_;
@@ -50,8 +54,8 @@ public:
     data_ = temp;
     capacity_ = other.capacity_;
     size_ = other.size_;
-    front_ = other.front_;
-    back_ = other.back_;
+    front_ = 0;
+    back_ = size_;
 
     return *this;
   }
@@ -82,8 +86,8 @@ public:
 
   void pushFront(const T &item) override {
     ensureCapacity();
-    data_[front_] = item;
     front_ = (front_ - 1 + capacity_) % capacity_;
+    data_[front_] = item;
     size_++;
   }
 
@@ -117,8 +121,8 @@ public:
     shrinkIfNeeded();
     size_--;
 
-    T temp = data_[back_];
     back_ = (back_ - 1 + capacity_) % capacity_;
+    T temp = data_[back_];
     return temp;
   }
 
@@ -129,8 +133,7 @@ public:
       throw std::runtime_error("Cannot access elements from empty deque");
     }
 
-    size_t i = (front_ + 1) % capacity_;
-    return data_[i];
+    return data_[front_];
   }
 
   const T &back() const override {
@@ -138,10 +141,14 @@ public:
       throw std::runtime_error("Cannot access elements from empty deque");
     }
 
-    size_t i = (front_ - 1 + capacity_) % capacity_;
-    return data_[i];
+    size_t index = (back_ - 1 + capacity_) % capacity_;
+    return data_[index];
   }
 
+  // Getters
+  std::size_t getSize() const noexcept override { return size_; }
+
+private:
   // -- Extremities --
 
   void ensureCapacity() {
@@ -184,10 +191,6 @@ public:
     back_ = size_;
   }
 
-  // Getters
-  std::size_t getSize() const noexcept override { return size_; }
-
-private:
   T *data_;              // underlying dynamic array
   std::size_t capacity_; // total allocated capacity
   std::size_t size_;     // number of stored elements

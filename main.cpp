@@ -38,6 +38,19 @@ int main() {
     assert(ll3.getTail()->data == 2);
   }
 
+  {
+    ABDQ<int> hi;
+    hi.pushFront(1);
+    assert(hi.front() == 1);
+    assert(hi.back() == 1);
+    hi.pushBack(2);
+    assert(hi.back() == 2);
+
+    hi.popFront();
+    assert(hi.front() == 1);
+    assert(hi.back() == 1);
+  }
+
   //   ABDQ<int> hi;
 
   //   try {
