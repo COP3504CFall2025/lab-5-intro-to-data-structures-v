@@ -122,7 +122,7 @@ public:
     }
 
     shrinkIfNeeded();
-    size--;
+    size_--;
 
     return data_[size_];
   }
@@ -165,7 +165,7 @@ public:
   }
 
   void shrinkIfNeeded() {
-    if (size * 4 > capacity_) {
+    if (size_ * 4 > capacity_) {
       return;
     }
 
