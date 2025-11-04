@@ -22,7 +22,7 @@ public:
 			cout << endl;
 		}
 	}
-	void printReverse() const {
+	void PrintReverse() const {
 		Node* node = tail;
 		if (node) {
 			cout << node->data << " ";
@@ -41,7 +41,7 @@ public:
 	const Node* getTail() const {return tail;}
 
 	// Insertion
-	void addHead(const T& data) {
+	void AddHead(const T& data) {
 		head = new Node(data, nullptr, head);
 		if (head->next) {
 			head->next->prev = head;
@@ -50,7 +50,7 @@ public:
 			tail = head;
 		}
 	}
-	void addTail(const T& data) {
+	void AddTail(const T& data) {
 		tail = new Node(data, tail, nullptr);
 		if (tail->prev) {
 			tail->prev->next = tail;
@@ -61,7 +61,7 @@ public:
 	}
 
 	// Removal
-	bool removeHead() {
+	bool RemoveHead() {
 		if (head) {
 			Node* next = head->next;
 			if (next) {
@@ -71,13 +71,12 @@ public:
 			} else {
 				delete head;
 			}
-			count--;
 			return true;
 		} else {
 			return false;
 		}
 	}
-	bool removeTail() {
+	bool RemoveTail() {
 		if (tail) {
 			Node* prev = tail->prev;
 			if (prev) {
@@ -87,13 +86,12 @@ public:
 			} else {
 				delete tail;
 			}
-			count--;
 			return true;
 		} else {
 			return false;
 		}
 	}
-	void clear() {
+	void Clear() {
 	    Node* prev = head;
 		Node* node;
 		if (prev) {
@@ -109,18 +107,17 @@ public:
 	}
 
 	// Operators
-	LinkedList<T>& operator=(LinkedList<T>&& list) noexcept {
-		clear();
+	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
+		Clear();
 		head = list.head;
 		tail = list.tail;
 		count = list.count;
 		list.head = nullptr;
 		list.tail = nullptr;
 		list.count = 0;
-		return *this;
 	}
-	LinkedList<T>& operator=(const LinkedList<T>& list) {
-		clear();
+	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
+		Clear();
 		count = list.count;
 		if (list.head) {
 			head = new Node(list.head->data, nullptr, nullptr);
@@ -132,7 +129,6 @@ public:
 			}
 			tail = current_list_node;
 		}
-		return *this;
 	}
 
 	// Construction/Destruction
@@ -150,7 +146,7 @@ public:
 			tail = current_list_node;
 		}
 	}
-	LinkedList(LinkedList<T>&& list) noexcept {
+	LinkedList(LinkedList<T>&& other) noexcept {
 		head = list.head;
 		tail = list.tail;
 		count = list.count;
@@ -158,9 +154,7 @@ public:
 		list.tail = nullptr;
 		list.count = 0;
 	}
-	~LinkedList() {
-		clear();
-	}
+	~LinkedList();
 
 private:
 	// Stores pointers to first and last nodes and count
