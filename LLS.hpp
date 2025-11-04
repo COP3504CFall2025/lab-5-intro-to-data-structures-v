@@ -8,12 +8,12 @@
 template <typename T> class LLS : public StackInterface<T> {
 public:
   // Insertion
-  void push(const T &item) override { list.AddHead(item); }
+  void push(const T &item) override { list.addHead(item); }
 
   // Deletion
   T pop() override {
     T temp = list.getHead()->data;
-    list.RemoveHead();
+    list.removeHead();
     return temp;
   }
 

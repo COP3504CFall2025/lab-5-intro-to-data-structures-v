@@ -23,7 +23,7 @@ public:
     std::cout << "]\n";
   }
 
-  void PrintReverse() const {
+  void printReverse() const {
     std::cout << "[" << count;
     const Node *curr = tail;
 
@@ -52,7 +52,7 @@ public:
 
   // -- Insertion --
 
-  void AddHead(const T &data) {
+  void addHead(const T &data) {
     if (head) {
       head->prev = new Node{data, nullptr, head};
       head = head->prev;
@@ -64,7 +64,7 @@ public:
     count++;
   }
 
-  void AddTail(const T &data) {
+  void addTail(const T &data) {
     if (tail) {
       tail->next = new Node{data, tail, nullptr};
       tail = tail->next;
@@ -78,7 +78,7 @@ public:
 
   // -- Removal --
 
-  bool RemoveHead() {
+  bool removeHead() {
     if (!head) {
       return false;
     }
@@ -97,7 +97,7 @@ public:
     return true;
   }
 
-  bool RemoveTail() {
+  bool removeTail() {
     if (!tail) {
       return false;
     }
@@ -116,9 +116,9 @@ public:
     return true;
   }
 
-  void Clear() {
+  void clear() {
     while (head) {
-      RemoveHead();
+      removeHead();
     }
   }
 
@@ -129,7 +129,7 @@ public:
       return *this;
     }
 
-    Clear();
+    clear();
 
     count = other.count;
     head = other.head;
@@ -147,12 +147,12 @@ public:
       return *this;
     }
 
-    Clear();
+    clear();
 
     const Node *curr = rhs.head;
 
     while (curr) {
-      AddTail(curr->data);
+      addTail(curr->data);
       curr = curr->next;
     }
 
@@ -168,7 +168,7 @@ public:
     const Node *curr = list.head;
 
     while (curr) {
-      AddTail(curr->data);
+      addTail(curr->data);
       curr = curr->next;
     }
   }
@@ -180,7 +180,7 @@ public:
     other.count = 0;
   }
 
-  ~LinkedList() { Clear(); }
+  ~LinkedList() { clear(); }
 
 private:
   // Stores pointers to first and last nodes and count

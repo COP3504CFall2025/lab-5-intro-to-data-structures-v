@@ -28,18 +28,18 @@ int main() {
 
     assert(ll.getTail() == nullptr);
 
-    ll.AddHead(1);
-    ll.RemoveTail();
+    ll.addHead(1);
+    ll.removeTail();
 
     assert(ll.getHead() == nullptr);
-    assert(ll.RemoveHead() == false);
-    assert(ll.RemoveTail() == false);
+    assert(ll.removeHead() == false);
+    assert(ll.removeTail() == false);
 
-    ll.AddTail(1);
+    ll.addTail(1);
     assert(ll.getTail()->data == 1);
     assert(ll.getHead()->data == 1);
-    ll.AddTail(2);
-    ll.RemoveHead();
+    ll.addTail(2);
+    ll.removeHead();
     assert(ll.getTail()->data == 2);
     assert(ll.getHead()->data == 2);
 

@@ -11,21 +11,21 @@ template <typename T> class LLDQ : public DequeInterface<T> {
 public:
   // -- Core Insertion Operations --
 
-  void pushFront(const T &item) override { list.AddHead(item); }
+  void pushFront(const T &item) override { list.addHead(item); }
 
-  void pushBack(const T &item) override { list.AddTail(item); }
+  void pushBack(const T &item) override { list.addTail(item); }
 
   // -- Core Removal Operations --
 
   T popFront() override {
     T temp = list.getHead()->data;
-    list.RemoveHead();
+    list.removeHead();
     return temp;
   }
 
   T popBack() override {
     T temp = list.getTail()->data;
-    list.RemoveTail();
+    list.removeTail();
     return temp;
   }
 
