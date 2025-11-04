@@ -6,11 +6,33 @@ template <typename T>
 class LinkedList {
 public:
 	// Behaviors
-	void printForward() const;
-	void printReverse() const;
+	void printForward() const {
+        if (!head) {
+            return;
+        }
+
+        Node* current = head;
+
+        for (int i = 0; i < count; i++) {
+            std::cout << current->data << std::endl;
+            current = current->next;
+        }
+    }
+	void printReverse() const {
+        if (!tail) {
+            return;
+        }
+
+        Node* current = tail;
+
+        for (int i = 0; i < count; i++) {
+            std::cout << current->data << std::endl;
+            current = current->prev;
+        }
+    }
 
 	// Accessors
-	[[nodiscard]] unsigned int getCount() const;
+	[[nodiscard]] unsigned int getCount() const
 	Node* getHead() { return head; }
 	const Node* getHead() const { return head; }
 
