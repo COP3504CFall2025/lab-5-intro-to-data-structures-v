@@ -82,7 +82,7 @@ public:
     return *this;
   }
 
-  ~ABDQ() { delete[] data_; }
+  ~ABDQ() override { delete[] data_; }
 
   // -- Insertion --
 
@@ -176,7 +176,7 @@ private:
   }
 
   void shrinkIfNeeded() {
-    if (size_ * 4 > capacity_) {
+    if (size_ * 4 >= capacity_) {
       return;
     }
 

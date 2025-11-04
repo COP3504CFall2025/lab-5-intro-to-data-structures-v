@@ -91,20 +91,6 @@ int main() {
     }
   }
 
-  //   ABDQ<int> hi;
-
-  //   try {
-  //     hi.front();
-  //     return 1;
-  //   } catch (...) {
-  //   }
-
-  //   std::cout << "si: " << hi.getSize() << "\n";
-
-  //   hi.pushFront(10);
-  //   std::cout << "si: " << hi.getSize() << "\n";
-  //   std::cout << "fr: " << hi.front() << "\n";
-
   std::cout << "Success!\n";
   return 0;
 }
