@@ -13,7 +13,7 @@ public:
 
   explicit ABDQ(std::size_t capacity)
       : data_(nullptr), capacity_(capacity), size_(0), front_(0), back_(0) {
-    if (capacity_ > 0) {
+    if (capacity > 0) {
       data_ = new T[capacity];
     }
   }
@@ -92,15 +92,22 @@ public:
   void pushFront(const T &item) override {
     size_++;
     ensureCapacity();
-    front_ = (front_ - 1 + capacity_) % capacity_;
+
+    if (size_ != 1) {
+      front_ = (front_ - 1 + capacity_) % capacity_;
+    } else {
+      back_ = 1;
+    }
+
     data_[front_] = item;
   }
 
   void pushBack(const T &item) override {
     size_++;
     ensureCapacity();
+
     data_[back_] = item;
-    back_ = (back_ + 1) % capacity_;
+    back_ = size_ == 1 ? 1 : (back_ + 1) % capacity_;
   }
 
   // -- Deletion --
@@ -111,10 +118,10 @@ public:
     }
 
     size_--;
-    shrinkIfNeeded();
+    // shrinkIfNeeded();
 
     T temp = data_[front_];
-    front_ = (front_ + 1) % capacity_;
+    front_ = size_ == 0 ? 0 : (front_ + 1) % capacity_;
     return temp;
   }
 
@@ -124,7 +131,7 @@ public:
     }
 
     size_--;
-    shrinkIfNeeded();
+    // shrinkIfNeeded();
 
     back_ = (back_ - 1 + capacity_) % capacity_;
     T temp = data_[back_];
@@ -179,7 +186,7 @@ private:
   }
 
   void shrinkIfNeeded() {
-    if (size_ * 4 >= capacity_) {
+    if (size_ >= capacity_ / 4) {
       return;
     }
 

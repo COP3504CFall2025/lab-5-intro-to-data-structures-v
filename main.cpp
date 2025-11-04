@@ -54,17 +54,6 @@ int main() {
 
   {
     ABDQ<int> hi;
-    hi.pushFront(1);
-    assert(hi.front() == 1);
-    assert(hi.back() == 1);
-    hi.pushBack(2);
-    assert(hi.back() == 2);
-
-    hi.popFront();
-    assert(hi.front() == 2);
-    assert(hi.back() == 2);
-
-    hi.popBack();
 
     try {
       hi.popFront();
@@ -89,6 +78,28 @@ int main() {
       return 1;
     } catch (...) {
     }
+
+    hi.pushFront(2);
+
+    assert(hi.front() == 2);
+    assert(hi.back() == 2);
+    assert(hi.popFront() == 2);
+
+    hi.pushFront(2);
+
+    assert(hi.popBack() == 2);
+
+    hi.pushFront(1);
+    assert(hi.front() == 1);
+    assert(hi.back() == 1);
+    hi.pushBack(2);
+    assert(hi.back() == 2);
+
+    hi.popFront();
+    assert(hi.front() == 2);
+    assert(hi.back() == 2);
+
+    hi.popBack();
   }
 
   std::cout << "Success!\n";
