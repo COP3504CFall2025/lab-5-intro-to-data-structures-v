@@ -1,13 +1,13 @@
 #ifdef MAIN
 
-#include "ABDQ.hpp"
-#include "ABQ.hpp"
-#include "ABS.hpp"
-#include "Interfaces.hpp"
+// #include "ABDQ.hpp"
+// #include "ABQ.hpp"
+// #include "ABS.hpp"
+// #include "Interfaces.hpp"
 #include "LinkedList.hpp"
-#include "LLDQ.hpp"
-#include "LLQ.hpp"
-#include "LLS.hpp"
+// #include "LLDQ.hpp"
+// #include "LLQ.hpp"
+// #include "LLS.hpp"
 #include <iostream>
 
 /*
@@ -20,22 +20,22 @@
 
 int main() {
 
-    // LinkedList<int> l;
-    // l.addHead(5);
-    // l.addHead(10);
-    // l.addHead(15);
-    // l.addTail(0);
-    // l.printForward();
-    // LinkedList<int> l2 = l;
-    // l2.printForward();
-    // cout << l2.getTail()->data << endl;
+    LinkedList<int> l;
+    l.addHead(5);
+    l.addHead(10);
+    l.addHead(15);
+    l.addTail(0);
+    l.printForward();
+    LinkedList<int> l2 = l;
+    l2.printForward();
+    cout << l2.getTail()->data << endl;
 
-    ABS<int> stack;
-    stack.push(5);
-    stack.push(10);
-    stack.pop();
-    cout << stack.getSize() << endl;
-    cout << stack.peek() << endl;
+    // ABS<int> stack;
+    // stack.push(5);
+    // stack.push(10);
+    // stack.pop();
+    // cout << stack.getSize() << endl;
+    // cout << stack.peek() << endl;
     // int* data = stack.getData();
     // for (size_t i = 0; i < stack.getSize(); i++) {
     //     cout << data[i] << " ";
