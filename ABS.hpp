@@ -30,6 +30,7 @@ public:
         for (size_t i = 0; i < curr_size_; i++) {
             array_[i] = rhs.array_[i];
         }
+        return *this;
     }
     ABS(ABS&& other) noexcept {
         capacity_ = other.capacity_;
@@ -42,13 +43,14 @@ public:
     }
     ABS& operator=(ABS&& rhs) noexcept {
         if (rhs.array_ == this->array_) {return *this;}
-        capacity_ = other.capacity_;
-        curr_size_ = other.curr_size_;
-        array_ = other.array_;
+        capacity_ = rhs.capacity_;
+        curr_size_ = rhs.curr_size_;
+        array_ = rhs.array_;
 
-        other.capacity_ = 0;
-        other.curr_size_ = 0;
-        other.array_ = nullptr;
+        rhs.capacity_ = 0;
+        rhs.curr_size_ = 0;
+        rhs.array_ = nullptr;
+        return *this;
     }
     ~ABS() noexcept {delete[] array_;}
 
