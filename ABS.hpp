@@ -160,7 +160,7 @@ public:
         }
     }
 
-    void PrintBackward() {
+    void PrintReverse() {
         for (size_t i = curr_size_ - 1; i >= 0; i--) {
             std::cout << array_[i] << std::endl;
         }
