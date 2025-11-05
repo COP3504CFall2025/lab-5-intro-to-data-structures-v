@@ -8,7 +8,7 @@
 template <typename T>
 class LLS : public StackInterface<T> {
 private:
-    LinkedList<T> list = LinkedList<T>;
+    LinkedList<T> list;
 public:
     // Constructor
     LLS() = default;
@@ -25,7 +25,7 @@ public:
 
     // Access
     T peek() const override {
-        return list.getHead();
+        return list.getHead()->data;
     }
 
     //Getters
