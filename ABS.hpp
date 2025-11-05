@@ -51,7 +51,7 @@ public:
   }
 
   ABS &operator=(ABS &&rhs) noexcept {
-    if (this = &rhs) {
+    if (this == &rhs) {
       return *this;
     }
 

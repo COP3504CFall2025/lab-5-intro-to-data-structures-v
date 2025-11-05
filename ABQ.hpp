@@ -46,7 +46,7 @@ public:
     array_ = other.array_;
 
     other.capacity_ = 0;
-    other.size_ = 0;
+    other.curr_size_ = 0;
     other.array_ = nullptr;
   }
 
