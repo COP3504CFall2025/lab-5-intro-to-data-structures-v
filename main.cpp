@@ -22,13 +22,9 @@ int main() {
 
     LinkedList<int> l;
     l.addHead(5);
-    l.addHead(10);
-    l.addHead(15);
-    l.addTail(0);
+    l.removeHead();
     l.printForward();
-    LinkedList<int> l2 = l;
-    l2.printForward();
-    cout << l2.getTail()->data << endl;
+    // cout << l.getTail()->data << endl;
 
     // ABS<int> stack;
     // stack.push(5);
