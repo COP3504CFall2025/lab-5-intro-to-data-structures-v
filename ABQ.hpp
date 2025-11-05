@@ -81,7 +81,7 @@ public:
                 array_[i] = stack_array[i];
             }
         }
-        for (size_t i = curr_size_ + 1; i > 0; i--) {
+        for (size_t i = curr_size_; i > 0; i--) {
             array_[i] = array_[i - 1];
         }
         array_[0] = data;
