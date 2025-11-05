@@ -21,8 +21,8 @@
 int main() {
 
     LinkedList<int> l;
-    l.addHead(5);
-    l.removeHead();
+    l.addTail(5);
+    l.removeTail();
     l.printForward();
     // cout << l.getTail()->data << endl;
 

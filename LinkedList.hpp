@@ -70,6 +70,7 @@ public:
 				next->prev = nullptr;
 			} else {
 				delete head;
+				tail = nullptr;
 				head = nullptr;
 			}
 			count--;
@@ -88,6 +89,7 @@ public:
 			} else {
 				delete tail;
 				tail = nullptr;
+				head = nullptr;
 			}
 			count--;
 			return true;
