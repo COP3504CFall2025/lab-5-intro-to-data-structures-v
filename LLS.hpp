@@ -20,7 +20,12 @@ public:
 
     // Deletion
     T pop() override {
-        return list.removeHead();
+        T temp = list.getHead()->data;
+        if (list.removeHead()) {
+            return temp;
+        } else {
+            throw std::runtime_error("sldkfj");
+        }
     }
 
     // Access
