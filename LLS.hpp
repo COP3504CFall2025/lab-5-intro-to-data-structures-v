@@ -20,9 +20,9 @@ public:
 
     // Deletion
     T pop() override {
-        T temp = list.getHead()->data;
-        if (list.removeHead()) {
-            return temp;
+        Node* temp = list.getHead();
+        if (temp && list.removeHead()) {
+            return temp->data;
         } else {
             throw std::runtime_error("sldkfj");
         }
@@ -30,7 +30,7 @@ public:
 
     // Access
     T peek() const override {
-        T temp = list.getHead();
+        Node* temp = list.getHead();
         if (temp) {
             return temp->data;
         } else {

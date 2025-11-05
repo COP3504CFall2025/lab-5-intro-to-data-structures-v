@@ -20,9 +20,9 @@ public:
 
     // Deletion
     T dequeue() override {
-        T temp = list.getTail()->data;
-        if (list.removeTail()) {
-            return temp;
+        Node* temp = list.getTail();
+        if (temp && list.getTail()) {
+            return temp->data;
         } else {
             throw std::runtime_error("sldkfj");
         }
@@ -30,7 +30,7 @@ public:
 
     // Access
     T peek() const override {
-        T temp = list.getTail();
+        Node* temp = list.getTail();
         if (temp) {
             return temp->data;
         } else {
