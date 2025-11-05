@@ -1,7 +1,7 @@
 #ifdef MAIN
 
 // #include "ABDQ.hpp"
-// #include "ABQ.hpp"
+#include "ABQ.hpp"
 #include "ABS.hpp"
 // #include "Interfaces.hpp"
 #include "LinkedList.hpp"
@@ -26,20 +26,26 @@ int main() {
     // l.printForward();
     // cout << l.getTail()->data << endl;
 
-    ABS<int> stack;
-    stack.push(5);
-    stack.push(10);
-    stack.pop();
-    stack.push(5);
-    stack.push(10);
-    ABS<int> stack2 = stack;
-    // cout << stack2.getSize() << endl;
-    // cout << stack.peek() << endl;
-    int* data = stack2.getData();
-    for (size_t i = 0; i < stack2.getSize(); i++) {
+    // ABS<int> stack;
+    // stack.push(5);
+    // stack.push(10);
+    // stack.pop();
+    // stack.push(5);
+    // stack.push(10);
+    // ABS<int> stack2 = stack;
+    // // cout << stack2.getSize() << endl;
+    // // cout << stack.peek() << endl;
+
+    ABQ<int> queue;
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+    int* data = queue.getData();
+    for (size_t i = 0; i < queue.getSize(); i++) {
         cout << data[i] << " ";
     }
     cout << endl;
+
     return 0;
 }
 

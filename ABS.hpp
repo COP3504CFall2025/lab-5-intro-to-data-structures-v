@@ -54,13 +54,8 @@ public:
     }
     ~ABS() noexcept {delete[] array_;}
 
-    // Get the number of items in the ABS
     [[nodiscard]] size_t getSize() const noexcept override {return curr_size_;}
-
-    // Get the max size of the ABS
     [[nodiscard]] size_t getMaxCapacity() const noexcept {return capacity_;}
-
-    // Return underlying data for the stack
     [[nodiscard]] T* getData() const noexcept {return array_;}
 
     // Push item onto the stack
@@ -81,9 +76,15 @@ public:
         array_[curr_size_++] = data;
     }
 
-    T peek() const override {return array_[curr_size_ - 1];}
+    T peek() const override {
+        if (curr_size_ == 0) {throw std::runtime_error("abc");}
+        return array_[curr_size_ - 1];
+    }
 
-    T pop() override {return array_[--curr_size_];}
+    T pop() override {
+        if (curr_size_ == 0) {throw std::runtime_error("abc");}
+        return array_[--curr_size_];
+    }
 
 private:
     size_t capacity_ = 1;
