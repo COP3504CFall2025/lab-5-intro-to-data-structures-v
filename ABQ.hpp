@@ -27,7 +27,7 @@ public:
             array_[i] = other.array_[i];
         }
     }
-    ABS& operator=(const ABS& rhs) {
+    ABQ& operator=(const ABQ& rhs) {
         if (rhs.array_ == this->array_) {return *this;}
         delete[] array_;
         capacity_ = rhs.capacity_;
@@ -38,7 +38,7 @@ public:
         }
         return *this;
     }
-    ABS(ABS&& other) noexcept {
+    ABQ(ABQ&& other) noexcept {
         capacity_ = other.capacity_;
         curr_size_ = other.curr_size_;
         array_ = other.array_;
@@ -47,7 +47,7 @@ public:
         other.curr_size_ = 0;
         other.array_ = nullptr;
     }
-    ABS& operator=(ABS&& rhs) noexcept {
+    ABQ& operator=(ABQ&& rhs) noexcept {
         if (rhs.array_ == this->array_) {return *this;}
         capacity_ = rhs.capacity_;
         curr_size_ = rhs.curr_size_;
