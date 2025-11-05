@@ -76,14 +76,28 @@ public:
         array_[curr_size_++] = data;
     }
 
+    // Realized this isn't actually necessary lol
+    // misread autograder warning output
     T peek() const override {
         if (curr_size_ == 0) {throw std::runtime_error("abc");}
         return array_[curr_size_ - 1];
     }
 
+    // why downsize required?
     T pop() override {
-        if (curr_size_ == 0) {throw std::runtime_error("abc");}
-        return array_[--curr_size_];
+        if (--curr_size_ <= capacity_ / scale_factor_) {
+            T stack_array[curr_size_];
+            for (size_t i = 0; i < curr_size_; i++) {
+                stack_array[i] = array_[i];
+            }
+            delete[] array_;
+            capacity_ /= scale_factor_;
+            array_ = new T[capacity_];
+            for (size_t i = 0; i < curr_size_; i++) {
+                array_[i] = stack_array[i];
+            }
+        }
+        return array_[curr_size_];
     }
 
 private:
