@@ -30,7 +30,12 @@ public:
 
     // Access
     T peek() const override {
-        return list.getHead()->data;
+        T temp = list.getHead();
+        if (temp) {
+            return temp->data;
+        } else {
+            throw std::runtime_error("sldkfj");
+        }
     }
 
     //Getters
