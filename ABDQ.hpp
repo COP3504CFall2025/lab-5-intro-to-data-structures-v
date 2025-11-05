@@ -18,16 +18,97 @@ private:
 
 public:
     // Big 5
-    ABDQ();
-    explicit ABDQ(std::size_t capacity);
-    ABDQ(const ABDQ& other);
-    ABDQ(ABDQ&& other) noexcept;
-    ABDQ& operator=(const ABDQ& other);
-    ABDQ& operator=(ABDQ&& other) noexcept;
-    ~ABDQ() override;
+    ABDQ() {
+        this->capacity_ = 4;
+        this->size_ = 0;
+        this->front_ = 0;
+        this->back_ = 0;
+        this->data_ = new T[this->capacity_];
+    }
+
+    explicit ABDQ(std::size_t capacity) {
+        this->capacity_ = capacity;
+        this->size_ = 0;
+        this->front_ = 0;
+        this->back_ = 0;
+        this->data_ = new T[this->capacity_];
+    }
+
+    ABDQ(const ABDQ& other) {
+        this->capacity_ = other.capacity_;
+        this->size_ = other.size_;
+        this->front_ = other.front_;
+        this->back_ = other.back_;
+        this->data_ = new T[this->capacity_];
+
+        for (size_t i = 0; i < this->size_; i++) {
+            this->data_[i] = other.data_[i];
+        }
+    }
+
+    ABDQ(ABDQ&& other) noexcept {
+        this->capacity_ = other.capacity_;
+        this->size_ = other.size_;
+        this->front_ = other.front_;
+        this->back_ = other.back_;
+        this->data_ = other.data_;
+
+        other.capacity_ = 0;
+        other.size_ = 0;
+        other.front_ = 0;
+        other.back_ = 0;
+        other.data_ = nullptr;
+    }
+
+    ABDQ& operator=(const ABDQ& other) {
+        if (this == &other) {
+            return *this;
+        }
+        
+        T* temp = new T[other.capacity_];
+        delete[] this->data_;
+        this->data_ = temp;
+        this->capacity_ = other.capacity_;
+        this->size_ = other.size_;
+        this->front_ = other.front_;
+        this->back_ = other.back_;
+
+        for (size_t i = 0; i < size_; i++) {
+            this->data_[i] = other.data_[i];
+        }
+    }
+    ABDQ& operator=(ABDQ&& other) noexcept {
+        if (this == &other) {
+            return *this;
+        }
+
+        delete[] this->data_;
+        this->capacity_ = other.capacity_;
+        this->size_ = other.size_;
+        this->front_ = other.front_;
+        this->back_ = other.back_;
+        this->data_ = other.data_;
+
+        other.capacity_ = 0;
+        other.size_ = 0;
+        other.front_ = 0;
+        other.back_ = 0;
+        other.data_ = nullptr;
+    }
+
+    ~ABDQ() override {
+        delete[] this->data_;
+        this->data_ = nullptr;
+        this->capacity_ = 0;
+        this->size_ = 0;
+        this->front_ = 0;
+        this->back_ = 0;
+    }
 
     // Insertion
-    void pushFront(const T& item) override;
+    void pushFront(const T& item) override {
+        if (size_ > capacity)
+    }
     void pushBack(const T& item) override;
 
     // Deletion

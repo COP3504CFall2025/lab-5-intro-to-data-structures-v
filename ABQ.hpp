@@ -71,7 +71,7 @@ public:
         if (this == &rhs) {
             return *this;
         }
-
+        delete[] this->data_;
         this->capacity_ = rhs.capacity_;
         this->curr_size_ = rhs.curr_size_;
         this->array_ = rhs.array_;
