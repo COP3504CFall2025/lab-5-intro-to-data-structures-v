@@ -93,10 +93,10 @@ public:
     size_++;
     ensureCapacity();
 
-    if (size_ != 1) {
-      front_ = (front_ - 1 + capacity_) % capacity_;
+    if (size_ == 1) {
+      back_ = front_ + 1;
     } else {
-      back_ = 1;
+      front_ = (front_ - 1 + capacity_) % capacity_;
     }
 
     data_[front_] = item;
@@ -107,7 +107,12 @@ public:
     ensureCapacity();
 
     data_[back_] = item;
-    back_ = size_ == 1 ? 1 : (back_ + 1) % capacity_;
+
+    if (size_ == 1) {
+      back_ = front_ + 1;
+    } else {
+      back_ = size_ == 1 ? 1 : (back_ + 1) % capacity_;
+    }
   }
 
   // -- Deletion --
@@ -118,10 +123,12 @@ public:
     }
 
     size_--;
-    // shrinkIfNeeded();
 
     T temp = data_[front_];
-    front_ = size_ == 0 ? 0 : (front_ + 1) % capacity_;
+    front_ = (front_ + 1) % capacity_;
+
+    shrinkIfNeeded();
+
     return temp;
   }
 
@@ -131,10 +138,11 @@ public:
     }
 
     size_--;
-    // shrinkIfNeeded();
-
     back_ = (back_ - 1 + capacity_) % capacity_;
     T temp = data_[back_];
+
+    shrinkIfNeeded();
+
     return temp;
   }
 

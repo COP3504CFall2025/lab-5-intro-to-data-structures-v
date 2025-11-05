@@ -55,6 +55,9 @@ int main() {
   {
     ABDQ<int> hi;
 
+    hi.pushFront(2);
+    assert(hi.popFront() == 2);
+
     try {
       hi.popFront();
       return 1;
@@ -81,12 +84,6 @@ int main() {
 
     hi.pushFront(2);
 
-    assert(hi.front() == 2);
-    assert(hi.back() == 2);
-    assert(hi.popFront() == 2);
-
-    hi.pushFront(2);
-
     assert(hi.popBack() == 2);
 
     hi.pushFront(1);
@@ -94,11 +91,14 @@ int main() {
     assert(hi.back() == 1);
     hi.pushBack(2);
     assert(hi.back() == 2);
+    assert(hi.front() == 1);
 
-    hi.popFront();
+    hi.pushFront(2);
     assert(hi.front() == 2);
     assert(hi.back() == 2);
 
+    hi.popBack();
+    hi.popBack();
     hi.popBack();
   }
 
