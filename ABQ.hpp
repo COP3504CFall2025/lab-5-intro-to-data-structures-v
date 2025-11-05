@@ -90,13 +90,20 @@ public:
 
     // Access
     T peek() const override {
-        if (curr_size_ == 0) {throw std::runtime_error("abc");}
+        if (curr_size_ == 0) {
+            delete[] array_;
+            throw std::runtime_error("abc");
+        }
         return array_[curr_size_ - 1];
     }
 
     // Deletion
     T dequeue() override {
-        if (curr_size_ == 0) {throw std::runtime_error("abc");}
+        if (curr_size_ == 0) {
+            delete[] array_;
+
+            throw std::runtime_error("abc");
+        }
         if (curr_size_ - 1 <= (capacity_ / (scale_factor_ * 2))) {
             T stack_array[curr_size_];
             for (size_t i = 0; i < curr_size_; i++) {
