@@ -22,8 +22,19 @@ public:
     void pushBack(const T& item) override { list.addTail(item); }
 
     // Core Removal Operations
-    T popFront() override { list.removeHead(); }
-    T popBack() override { list.removeTail(); }
+    T popFront() override { 
+        Node<T>* head = list.getHead();
+        T headData = head->data;
+        list.removeHead();
+        return headData;
+    }
+    
+    T popBack() override {
+        Node<T>* tail = list.getTail();
+        T tailData = tail->data;
+        list.removeTail();
+        return tailData;
+    }
 
     // Element Accessors
     const T& front() const override { list.getHead(); }
