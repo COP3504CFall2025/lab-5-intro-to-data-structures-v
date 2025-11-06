@@ -11,7 +11,7 @@ template<typename T>
 class ABS : public StackInterface<T> {
 public:
     // Big 5 + Parameterized Constructor
-    ABS() : capacity_(0), curr_size_(0), array_(nullptr) {}
+    ABS() : capacity_(1), curr_size_(0), array_(new T[capacity_]) {}
     explicit ABS(const size_t capacity) {
         array_ = new T[capacity];
         capacity_ = capacity;
@@ -107,6 +107,8 @@ public:
     }
 
     T pop() override {
+        if (curr_size_ == 0) { return nullptr; }
+
         T value = array_[curr_size_];
         curr_size_--;
         return value;
