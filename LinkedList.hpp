@@ -4,7 +4,10 @@ using namespace std;
 
 template <typename T>
 struct Node {
-		T data;
+    public:
+        T getData() { return data; }
+    private:
+        T data;
 		Node<T>* prev;
 		Node<T>* next;
 };

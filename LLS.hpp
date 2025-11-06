@@ -27,7 +27,8 @@ public:
 
     // Access
     T peek() const override {
-        return list.getHead();
+        Node<T>* head = list.getHead();
+        return head->getData();
     }
 
     //Getters
