@@ -23,6 +23,8 @@ public:
 
     // Core Removal Operations
     T popFront() override { 
+        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element")}
+
         const Node<T>* head = list.getHead();
         T headData = head->data;
         list.removeHead();
@@ -30,6 +32,8 @@ public:
     }
 
     T popBack() override {
+        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element")}
+
         const Node<T>* tail = list.getTail();
         T tailData = tail->data;
         list.removeTail();
