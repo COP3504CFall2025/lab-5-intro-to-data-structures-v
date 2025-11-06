@@ -55,8 +55,6 @@ public:
         size_t newCap = other.capacity_;
         size_t newSize = other.curr_size_;
 
-        delete[] array_;
-
         array_ = newArr;
         capacity_ = newCap;
         curr_size_ = newSize;
@@ -67,10 +65,12 @@ public:
     }
 
     ABQ& operator=(ABQ&& rhs) noexcept {
-         if (this == &rhs) { return *this; }
+        if (this == &rhs) { return *this; }
         T* newArr = rhs.array_;
         size_t newCap = rhs.capacity_;
         size_t newSize = rhs.curr_size_;
+
+        delete[] array_;
 
         array_ = newArr;
         capacity_ = newCap;
