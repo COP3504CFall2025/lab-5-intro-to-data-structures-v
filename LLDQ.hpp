@@ -32,7 +32,7 @@ public:
     }
 
     T popBack() override {
-        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element")}
+        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element"); }
 
         const Node<T>* tail = list.getTail();
         T tailData = tail->data;

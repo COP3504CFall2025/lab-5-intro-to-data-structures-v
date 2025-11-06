@@ -20,7 +20,7 @@ public:
 
     // Deletion
     T dequeue() override {
-        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element")}
+        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element"); }
         
         const Node<T>* head = list.getHead();
         T headData = head->data;
