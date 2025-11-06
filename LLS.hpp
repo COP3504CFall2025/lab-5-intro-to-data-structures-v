@@ -34,4 +34,12 @@ public:
     std::size_t getSize() const noexcept override {
         return list.getCount();
     }
+
+    void printForward() const {
+        list.printForward();
+    }
+
+    void printReverse() const {
+        list.printReverse();
+    }
 };
