@@ -117,6 +117,13 @@ public:
     // Deletion
     T dequeue() override {
         if (curr_size_ == 0) { throw std::runtime_error("Current array is empty"); }
+
+        T front = arr[0];
+
+        for (int i = 0; i < curr_size_ - 1; ++i) {
+            array_[i] = array_[i + 1];
+        }
+
         curr_size_--;
 
         if (curr_size_ < capacity_/2) { 
@@ -127,7 +134,7 @@ public:
             capacity_ /= scale_factor_;
         }
 
-        return array_[0];
+        return front;
     }
 
 };
