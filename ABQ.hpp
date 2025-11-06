@@ -118,9 +118,9 @@ public:
     T dequeue() override {
         if (curr_size_ == 0) { throw std::runtime_error("Current array is empty"); }
 
-        T front = arr[0];
+        T front = array_[0];
 
-        for (int i = 0; i < curr_size_ - 1; ++i) {
+        for (size_t i = 0; i < curr_size_ - 1; ++i) {
             array_[i] = array_[i + 1];
         }
 
