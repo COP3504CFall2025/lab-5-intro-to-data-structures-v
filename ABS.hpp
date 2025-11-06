@@ -118,7 +118,7 @@ public:
         T value = array_[curr_size_-1];
         curr_size_--;
 
-        if (curr_size_ == capacity_/2) { 
+        if (curr_size_ < capacity_/2) { 
             T* newArr = new T[capacity_/scale_factor_];
             std::copy(array_, array_+curr_size_, newArr);
             delete[] array_;
