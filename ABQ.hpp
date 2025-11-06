@@ -127,7 +127,7 @@ public:
             capacity_ /= scale_factor_;
         }
 
-        return array_[];
+        return array_[0];
     }
 
 };
