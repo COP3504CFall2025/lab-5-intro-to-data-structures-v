@@ -98,12 +98,13 @@ public:
             array_ = newArr;
         }
 
-        array_[curr_size_] = data;
         curr_size_++;
+        array_[curr_size_-1] = data;
     }
 
     T peek() const override {
-        return array_[curr_size_];
+        if (curr_size_ == 0) { throw std::runtime_error("Current array is empty"); }
+        return array_[curr_size_-1];
     }
 
     T pop() override {
