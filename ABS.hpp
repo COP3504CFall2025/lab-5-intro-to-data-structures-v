@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <stdexcept>
+#include <algorithm>
 #include "Interfaces.hpp"
 
 // Technically bad, but size_t isn't likely to conflict with any client code.
@@ -19,13 +20,18 @@ public:
     }
 
     ABS(const ABS& other) {
-        array_ = other.array_;
+        array_ = new T[other.capacity_];
+
+        for (size_t i = 0; i < other.curr_size_; i++) {
+            array_[i] = other.array_[i];
+        }
+
         capacity_ = other.capacity_;
         curr_size_ = other.curr_size_;
     }
 
     ABS& operator=(const ABS& rhs) {
-        if (this == rhs) { return *this; }
+        if (this == &rhs) { return *this; }
         T* newArr = rhs.array_;
         size_t newCap = rhs.capacity_;
         size_t newSize = rhs.curr_size_;
@@ -43,8 +49,6 @@ public:
         T* newArr = other.array_;
         size_t newCap = other.capacity_;
         size_t newSize = other.curr_size_;
-
-        delete[] array_;
 
         array_ = newArr;
         capacity_ = newCap;
@@ -111,7 +115,7 @@ public:
     T pop() override {
         if (curr_size_ == 0) { throw std::runtime_error("Current array is empty"); }
 
-        T value = array_[curr_size_];
+        T value = array_[curr_size_-1];
         curr_size_--;
         return value;
     }
