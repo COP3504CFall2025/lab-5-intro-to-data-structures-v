@@ -11,7 +11,7 @@ private:
     LinkedList<T> list;
 public:
     // Constructor
-    LLS() : list(new LinkedList<T>()) {}
+    LLS() : list(LinkedList<T>()) {}
 
     // Insertion
     void push(const T& item) override {

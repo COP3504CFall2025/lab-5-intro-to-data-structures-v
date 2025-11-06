@@ -15,7 +15,7 @@ private:
 
 public:
     // Constructor
-    LLDQ() : list(new LinkedList<T>()) {}
+    LLDQ() : list(LinkedList<T>()) {}
 
     // Core Insertion Operations
     void pushFront(const T& item) override { list.addHead(item); }
