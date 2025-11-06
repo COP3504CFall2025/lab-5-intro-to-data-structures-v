@@ -17,26 +17,109 @@ class ABQ : public QueueInterface<T>{
 
 public:
     // Constructors + Big 5
-    ABQ();
-    explicit ABQ(const size_t capacity);
-    ABQ(const ABQ& other);
-    ABQ& operator=(const ABQ& rhs);
-    ABQ(ABQ&& other) noexcept;
-    ABQ& operator=(ABQ&& rhs) noexcept;
-    ~ABQ() noexcept override;
+    ABQ() : capacity_(0), curr_size_(0), array_(nullptr) {}
+    explicit ABQ(const size_t capacity) {
+        array_ = new T*[capacity];
+        capacity_ = capacity;
+        curr_size_ = 0;
+    }
+
+    ABQ(const ABQ& other) {
+        array_ = other.array_;
+        capacity_ = other.capacity_;
+        curr_size_ = other.curr_size_;
+    }
+
+    ABQ& operator=(const ABQ& rhs) {
+        if (this == rhs) { return *this; }
+        T* newArr = rhs.array_;
+        size_t newCap = rhs.capacity_;
+        size_t newSize = rhs.curr_size_;
+
+        delete[] array_;
+        delete curr_size_;
+        delete capacity_;
+
+        array_ = newArr;
+        capacity_ = newCap;
+        curr_size_ = newSize;
+
+        return *this;
+    }
+
+    ABQ(ABQ&& other) noexcept {
+        T* newArr = other.array_;
+        size_t newCap = other.capacity_;
+        size_t newSize = other.curr_size_;
+
+        delete[] array_;
+        delete capacity_;
+        delete curr_size_;
+
+        array_ = newArr;
+        capacity_ = newCap;
+        curr_size_ = newSize;
+
+        other.array_ = nullptr;
+        other.capacity_ = 0;
+        other.curr_size_ = 0;
+    }
+
+    ABQ& operator=(ABQ&& rhs) noexcept {
+         if (this == &rhs) { return *this; }
+        T* newArr = rhs.array_;
+        size_t newCap = rhs.capacity_;
+        size_t newSize = rhs.curr_size_;
+
+        delete[] array_;
+        delete capacity_;
+        delete curr_size_;
+
+        array_ = newArr;
+        capacity_ = newCap;
+        curr_size_ = newSize;
+
+        rhs.array_ = nullptr;
+        rhs.capacity_ = 0;
+        rhs.curr_size_ = 0;
+
+        return *this;
+    }
+
+    ~ABQ() noexcept override {
+        delete[] array_;
+        delete curr_size_;
+        delete capacity_;
+    }
 
     // Getters
-    [[nodiscard]] size_t getSize() const noexcept override;
-    [[nodiscard]] size_t getMaxCapacity() const noexcept;
-    [[nodiscard]] T* getData() const noexcept;
+    [[nodiscard]] size_t getSize() const noexcept override { return curr_size_; }
+    [[nodiscard]] size_t getMaxCapacity() const noexcept { return capacity_; }
+    [[nodiscard]] T* getData() const noexcept { return array_; }
 
     // Insertion
-    void enqueue(const T& data) override;
+    void enqueue(const T& data) override {
+        if (curr_size_ == capacity_) {
+            T* newArr = new T*[capacity_*scale_factor_];
+            std::copy(array_, array_+ curr_size_, newArr);
+            delete[] array_;
+            array_ = newArr;
+        }
+
+        array_[curr_size_] = data;
+        curr_size_++;
+    }
 
     // Access
-    T peek() const override;
+    T peek() const override { return array_[curr_size_]; }
 
     // Deletion
-    T dequeue() override;
+    T dequeue() override {
+        if (curr_size_ == 0) { return T; }
+        T value = array_[0];
+        delete array_[0];
+        curr_size_--;
+        return value;
+    }
 
 };
