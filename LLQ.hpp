@@ -20,7 +20,7 @@ public:
 
     // Deletion
     T dequeue() override {
-        typename LinkedList<T>::Node* temp = list.getTail();
+        const typename LinkedList<T>::Node* temp = list.getTail();
         if (temp && list.getTail()) {
             return temp->data;
         } else {
@@ -30,7 +30,7 @@ public:
 
     // Access
     T peek() const override {
-        typename LinkedList<T>::Node* temp = list.getTail();
+        const typename LinkedList<T>::Node* temp = list.getTail();
         if (temp) {
             return temp->data;
         } else {

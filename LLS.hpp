@@ -20,7 +20,7 @@ public:
 
     // Deletion
     T pop() override {
-        typename LinkedList<T>::Node* temp = list.getHead();
+        const typename LinkedList<T>::Node* temp = list.getHead();
         if (temp && list.removeHead()) {
             return temp->data;
         } else {
@@ -30,7 +30,7 @@ public:
 
     // Access
     T peek() const override {
-        typename LinkedList<T>::Node* temp = list.getHead();
+        const typename LinkedList<T>::Node* temp = list.getHead();
         if (temp) {
             return temp->data;
         } else {

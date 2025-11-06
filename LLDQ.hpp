@@ -8,7 +8,7 @@
 
 
 
-template <typename T>
+template <const typename T>
 class LLDQ : public DequeInterface<T> {
 private:
     LinkedList<T> list;
@@ -27,7 +27,7 @@ public:
 
     // Core Removal Operations
     T popFront() override {
-        typename LinkedList<T>::Node* temp = list.getHead();
+        const typename LinkedList<T>::Node* temp = list.getHead();
         if (temp && list.removeHead()) {
             return temp->data;
         } else {
@@ -35,7 +35,7 @@ public:
         }
     }
     T popBack() override {
-        typename LinkedList<T>::Node* temp = list.getTail();
+        const typename LinkedList<T>::Node* temp = list.getTail();
         if (temp && list.getTail()) {
             return temp->data;
         } else {
@@ -45,7 +45,7 @@ public:
 
     // Element Accessors
     const T& front() const override {
-        typename LinkedList<T>::Node* temp = list.getHead();
+        const typename LinkedList<T>::Node* temp = list.getHead();
         if (temp) {
             return temp->data;
         } else {
@@ -53,7 +53,7 @@ public:
         }
     }
     const T& back() const override {
-        typename LinkedList<T>::Node* temp = list.getTail();
+        const typename LinkedList<T>::Node* temp = list.getTail();
         if (temp) {
             return temp->data;
         } else {
