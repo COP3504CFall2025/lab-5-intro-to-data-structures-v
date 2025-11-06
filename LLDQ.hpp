@@ -28,7 +28,8 @@ public:
     // Core Removal Operations
     T popFront() override {
         const typename LinkedList<T>::Node* temp = list.getHead();
-        if (temp && list.removeHead()) {
+        if (temp) {
+            list.removeHead();
             return temp->data;
         } else {
             throw std::runtime_error("sldkfj");
@@ -36,7 +37,8 @@ public:
     }
     T popBack() override {
         const typename LinkedList<T>::Node* temp = list.getTail();
-        if (temp && list.getTail()) {
+        if (temp) {
+            list.getTail();
             return temp->data;
         } else {
             throw std::runtime_error("sldkfj");

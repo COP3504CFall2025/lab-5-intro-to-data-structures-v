@@ -1,6 +1,6 @@
 #ifdef MAIN
 
-// #include "ABDQ.hpp"
+#include "ABDQ.hpp"
 #include "ABQ.hpp"
 #include "ABS.hpp"
 // #include "Interfaces.hpp"
@@ -36,15 +36,23 @@ int main() {
     // // cout << stack2.getSize() << endl;
     // // cout << stack.peek() << endl;
 
-    ABQ<int> queue;
-    queue.enqueue(1);
-    queue.enqueue(2);
-    queue.enqueue(3);
-    int* data = queue.getData();
-    for (size_t i = 0; i < queue.getSize(); i++) {
-        cout << data[i] << " ";
-    }
-    cout << endl;
+    // ABQ<int> queue;
+    // queue.enqueue(1);
+    // queue.enqueue(2);
+    // queue.enqueue(3);
+    // int* data = queue.getData();
+    // for (size_t i = 0; i < queue.getSize(); i++) {
+    //     cout << data[i] << " ";
+    // }
+    // cout << endl;
+
+    ABDQ<int> dq;
+    dq.pushFront(10);
+    dq.pushFront(5);
+    dq.pushFront(20);
+    dq.pushFront(30);
+    dq.pushFront(40);
+    dq.print();
 
     return 0;
 }
