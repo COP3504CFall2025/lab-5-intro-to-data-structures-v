@@ -152,7 +152,6 @@ LinkedList<T>&LinkedList<T>::operator=(LinkedList<T>&& other) noexcept {
     
     delete head;
     delete tail;
-    delete count;
 
     head = newHead;
     tail = newTail;
@@ -174,7 +173,6 @@ LinkedList<T>&LinkedList<T>::operator=(const LinkedList<T>& rhs) {
 
     delete head;
     delete tail;
-    delete count;
 
     head = rhs->head;
     tail = rhs->tail;

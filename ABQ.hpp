@@ -37,8 +37,6 @@ public:
         size_t newSize = rhs.curr_size_;
 
         delete[] array_;
-        delete curr_size_;
-        delete capacity_;
 
         array_ = newArr;
         capacity_ = newCap;
@@ -53,8 +51,6 @@ public:
         size_t newSize = other.curr_size_;
 
         delete[] array_;
-        delete capacity_;
-        delete curr_size_;
 
         array_ = newArr;
         capacity_ = newCap;
@@ -72,8 +68,6 @@ public:
         size_t newSize = rhs.curr_size_;
 
         delete[] array_;
-        delete capacity_;
-        delete curr_size_;
 
         array_ = newArr;
         capacity_ = newCap;
@@ -88,8 +82,8 @@ public:
 
     ~ABQ() noexcept override {
         delete[] array_;
-        delete curr_size_;
-        delete capacity_;
+        curr_size_ = 0;
+        capacity_ = 0;
     }
 
     // Getters
