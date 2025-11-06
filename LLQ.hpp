@@ -22,6 +22,7 @@ public:
     T dequeue() override {
         const typename LinkedList<T>::Node* temp = list.getTail();
         if (temp && list.getTail()) {
+            list.removeTail();
             return temp->data;
         } else {
             throw std::runtime_error("sldkfj");
@@ -32,6 +33,7 @@ public:
     T peek() const override {
         const typename LinkedList<T>::Node* temp = list.getTail();
         if (temp) {
+            list.removeTail();
             return temp->data;
         } else {
             throw std::runtime_error("sldkfj");
