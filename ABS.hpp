@@ -13,7 +13,7 @@ public:
     // Big 5 + Parameterized Constructor
     ABS() : capacity_(0), curr_size_(0), array_(nullptr) {}
     explicit ABS(const size_t capacity) {
-        array_ = new T*[capacity];
+        array_ = new T[capacity];
         capacity_ = capacity;
         curr_size_ = 0;
     }
@@ -91,7 +91,12 @@ public:
 
     // Push item onto the stack
     void push(const T& data) override {
-        if (capacity_ == curr_size_) { capacity_ *= scale_factor_; }
+        if (curr_size_ == capacity_) {
+            T* newArr = new T[capacity_*scale_factor_];
+            std::copy(array_, array_+ curr_size_, newArr);
+            delete[] array_;
+            array_ = newArr;
+        }
 
         array_[curr_size_] = data;
         curr_size_++;
@@ -102,7 +107,6 @@ public:
     }
 
     T pop() override {
-        if (curr_size_ == 0) { return T; }
         T value = array_[curr_size_];
         curr_size_--;
         return value;
