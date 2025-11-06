@@ -19,7 +19,7 @@ public:
     // Constructors + Big 5
     ABQ() : capacity_(0), curr_size_(0), array_(nullptr) {}
     explicit ABQ(const size_t capacity) {
-        array_ = new T*[capacity];
+        array_ = new T[capacity];
         capacity_ = capacity;
         curr_size_ = 0;
     }
@@ -80,7 +80,7 @@ public:
         return *this;
     }
 
-    ~ABQ() noexcept override {
+    ~ABQ() noexcept {
         delete[] array_;
         curr_size_ = 0;
         capacity_ = 0;
@@ -94,7 +94,7 @@ public:
     // Insertion
     void enqueue(const T& data) override {
         if (curr_size_ == capacity_) {
-            T* newArr = new T*[capacity_*scale_factor_];
+            T* newArr = new T[capacity_*scale_factor_];
             std::copy(array_, array_+ curr_size_, newArr);
             delete[] array_;
             array_ = newArr;
@@ -109,11 +109,8 @@ public:
 
     // Deletion
     T dequeue() override {
-        if (curr_size_ == 0) { return T; }
-        T value = array_[0];
-        delete array_[0];
         curr_size_--;
-        return value;
+        return array_[0];
     }
 
 };

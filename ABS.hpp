@@ -74,7 +74,7 @@ public:
         return *this;
     }  
 
-    ~ABS() noexcept override {
+    ~ABS() noexcept {
         delete[] array_;
         curr_size_ = 0;
         capacity_ = 0;
@@ -104,7 +104,6 @@ public:
     T pop() override {
         if (curr_size_ == 0) { return T; }
         T value = array_[curr_size_];
-        delete array_[curr_size_];
         curr_size_--;
         return value;
     }
