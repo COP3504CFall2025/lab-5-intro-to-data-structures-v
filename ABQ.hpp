@@ -25,13 +25,18 @@ public:
     }
 
     ABQ(const ABQ& other) {
-        array_ = other.array_;
+        array_ = new T[other.capacity_];
+
+        for (size_t i = 0; i < other.curr_size_; i++) {
+            array_[i] = other.array_[i];
+        }
+
         capacity_ = other.capacity_;
         curr_size_ = other.curr_size_;
     }
 
     ABQ& operator=(const ABQ& rhs) {
-        if (this == rhs) { return *this; }
+        if (this == &rhs) { return *this; }
         T* newArr = rhs.array_;
         size_t newCap = rhs.capacity_;
         size_t newSize = rhs.curr_size_;
@@ -66,8 +71,6 @@ public:
         T* newArr = rhs.array_;
         size_t newCap = rhs.capacity_;
         size_t newSize = rhs.curr_size_;
-
-        delete[] array_;
 
         array_ = newArr;
         capacity_ = newCap;
@@ -115,7 +118,16 @@ public:
     T dequeue() override {
         if (curr_size_ == 0) { throw std::runtime_error("Current array is empty"); }
         curr_size_--;
-        return array_[0];
+
+        if (curr_size_ < capacity_/2) { 
+            T* newArr = new T[capacity_/scale_factor_];
+            std::copy(array_, array_+curr_size_, newArr);
+            delete[] array_;
+            array_ = newArr;
+            capacity_ /= scale_factor_;
+        }
+
+        return array_[];
     }
 
 };

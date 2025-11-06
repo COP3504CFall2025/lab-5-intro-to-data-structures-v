@@ -18,8 +18,8 @@ public:
     LLDQ() : list(new LinkedList<T>()) {}
 
     // Core Insertion Operations
-    void pushFront(const T& item) override { list.addHead(); }
-    void pushBack(const T& item) override { list.addTail(); }
+    void pushFront(const T& item) override { list.addHead(item); }
+    void pushBack(const T& item) override { list.addTail(item); }
 
     // Core Removal Operations
     T popFront() override { list.removeHead(); }
