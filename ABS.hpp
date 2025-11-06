@@ -107,7 +107,7 @@ public:
     }
 
     T pop() override {
-        if (curr_size_ == 0) { return nullptr; }
+        if (curr_size_ == 0) { throw std::runtime_error("Current array is empty"); }
 
         T value = array_[curr_size_];
         curr_size_--;

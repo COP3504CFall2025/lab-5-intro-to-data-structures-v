@@ -109,6 +109,7 @@ public:
 
     // Deletion
     T dequeue() override {
+        if (curr_size_ == 0) { throw std::runtime_error("Current array is empty"); }
         curr_size_--;
         return array_[0];
     }
