@@ -93,11 +93,12 @@ public:
 
     // Insertion
     void enqueue(const T& data) override {
-        if (curr_size_ == capacity_) {
+        if (curr_size_ >= capacity_) {
             T* newArr = new T[capacity_*scale_factor_];
             std::copy(array_, array_+ curr_size_, newArr);
             delete[] array_;
             array_ = newArr;
+            capacity_ *= scale_factor_;
         }
 
         curr_size_++;
