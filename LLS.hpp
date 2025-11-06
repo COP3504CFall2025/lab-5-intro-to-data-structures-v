@@ -20,7 +20,7 @@ public:
 
     // Deletion
     T pop() override {
-        Node<T>* head = list.getHead();
+        const Node<T>* head = list.getHead();
         T headData = head->data;
         list.removeHead();
         return headData;
