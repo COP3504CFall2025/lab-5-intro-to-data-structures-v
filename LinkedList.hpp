@@ -19,7 +19,7 @@ public:
 
         Node<T>* current = head;
 
-        for (int i = 0; i < count; i++) {
+        for (size_t i = 0; i < count; i++) {
             std::cout << current->data << std::endl;
             current = current->next;
         }
@@ -30,7 +30,7 @@ public:
 
         Node<T>* current = tail;
 
-        for (int i = 0; i < count; i++) {
+        for (size_t i = 0; i < count; i++) {
             std::cout << current->data << std::endl;
             current = current->prev;
         }
@@ -96,7 +96,7 @@ public:
         return true;
     }
 
-	void Clear() {
+	void clear() {
         while (head != nullptr) {
             removeHead();
         }
@@ -184,5 +184,5 @@ LinkedList<T>&LinkedList<T>::operator=(const LinkedList<T>& rhs) {
 
 template <typename T>
 LinkedList<T>::~LinkedList() {
-    Clear();
+    clear();
 }
