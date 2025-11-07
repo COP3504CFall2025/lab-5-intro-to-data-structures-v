@@ -67,7 +67,7 @@ private:
         if (idx == -1) {
             idx = capacity_ - 1;
 
-        } else if (idx == capacity_) {
+        } else if (idx == static_cast<int>(capacity_)) {
             idx = 0;
         }
         return idx;
@@ -75,12 +75,12 @@ private:
 
 public:
     // Big 5
-    ABDQ(): data_(new T[4]) {}
+    ABDQ(): capacity_(4), data_(new T[4]) {}
     explicit ABDQ(std::size_t capacity): capacity_(capacity), data_(new T[capacity]) {}
     ABDQ(const ABDQ& other): capacity_(other.capacity_), size_(other.size_), front_(other.front_), back_(other.back_) {
         data_ = new T[capacity_];
         for (size_t i = 0; i < capacity_; i++) {
-            data_[i] = other.data[i];
+            data_[i] = other.data_[i];
         }
     }
 
@@ -107,7 +107,7 @@ public:
         data_ = other.data_;
         data_ = new T[capacity_];
         for (size_t i = 0; i < capacity_; i++) {
-            data_[i] = other.data[i];
+            data_[i] = other.data_[i];
         }
         return *this;
     }
@@ -154,11 +154,13 @@ public:
 
     // Deletion
     T popFront() override {
+        if (size_ == 0) {throw std::runtime_error("a");}
         T return_val = data_[front_];
         front_ = get_wrapped_idx(front_ + 1);
         return return_val;
     }
     T popBack() override {
+        if (size_ == 0) {throw std::runtime_error("a");}
         T return_val = data_[back_];
         back_ = get_wrapped_idx(back_ - 1);
         return return_val;
