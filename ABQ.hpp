@@ -103,7 +103,12 @@ public:
     }
 
     curr_size_--;
-    T temp = array_[curr_size_];
+    T temp = array_[0];
+
+    for (size_t i = 0; i < curr_size_; i++) {
+      array_[i] = array_[i + 1];
+    }
+
     shrinkIfNeeded();
     return temp;
   }
@@ -127,7 +132,7 @@ private:
   }
 
   void shrinkIfNeeded() {
-    if (curr_size_ >= capacity_ / 4) {
+    if (curr_size_ > capacity_ / 4) {
       return;
     }
 

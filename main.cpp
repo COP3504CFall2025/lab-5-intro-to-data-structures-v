@@ -42,8 +42,21 @@ void test_abs() {
   std::cerr << "ABS success\n";
 }
 
+void test_abq() {
+  std::cerr << "ABQ test:\n";
+
+  ABQ<int> hi;
+  hi.enqueue(1);
+  hi.enqueue(2);
+  assert(hi.dequeue() == 1);
+  assert(hi.dequeue() == 2);
+
+  std::cerr << "ABQ success\n";
+}
+
 int main() {
   test_abs();
+  test_abq();
 
   // std::cout << "ll:\n";
 
