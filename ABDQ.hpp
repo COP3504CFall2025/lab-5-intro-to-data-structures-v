@@ -63,14 +63,13 @@ private:
         }
 
     }
-    size_t insert_at(int idx, const T& item) {
+    size_t get_wrapped_idx(int idx) {
         if (idx == -1) {
             idx = capacity_ - 1;
 
         } else if (idx == capacity_) {
             idx = 0;
         }
-        data_[idx] = item;
         return idx;
     }
 
@@ -85,7 +84,12 @@ public:
         }
     }
 
-    ABDQ(ABDQ&& other): capacity_(other.capacity_), size_(other.size_), front_(other.front_), back_(other.back_), data_(other.data_) noexcept {
+    ABDQ(ABDQ&& other) noexcept {
+        capacity_ = other.capacity_;
+        size_ = other.size_;
+        front_ = other.front_;
+        back_ = other.back_;
+        data_ = other.data_;
         other.capacity_ = 0;
         other.size_ = 0;
         other.front_ = 0;
@@ -93,22 +97,34 @@ public:
         other.data_ = nullptr;
     }
 
-    ABDQ& operator=(const ABDQ& other): capacity_(other.capacity_), size_(other.size_), front_(other.front_), back_(other.back_) {
+    ABDQ& operator=(const ABDQ& other) {
         if (data_ == other.data_) {return *this;}
         delete[] data_;
+        capacity_ = other.capacity_;
+        size_ = other.size_;
+        front_ = other.front_;
+        back_ = other.back_;
+        data_ = other.data_;
         data_ = new T[capacity_];
         for (size_t i = 0; i < capacity_; i++) {
             data_[i] = other.data[i];
         }
+        return *this;
     }
-    ABDQ& operator=(ABDQ&& other): capacity_(other.capacity_), size_(other.size_), front_(other.front_), back_(other.back_) noexcept {
+    ABDQ& operator=(ABDQ&& other) noexcept {
         if (data_ == other.data_) {return *this;}
         delete[] data_;
+        capacity_ = other.capacity_;
+        size_ = other.size_;
+        front_ = other.front_;
+        back_ = other.back_;
+        data_ = other.data_;
         other.capacity_ = 0;
         other.size_ = 0;
         other.front_ = 0;
         other.back_ = 0;
         other.data_ = nullptr;
+        return *this;
     }
     ~ABDQ() {delete[] data_;}
 
@@ -118,7 +134,8 @@ public:
             resize_capacity(2);
         }
         size_++;
-        size_t idx = insert_at(front_ - 1, item);
+        size_t idx = get_wrapped_idx(front_ - 1);
+        data_[idx] = item;
 
         front_ = idx;
         if (size_ == 1) {back_ = idx;}
@@ -128,7 +145,8 @@ public:
             resize_capacity(2);
         }
         size_++;
-        size_t idx = insert_at(back_ + 1, item);
+        size_t idx = get_wrapped_idx(back_ + 1);
+        data_[idx] = item;
 
         back_ = idx;
         if (size_ == 1) {front_ = idx;}
@@ -136,10 +154,14 @@ public:
 
     // Deletion
     T popFront() override {
-
+        T return_val = data_[front_];
+        front_ = get_wrapped_idx(front_ + 1);
+        return return_val;
     }
     T popBack() override {
-
+        T return_val = data_[back_];
+        back_ = get_wrapped_idx(back_ - 1);
+        return return_val;
     }
 
     // Access
