@@ -174,7 +174,7 @@ public:
     T popFront() override {
         if (size_ == 0) { throw std::runtime_error("Array is empty!"); }
 
-        T front = array_[front_];
+        T front = data_[front_];
         size_--;
         front_--;
 
@@ -185,7 +185,7 @@ public:
     T popBack() override {
         if (size_ == 0) { throw std::runtime_error("Array is empty!"); }
         
-        T back = array_[back_-1];
+        T back = data_[back_-1];
         size_--;
         back_--;
         
