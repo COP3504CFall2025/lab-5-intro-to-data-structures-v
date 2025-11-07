@@ -23,22 +23,32 @@ public:
 
     // Core Removal Operations
     T popFront() override { 
-        const Node<T>* head = list.getHead();
-        T headData = head->data;
+        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element"); }
+
+        T headData = list.getHead()->data;
+
         list.removeHead();
         return headData;
     }
 
     T popBack() override {
-        const Node<T>* tail = list.getTail();
-        T tailData = tail->data;
+        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element"); }
+
+        T tailData = list.getTail()->data;
+
         list.removeTail();
         return tailData;
     }
 
     // Element Accessors
-    const T& front() const override { list.getHead(); }
-    const T& back() const override { list.getTail(); }
+    const T& front() const override { 
+        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element"); }
+        list.getHead();
+    }
+    const T& back() const override { 
+        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element"); }
+        list.getTail();
+    }
 
     // Getter
     std::size_t getSize() const noexcept override { list.getCount(); }
