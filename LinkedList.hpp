@@ -21,8 +21,8 @@ public:
 	};
 	void printReverse() const {
 		Node<T>* current = tail;
-		while (current->value != nullptr) {
-			std::cout << current->value << std::endl;
+		while (current->data != nullptr) {
+			std::cout << current->data << std::endl;
 			current = current->prev;
 		}
 	};
