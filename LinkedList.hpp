@@ -101,7 +101,7 @@ public:
 		count--;
 		return true;
 	};
-	void Clear() {
+	void clear() {
 		while (head != nullptr) {
 			Node<T>* temp = head->next;
 			delete head;
@@ -112,10 +112,10 @@ public:
 	// Operators
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
 		if (this != &other) {
-			Clear();
-			head = other.head;
-			tail = other.tail;
-			count = other.count;
+			clear();
+			head = other.getHead();
+			tail = other.getTail();
+			count = other.getCount();
 
 			other.head = nullptr;
 			other.tail = nullptr;
@@ -126,10 +126,10 @@ public:
 	LinkedList<T>& operator=(const LinkedList<T>& rhs){
 
 		if (this != &rhs) {
-			Clear();
+			clear();
 			count = rhs.getCount();
 			rhs.getTail() = rhs.getHead();
-			for (int i = 0; i < rhs.count; i++) {
+			for (int i = 0; i < rhs.getCount(); i++) {
 				addTail(rhs.getTail()->data);
 				if (rhs.getTail()->next != nullptr) {
 					rhs.getTail() = rhs.getTail()->next;
@@ -161,7 +161,7 @@ public:
 		other.count = 0;
 	};
 	~LinkedList() {
-		Clear();
+		clear();
 	};
 
 private:
