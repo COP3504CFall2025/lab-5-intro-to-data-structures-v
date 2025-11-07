@@ -41,8 +41,14 @@ public:
     }
 
     // Element Accessors
-    const T& front() const override { list.getHead(); }
-    const T& back() const override { list.getTail(); }
+    const T& front() const override { 
+        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element"); }
+        list.getHead();
+    }
+    const T& back() const override { 
+        if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element"); }
+        list.getTail();
+    }
 
     // Getter
     std::size_t getSize() const noexcept override { list.getCount(); }
