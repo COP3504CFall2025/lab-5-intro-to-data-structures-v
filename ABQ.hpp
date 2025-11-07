@@ -38,6 +38,8 @@ public:
     for (size_t i = 0; i < rhs.curr_size_; i++) {
       array_[i] = rhs.array_[i];
     }
+
+    return *this;
   }
 
   ABQ(ABQ &&other) noexcept {
@@ -62,6 +64,8 @@ public:
     rhs.capacity_ = 0;
     rhs.curr_size_ = 0;
     rhs.array_ = nullptr;
+
+    return *this;
   }
 
   ~ABQ() noexcept override { delete[] array_; }
