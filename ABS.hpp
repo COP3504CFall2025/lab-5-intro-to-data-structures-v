@@ -123,11 +123,11 @@ private:
     T *temp = new T[capacity_];
 
     for (size_t i = 0; i < curr_size_; i++) {
-      temp[i] = data_[i];
+      temp[i] = array_[i];
     }
 
-    delete[] data_;
-    data_ = temp;
+    delete[] array_;
+    array_ = temp;
   }
 
   void shrinkIfNeeded() {
@@ -142,11 +142,11 @@ private:
     T *temp = new T[capacity_];
 
     for (size_t i = 0; i < curr_size_; i++) {
-      temp[i] = data_[i];
+      temp[i] = array_[i];
     }
 
-    delete[] data_;
-    data_ = temp;
+    delete[] array_;
+    array_ = temp;
   }
 
   size_t capacity_;
