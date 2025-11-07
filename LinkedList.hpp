@@ -14,14 +14,14 @@ public:
 	// Behaviors
 	void printForward() const {
 		Node<T>* current = head;
-		while (current->data != nullptr) {
+		while (current != nullptr) {
 			std::cout << current->data << std::endl;
 			current = current->next;
 		}
 	};
 	void printReverse() const {
 		Node<T>* current = tail;
-		while (current->data != nullptr) {
+		while (current != nullptr) {
 			std::cout << current->data << std::endl;
 			current = current->prev;
 		}
