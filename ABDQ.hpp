@@ -13,7 +13,7 @@ private:
     std::size_t capacity_ = 4;  // total allocated capacity
     std::size_t size_ = 0;      // number of stored elements
     std::size_t front_ = 0;     // index of front element
-    std::size_t back_ = 0;      // index after the last element (circular)
+    std::size_t back_ = -1;      // index after the last element (circular)
 
     static constexpr std::size_t SCALE_FACTOR = 2;
     void resize_capacity(double scale) {
