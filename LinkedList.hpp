@@ -14,8 +14,8 @@ public:
 	// Behaviors
 	void printForward() const {
 		Node<T>* current = head;
-		while (current->value != nullptr) {
-			std::cout << current->value << std::endl;
+		while (current->data != nullptr) {
+			std::cout << current->data << std::endl;
 			current = current->next;
 		}
 	};
@@ -128,10 +128,11 @@ public:
 		if (this != &rhs) {
 			clear();
 			count = rhs.getCount();
-			for (int i = 0; i < rhs.getCount(); i++) {
-				addTail(rhs.getHead()->data);
-				if (rhs.getHead()->next != nullptr) {
-					rhs.getHead() = rhs.getHead()->next;
+			head = rhs.getHead();
+			for (size_t i = 0; i < rhs.getCount(); i++) {
+				addTail(head->data);
+				if (head->next != nullptr) {
+					head = head->next;
 				}
 			}
 		}
@@ -142,10 +143,11 @@ public:
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
 	LinkedList(const LinkedList<T>& list) {
 		count = list.getCount();
-		for (int i = 0; i < list.count; i++) {
-			addTail(list.getHead()->data);
-			if (list.getHead()->next != nullptr) {
-				list.getHead() = list.getHead()->next;
+		head = list.getHead();
+		for (size_t i = 0; i < list.getCount(); i++) {
+			addTail(head->data);
+			if (head->next != nullptr) {
+				head = head->next;
 			}
 		}
 	};
