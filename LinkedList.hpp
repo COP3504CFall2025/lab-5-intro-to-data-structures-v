@@ -168,16 +168,16 @@ LinkedList<T>&LinkedList<T>::operator=(LinkedList<T>&& other) noexcept {
 template <typename T>
 LinkedList<T>&LinkedList<T>::operator=(const LinkedList<T>& rhs) {
     if (this == &rhs) { return *this; }
-    Node<T>* newHead = rhs->head;
-    Node<T>* newTail = rhs->tail;
-    unsigned int newCount = rhs->count;
+    Node<T>* newHead = rhs.head;
+    Node<T>* newTail = rhs.tail;
+    unsigned int newCount = rhs.count;
 
     delete head;
     delete tail;
 
-    head = rhs->head;
-    tail = rhs->tail;
-    count = rhs->count;
+    head = newHead;
+    tail = newTail;
+    count = newCount;
 
     return *this;
 }
