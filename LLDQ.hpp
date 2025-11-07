@@ -25,8 +25,8 @@ public:
     T popFront() override { 
         if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element"); }
 
-        const Node<T>* head = list.getHead();
-        T headData = head->data;
+        T headData = list.getHead()->data;
+
         list.removeHead();
         return headData;
     }
@@ -34,8 +34,8 @@ public:
     T popBack() override {
         if (list.getCount() == 0) { throw std::runtime_error("List is empty cannot pop element"); }
 
-        const Node<T>* tail = list.getTail();
-        T tailData = tail->data;
+        T tailData = list.getTail()->data;
+
         list.removeTail();
         return tailData;
     }
