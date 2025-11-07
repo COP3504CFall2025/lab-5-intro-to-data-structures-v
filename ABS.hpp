@@ -30,14 +30,16 @@ public:
     }
 
     T *temp = new T[rhs.capacity_];
-    delete[] array_;
-    array_ = temp;
-    capacity_ = rhs.capacity_;
-    curr_size_ = rhs.curr_size_;
 
     for (size_t i = 0; i < rhs.curr_size_; i++) {
-      array_[i] = rhs.array_[i];
+      temp[i] = rhs.array_[i];
     }
+
+    delete[] array_;
+    array_ = temp;
+
+    capacity_ = rhs.capacity_;
+    curr_size_ = rhs.curr_size_;
 
     return *this;
   }
@@ -55,13 +57,15 @@ public:
       return *this;
     }
 
+    delete[] array_;
+
+    array_ = rhs.array_;
     capacity_ = rhs.capacity_;
     curr_size_ = rhs.curr_size_;
-    array_ = rhs.array_;
 
+    rhs.array_ = nullptr;
     rhs.capacity_ = 0;
     rhs.curr_size_ = 0;
-    rhs.array_ = nullptr;
 
     return *this;
   }
