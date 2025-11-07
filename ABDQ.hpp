@@ -200,7 +200,7 @@ public:
     }
     const T& back() const override { 
         if (size_ == 0) { throw std::runtime_error("Array is empty!"); }
-        return data_[back_];
+        return data_[back_-1];
     }
 
     // Getters
