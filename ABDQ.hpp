@@ -24,7 +24,7 @@ private:
         T* temp = new T[capacity_];
 
         for (size_t i = 0; i < size_; i++) {
-            size_t index = (front + i) % capacity_;
+            size_t index = (front_ + i) % capacity_;
             temp[i] = data_[index];
         }
 
@@ -42,7 +42,7 @@ private:
         T* temp = new T[capacity_];
 
         for (size_t i = 0; i < size_; i++) {
-            size_t index = (front + i) % capacity_;
+            size_t index = (front_ + i) % capacity_;
             temp[i] = data_[index];
         }
 
@@ -56,8 +56,8 @@ public:
     // Big 5
     ABDQ() : capacity_(4), size_(0), data_(new T[capacity_]), front_(0), back_(0) {}
     explicit ABDQ(std::size_t capacity) {
-        capacity_ = capacity_;
-        data_ = new T[capacity_];
+        capacity_ = capacity;
+        data_ = new T[capacity];
         front_ = 0;
         back_ = 0;
         size_ = 0;
@@ -71,7 +71,7 @@ public:
         }
 
         capacity_ = other.capacity_;
-        size_ = other.curr_size_;
+        size_ = other.size_;
         front_ = other.front_;
         back_ = other.back_;
     }
