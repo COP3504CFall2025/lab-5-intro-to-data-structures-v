@@ -54,7 +54,7 @@ private:
 
 public:
     // Big 5
-    ABDQ() : capacity_(4), curr_size_(0), data_(new T[capacity_]), front_(0), back_(0) {}
+    ABDQ() : capacity_(4), size_(0), data_(new T[capacity_]), front_(0), back_(0) {}
     explicit ABDQ(std::size_t capacity) {
         capacity_ = capacity_;
         data_ = new T[capacity_];
@@ -123,7 +123,7 @@ public:
         size_t newFront = other.front_;
         size_t newBack = other.back_;
 
-        delete[] array_;
+        delete[] data_;
 
         data_ = newArr;
         capacity_ = newCap;
@@ -131,7 +131,7 @@ public:
         front_ = newFront;
         back_ = newBack;
 
-        other.array_ = nullptr;
+        other.data_ = nullptr;
         other.capacity_ = 0;
         other.curr_size_ = 0;
         other.back_ = 0;
