@@ -128,11 +128,10 @@ public:
 		if (this != &rhs) {
 			clear();
 			count = rhs.getCount();
-			rhs.getTail() = rhs.getHead();
 			for (int i = 0; i < rhs.getCount(); i++) {
-				addTail(rhs.getTail()->data);
-				if (rhs.getTail()->next != nullptr) {
-					rhs.getTail() = rhs.getTail()->next;
+				addTail(rhs.getHead()->data);
+				if (rhs.getHead()->next != nullptr) {
+					rhs.getHead() = rhs.getHead()->next;
 				}
 			}
 		}
@@ -143,11 +142,10 @@ public:
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
 	LinkedList(const LinkedList<T>& list) {
 		count = list.getCount();
-		list.getTail() = list.getHead();
 		for (int i = 0; i < list.count; i++) {
-			addTail(list.getTail()->data);
-			if (list.getTail()->next != nullptr) {
-				list.getTail() = list.getTail()->next;
+			addTail(list.getHead()->data);
+			if (list.getHead()->next != nullptr) {
+				list.getHead() = list.getHead()->next;
 			}
 		}
 	};
