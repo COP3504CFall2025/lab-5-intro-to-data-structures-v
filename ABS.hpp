@@ -84,30 +84,17 @@ public:
 
   // Push item onto the stack
   void push(const T &data) override {
-    if (curr_size_ >= capacity_) {
-      capacity_ *= scale_factor_;
-
-      T *temp = new T[capacity_];
-
-      for (size_t i = 0; i < curr_size_; i++) {
-        temp[i] = array_[i];
-      }
-
-      delete[] array_;
-      array_ = temp;
-    }
-
-    array_[++curr_size_] = data;
-
+    curr_size_++;
     ensureCapacity();
+    array_[curr_size_ - 1] = data;
   }
 
-  T peek() const override { return array_[curr_size_]; }
+  T peek() const override { return array_[curr_size_ - 1]; }
 
   T pop() override {
-    T temp = array_[curr_size_--];
+    curr_size_--;
     shrinkIfNeeded();
-    return temp;
+    return array_[curr_size_ - 1];
   }
 
 private:
@@ -115,8 +102,6 @@ private:
     if (curr_size_ < capacity_) {
       return;
     }
-
-    size_t old_capacity = capacity_;
 
     capacity_ *= scale_factor_;
 
@@ -134,8 +119,6 @@ private:
     if (curr_size_ >= capacity_ / 4) {
       return;
     }
-
-    size_t old_capacity = capacity_;
 
     capacity_ /= scale_factor_;
 

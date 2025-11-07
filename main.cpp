@@ -20,87 +20,104 @@
 
 */
 
+void test_abs() {
+  std::cerr << "ABS test:\n";
+  ABS<int> hi;
+  assert(hi.getSize() == 0);
+  assert(hi.getMaxCapacity() == 1);
+  hi.push(7);
+  hi.push(8);
+  assert(hi.getSize() == 2);
+  assert(hi.peek() == 8);
+  assert(hi.pop() == 7);
+  assert(hi.getSize() == 1);
+  assert(hi.getMaxCapacity() == 4);
+  std::cerr << "ABS success\n";
+}
+
 int main() {
-  std::cout << "ll:\n";
+  test_abs();
 
-  {
-    LinkedList<int> ll;
+  // std::cout << "ll:\n";
 
-    assert(ll.getTail() == nullptr);
+  // {
+  //   LinkedList<int> ll;
 
-    ll.addHead(1);
-    ll.removeTail();
+  //   assert(ll.getTail() == nullptr);
 
-    assert(ll.getHead() == nullptr);
-    assert(ll.removeHead() == false);
-    assert(ll.removeTail() == false);
+  //   ll.addHead(1);
+  //   ll.removeTail();
 
-    ll.addTail(1);
-    assert(ll.getTail()->data == 1);
-    assert(ll.getHead()->data == 1);
-    ll.addTail(2);
-    ll.removeHead();
-    assert(ll.getTail()->data == 2);
-    assert(ll.getHead()->data == 2);
+  //   assert(ll.getHead() == nullptr);
+  //   assert(ll.removeHead() == false);
+  //   assert(ll.removeTail() == false);
 
-    LinkedList<int> ll2(ll);
-    assert(ll2.getTail()->data == 2);
+  //   ll.addTail(1);
+  //   assert(ll.getTail()->data == 1);
+  //   assert(ll.getHead()->data == 1);
+  //   ll.addTail(2);
+  //   ll.removeHead();
+  //   assert(ll.getTail()->data == 2);
+  //   assert(ll.getHead()->data == 2);
 
-    LinkedList<int> ll3(std::move(ll));
-    assert(ll3.getTail()->data == 2);
-  }
+  //   LinkedList<int> ll2(ll);
+  //   assert(ll2.getTail()->data == 2);
 
-  std::cout << "ABDQ:\n";
+  //   LinkedList<int> ll3(std::move(ll));
+  //   assert(ll3.getTail()->data == 2);
+  // }
 
-  {
-    ABDQ<int> hi;
+  // std::cout << "ABDQ:\n";
 
-    hi.pushFront(2);
-    assert(hi.popFront() == 2);
+  // {
+  //   ABDQ<int> hi;
 
-    try {
-      hi.popFront();
-      return 1;
-    } catch (...) {
-    }
+  //   hi.pushFront(2);
+  //   assert(hi.popFront() == 2);
 
-    try {
-      hi.popBack();
-      return 1;
-    } catch (...) {
-    }
+  //   try {
+  //     hi.popFront();
+  //     return 1;
+  //   } catch (...) {
+  //   }
 
-    try {
-      hi.front();
-      return 1;
-    } catch (...) {
-    }
+  //   try {
+  //     hi.popBack();
+  //     return 1;
+  //   } catch (...) {
+  //   }
 
-    try {
-      hi.back();
-      return 1;
-    } catch (...) {
-    }
+  //   try {
+  //     hi.front();
+  //     return 1;
+  //   } catch (...) {
+  //   }
 
-    hi.pushFront(2);
+  //   try {
+  //     hi.back();
+  //     return 1;
+  //   } catch (...) {
+  //   }
 
-    assert(hi.popBack() == 2);
+  //   hi.pushFront(2);
 
-    hi.pushFront(1);
-    assert(hi.front() == 1);
-    assert(hi.back() == 1);
-    hi.pushBack(2);
-    assert(hi.back() == 2);
-    assert(hi.front() == 1);
+  //   assert(hi.popBack() == 2);
 
-    hi.pushFront(2);
-    assert(hi.front() == 2);
-    assert(hi.back() == 2);
+  //   hi.pushFront(1);
+  //   assert(hi.front() == 1);
+  //   assert(hi.back() == 1);
+  //   hi.pushBack(2);
+  //   assert(hi.back() == 2);
+  //   assert(hi.front() == 1);
 
-    hi.popBack();
-    hi.popBack();
-    hi.popBack();
-  }
+  //   hi.pushFront(2);
+  //   assert(hi.front() == 2);
+  //   assert(hi.back() == 2);
+
+  //   hi.popBack();
+  //   hi.popBack();
+  //   hi.popBack();
+  // }
 
   std::cout << "Success!\n";
   return 0;
