@@ -98,13 +98,57 @@ public:
     }
 
     array_[++curr_size_] = data;
+
+    ensureCapacity();
   }
 
   T peek() const override { return array_[curr_size_]; }
 
-  T pop() override { return array_[curr_size_--]; }
+  T pop() override {
+    T temp = array_[curr_size_--];
+    shrinkIfNeeded();
+    return temp;
+  }
 
 private:
+  void ensureCapacity() {
+    if (curr_size_ < capacity_) {
+      return;
+    }
+
+    size_t old_capacity = capacity_;
+
+    capacity_ *= scale_factor_;
+
+    T *temp = new T[capacity_];
+
+    for (size_t i = 0; i < curr_size_; i++) {
+      temp[i] = data_[i];
+    }
+
+    delete[] data_;
+    data_ = temp;
+  }
+
+  void shrinkIfNeeded() {
+    if (curr_size_ >= capacity_ / 4) {
+      return;
+    }
+
+    size_t old_capacity = capacity_;
+
+    capacity_ /= scale_factor_;
+
+    T *temp = new T[capacity_];
+
+    for (size_t i = 0; i < curr_size_; i++) {
+      temp[i] = data_[i];
+    }
+
+    delete[] data_;
+    data_ = temp;
+  }
+
   size_t capacity_;
   size_t curr_size_;
   T *array_;
