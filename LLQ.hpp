@@ -13,22 +13,26 @@ public:
 
   // Deletion
   T dequeue() override {
-    if (!list.getHead()) {
-      throw std::runtime_error("Cannot dequeue in empty list");
+    auto *head = list.getHead();
+
+    if (!head) {
+      throw std::runtime_error("Cannot dequeue in empty queue");
     }
 
-    T temp = list.getHead()->data;
+    T temp = head->data;
     list.removeHead();
     return temp;
   }
 
   // Access
   T peek() const override {
-    if (!list.getHead()) {
+    auto *head = list.getHead();
+
+    if (!head) {
       throw std::runtime_error("Cannot peek in empty list");
     }
 
-    return list.getHead()->data;
+    return head->data;
   }
 
   // Getter
