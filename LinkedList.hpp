@@ -110,8 +110,9 @@ public:
 	};
 
 	// Operators
-	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept : head(nullptr),tail(nullptr),count(0) {
+	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
 		if (this != &other) {
+			Clear();
 			head = other.head;
 			tail = other.tail;
 			count = other.count;
@@ -122,9 +123,12 @@ public:
 		}
 		return *this;
 	};
-	LinkedList<T>& operator=(const LinkedList<T>& rhs) : head(nullptr),tail(nullptr),count(0){
+	LinkedList<T>& operator=(const LinkedList<T>& rhs){
+
 		if (this != &rhs) {
-				rhs.getTail() = rhs.getHead();
+			Clear();
+			count = rhs.getCount();
+			rhs.getTail() = rhs.getHead();
 			for (int i = 0; i < rhs.count; i++) {
 				addTail(rhs.getTail()->data);
 				if (rhs.getTail()->next != nullptr) {
@@ -138,6 +142,7 @@ public:
 	// Construction/Destruction
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
 	LinkedList(const LinkedList<T>& list) {
+		count = list.getCount();
 		list.getTail() = list.getHead();
 		for (int i = 0; i < list.count; i++) {
 			addTail(list.getTail()->data);
@@ -155,7 +160,9 @@ public:
 		other.tail = nullptr;
 		other.count = 0;
 	};
-	~LinkedList() : head(nullptr), tail(nullptr), count(0) {};
+	~LinkedList() {
+		Clear();
+	};
 
 private:
 	// Stores pointers to first and last nodes and count
