@@ -1,4 +1,4 @@
-#ifdef MAIN
+// #ifdef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -22,6 +22,7 @@
 
 void test_abs() {
   std::cerr << "ABS test:\n";
+
   ABS<int> hi;
   assert(hi.getSize() == 0);
   assert(hi.getMaxCapacity() == 1);
@@ -32,6 +33,12 @@ void test_abs() {
   assert(hi.pop() == 7);
   assert(hi.getSize() == 1);
   assert(hi.getMaxCapacity() == 2);
+
+  ABS<int> hi2 = ABS(hi);
+  for (size_t i = 0; i < hi.getSize(); i++) {
+    assert(hi.pop() == hi2.pop());
+  }
+
   std::cerr << "ABS success\n";
 }
 
@@ -123,4 +130,4 @@ int main() {
   return 0;
 }
 
-#endif
+// #endif

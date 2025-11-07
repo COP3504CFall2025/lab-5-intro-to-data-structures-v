@@ -98,8 +98,8 @@ public:
       throw std::runtime_error("Cannot deque from empty queue");
     }
 
-    T temp = array_[curr_size_ - 1];
     curr_size_--;
+    T temp = array_[curr_size_];
     shrinkIfNeeded();
     return temp;
   }

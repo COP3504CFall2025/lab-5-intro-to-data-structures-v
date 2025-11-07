@@ -119,7 +119,7 @@ private:
 
     T *temp = new T[capacity_];
 
-    for (size_t i = 0; i < curr_size_; i++) {
+    for (size_t i = 0; i < curr_size_ - 1; i++) {
       temp[i] = array_[i];
     }
 
