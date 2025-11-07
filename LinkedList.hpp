@@ -130,10 +130,12 @@ template <typename T>
 LinkedList<T>::LinkedList() : head(nullptr), tail(nullptr), count(0) {}
 
 template <typename T>
-LinkedList<T>::LinkedList(const LinkedList<T>& list) {
-    head = list.head;
-    tail = list.tail;
-    count = list.count;
+LinkedList<T>::LinkedList(const LinkedList<T>& list) : head(nullptr), tail(nullptr), count(0) {
+    Node<T>* current = other.head;
+    while (current != nullptr) {
+        addTail(current->data);
+        current = current->next;
+    }
 }
 
 template <typename T>
