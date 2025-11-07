@@ -25,3 +25,18 @@ public:
     //Getters
     std::size_t getSize() const noexcept override;
 };
+
+template<typename T>
+void LLS<T>::push(const T& item) {
+    list.addTail(item);
+}
+template<typename T>
+T LLS<T>::pop() {
+    T tail = list.getTail()->data;
+    list.removeTail();
+    return tail;
+}
+template<typename T>
+T LLS<T>::peek() const {
+    return list.getTail()->data;
+}
