@@ -157,18 +157,26 @@ public:
         if (size_ == 0) {throw std::runtime_error("a");}
         T return_val = data_[front_];
         front_ = get_wrapped_idx(front_ + 1);
+        size_--;
         return return_val;
     }
     T popBack() override {
         if (size_ == 0) {throw std::runtime_error("a");}
         T return_val = data_[back_];
         back_ = get_wrapped_idx(back_ - 1);
+        size_--;
         return return_val;
     }
 
     // Access
-    const T& front() const override {return data_[front_];}
-    const T& back() const override {return data_[back_];}
+    const T& front() const override {
+        if (size_ == 0) {throw std::runtime_error("a");}
+        return data_[front_];
+    }
+    const T& back() const override {
+        if (size_ == 0) {throw std::runtime_error("a");}
+        return data_[back_];
+    }
 
     // Getters
     std::size_t getSize() const noexcept override {return size_;}
