@@ -8,8 +8,8 @@
 template <typename T>
 class ABDQ : public DequeInterface<T> {
 private:
-    T* data_;                 // underlying dynamic array
     std::size_t capacity_;    // total allocated capacity
+    T* data_; 
     std::size_t size_;        // number of stored elements
     std::size_t front_;       // index of front element
     std::size_t back_;        // index after the last element (circular)
@@ -17,7 +17,7 @@ private:
     static constexpr std::size_t SCALE_FACTOR = 2;
 
     void ensureCapacity() {
-        if (size_ <= capacity_) { return; }
+        if (size_ < capacity_) { return; }
 
         size_t oldCapacity = capacity_;
         capacity_ *= SCALE_FACTOR;
@@ -54,7 +54,7 @@ private:
 
 public:
     // Big 5
-    ABDQ() : capacity_(4), size_(0), data_(new T[capacity_]), front_(0), back_(0) {}
+    ABDQ() : capacity_(4), data_(new T[capacity_]), size_(0), front_(0), back_(0) {}
     explicit ABDQ(std::size_t capacity) {
         capacity_ = capacity;
         data_ = new T[capacity];
@@ -97,20 +97,17 @@ public:
     }
 
     ABDQ& operator=(const ABDQ& other) {
-        if (this == &other) { return *this; }
-        T* newArr = other.data_;
-        size_t newCap = other.capacity_;
-        size_t newSize = other.size_;
-        size_t newFront = other.front_;
-        size_t newBack = other.back_;
+        if (this == &other) return *this;
 
         delete[] data_;
+        capacity_ = other.capacity_;
+        size_ = other.size_;
+        front_ = other.front_;
+        back_ = other.back_;
 
-        data_ = newArr;
-        capacity_ = newCap;
-        size_ = newSize;
-        front_ = newFront;
-        back_ = newBack;
+        data_ = new T[capacity_];
+        for (size_t i = 0; i < capacity_; ++i)
+            data_[i] = other.data_[i];
 
         return *this;
     }
@@ -160,14 +157,8 @@ public:
     void pushBack(const T& item) override {
         ensureCapacity();
 
-        if (size_ == 0) {
-            front_ = back_ = 0;
-            data_[back_] = item;
-        } else {
-            back_ = (back_ + 1) % capacity_;
-            data_[back_] = item;
-        }
-
+        data_[back_] = item;
+        back_ = (back_ + 1) % capacity_;
         size_++;
     }
 
@@ -176,7 +167,7 @@ public:
         if (size_ == 0) { throw std::runtime_error("Array is empty!"); }
 
         T front = data_[front_];
-        back_ = (back_ - 1 + capacity_) % capacity_;
+        front_ = (front_ + capacity_) % capacity_;
         size_--;
 
         shrinkIfNeeded();
@@ -187,8 +178,8 @@ public:
         if (size_ == 0) { throw std::runtime_error("Array is empty!"); }
         
         T back = data_[back_-1];
+        back_ = (back_ - 1 + capacity_) % capacity_;
         size_--;
-        back_--;
         
         shrinkIfNeeded();
         return back;
@@ -201,6 +192,7 @@ public:
     }
     const T& back() const override { 
         if (size_ == 0) { throw std::runtime_error("Array is empty!"); }
+        size_t lastIndex = (back_ - 1 + capacity_) % capacity_;
         return data_[back_-1];
     }
 
