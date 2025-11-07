@@ -51,7 +51,9 @@ public:
         newHead->prev = nullptr;
         newHead->next = head;
 
-        if (head != nullptr) { head->prev = newHead; }
+        if (head != nullptr) { head->prev = newHead;} 
+        else { tail = newHead; }
+
         head = newHead;
         count++;
     }
@@ -62,7 +64,9 @@ public:
         newTail->next = nullptr;
         newTail->prev = tail;
 
-        if (tail != nullptr) { tail->next = newTail; }
+        if (tail != nullptr) { tail->next = newTail; } 
+        else { head = newTail; }
+
         tail = newTail;
         count++;
     }
