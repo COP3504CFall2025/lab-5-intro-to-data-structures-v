@@ -30,10 +30,10 @@ public:
     }
 
     T *temp = new T[rhs.capacity_];
-
+    delete[] array_;
+    array_ = temp;
     capacity_ = rhs.capacity_;
     curr_size_ = rhs.curr_size_;
-    array_ = temp;
 
     for (size_t i = 0; i < rhs.curr_size_; i++) {
       array_[i] = rhs.array_[i];
