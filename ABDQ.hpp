@@ -152,22 +152,23 @@ public:
     void pushFront(const T& item) override {
         ensureCapacity();
 
-        if (size_ == 0) { data_[0] = item; size_++; front_ = 0; return; }
-        if (front_ == 0) { front_ = size_+1; }
-
-        data_[front_-1] = item;
-        front_ -= 1;    
+        front_ = (front_ - 1 + capacity_) % capacity_;
+        data_[front_] = item;
         size_++;
 
     }
     void pushBack(const T& item) override {
         ensureCapacity();
 
-        if (size_ == 0) { data_[0] = item; size_++; back_ = 0; return; }
-        
-        data_[back_+1] = item;
-        back_++;
-        size_++; 
+        if (size_ == 0) {
+            front_ = back_ = 0;
+            data_[back_] = item;
+        } else {
+            back_ = (back_ + 1) % capacity_;
+            data_[back_] = item;
+        }
+
+        size_++;
     }
 
     // Deletion
@@ -175,8 +176,8 @@ public:
         if (size_ == 0) { throw std::runtime_error("Array is empty!"); }
 
         T front = data_[front_];
+        back_ = (back_ - 1 + capacity_) % capacity_;
         size_--;
-        front_--;
 
         shrinkIfNeeded();
         return front;
