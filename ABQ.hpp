@@ -42,11 +42,9 @@ public:
     return *this;
   }
 
-  ABQ(ABQ &&other) noexcept {
-    capacity_ = other.capacity_;
-    curr_size_ = other.curr_size_;
-    array_ = other.array_;
-
+  ABQ(ABQ &&other) noexcept
+      : capacity_(other.capacity_), curr_size_(other.curr_size_),
+        array_(other.array_) {
     other.capacity_ = 0;
     other.curr_size_ = 0;
     other.array_ = nullptr;
@@ -82,7 +80,7 @@ public:
   void enqueue(const T &data) override {
     curr_size_++;
     ensureCapacity();
-    array_[curr_size_] = data;
+    array_[curr_size_ - 1] = data;
   }
 
   // Access
@@ -100,7 +98,7 @@ public:
       throw std::runtime_error("Cannot deque from empty queue");
     }
 
-    T temp = array_[curr_size_];
+    T temp = array_[curr_size_ - 1];
     curr_size_--;
     shrinkIfNeeded();
     return temp;
