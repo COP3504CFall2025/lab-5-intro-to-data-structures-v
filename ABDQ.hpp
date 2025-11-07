@@ -133,7 +133,7 @@ public:
 
         other.data_ = nullptr;
         other.capacity_ = 0;
-        other.curr_size_ = 0;
+        other.size_ = 0;
         other.back_ = 0;
         other.front_ = 0;
 
