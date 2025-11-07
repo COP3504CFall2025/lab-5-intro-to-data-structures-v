@@ -40,20 +40,20 @@ public:
   // -- Element Accessors --
 
   const T &front() const override {
-    T *head = list.getHead();
+    auto *head = list.getHead();
 
     if (!head) {
-      throw std::runtime_error("Cannot access front in empty deque") ';'
+      throw std::runtime_error("Cannot access front in empty deque");
     }
 
     return head->data;
   }
 
   const T &back() const override {
-    T *tail = list.getTail();
+    auto *tail = list.getTail();
 
-    if (!head) {
-      throw std::runtime_error("Cannot access back in empty deque") ';'
+    if (!tail) {
+      throw std::runtime_error("Cannot access back in empty deque");
     }
 
     return tail->data;
