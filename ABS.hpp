@@ -98,8 +98,9 @@ public:
     }
 
     curr_size_--;
+    T temp = array_[curr_size_];
     shrinkIfNeeded();
-    return array_[curr_size_ - 1];
+    return temp;
   }
 
 private:

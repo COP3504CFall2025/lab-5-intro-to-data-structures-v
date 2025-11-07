@@ -30,7 +30,7 @@ void test_abs() {
   hi.push(8);
   assert(hi.getSize() == 2);
   assert(hi.peek() == 8);
-  assert(hi.pop() == 7);
+  assert(hi.pop() == 8);
   assert(hi.getSize() == 1);
   assert(hi.getMaxCapacity() == 2);
 
