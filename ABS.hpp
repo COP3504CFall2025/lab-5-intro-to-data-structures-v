@@ -69,6 +69,8 @@ public:
     rhs.curr_size_ = 0;
     delete[] rhs.array_;
     rhs.array_ = nullptr;
+
+    return *this;
   }
 
   ~ABS() noexcept override { delete[] array_; }

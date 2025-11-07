@@ -168,7 +168,7 @@ private:
   // -- Extremities --
 
   void ensureCapacity() {
-    if (size_ < capacity_) {
+    if (size_ <= capacity_) {
       return;
     }
 
