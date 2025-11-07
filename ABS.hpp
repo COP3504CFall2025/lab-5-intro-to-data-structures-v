@@ -38,13 +38,13 @@ public:
     for (size_t i = 0; i < rhs.curr_size_; i++) {
       array_[i] = rhs.array_[i];
     }
+
+    return *this;
   }
 
-  ABS(ABS &&other) noexcept {
-    capacity_ = other.capacity_;
-    curr_size_ = other.curr_size_;
-    array_ = other.array_;
-
+  ABS(ABS &&other) noexcept
+      : capacity_(other.capacity_), curr_size_(other.curr_size_),
+        array_(other.array_) {
     other.capacity_ = 0;
     other.curr_size_ = 0;
     other.array_ = nullptr;
