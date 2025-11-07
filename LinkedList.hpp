@@ -130,10 +130,12 @@ template <typename T>
 LinkedList<T>::LinkedList() : head(nullptr), tail(nullptr), count(0) {}
 
 template <typename T>
-LinkedList<T>::LinkedList(const LinkedList<T>& list) {
-    head = list.head;
-    tail = list.tail;
-    count = list.count;
+LinkedList<T>::LinkedList(const LinkedList<T>& list) : head(nullptr), tail(nullptr), count(0) {
+    Node<T>* current = list.head;
+    while (current != nullptr) {
+        addTail(current->data);
+        current = current->next;
+    }
 }
 
 template <typename T>
@@ -172,16 +174,13 @@ LinkedList<T>&LinkedList<T>::operator=(LinkedList<T>&& other) noexcept {
 template <typename T>
 LinkedList<T>&LinkedList<T>::operator=(const LinkedList<T>& rhs) {
     if (this == &rhs) { return *this; }
-    Node<T>* newHead = rhs.head;
-    Node<T>* newTail = rhs.tail;
-    unsigned int newCount = rhs.count;
+    clear();
 
-    delete head;
-    delete tail;
-
-    head = newHead;
-    tail = newTail;
-    count = newCount;
+    Node<T>* current = rhs.head;
+    while (current != nullptr) {
+        addTail(current->data);
+        current = current->next;
+    }
 
     return *this;
 }
