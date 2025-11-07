@@ -39,9 +39,25 @@ public:
 
   // -- Element Accessors --
 
-  const T &front() const override { return list.getHead()->data; }
+  const T &front() const override {
+    T *head = list.getHead();
 
-  const T &back() const override { return list.getTail()->data; }
+    if (!head) {
+      throw std::runtime_error("Cannot access front in empty deque") ';'
+    }
+
+    return head->data;
+  }
+
+  const T &back() const override {
+    T *tail = list.getTail();
+
+    if (!head) {
+      throw std::runtime_error("Cannot access back in empty deque") ';'
+    }
+
+    return tail->data;
+  }
 
   // Getter
   std::size_t getSize() const noexcept override { return list.getCount(); }

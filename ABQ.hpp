@@ -76,39 +76,67 @@ public:
 
   // Insertion
   void enqueue(const T &data) override {
-    if (curr_size_ >= capacity_) {
-      capacity_ *= scale_factor_;
-
-      T *temp = new T[capacity_];
-
-      for (size_t i = 0; i < curr_size_; i++) {
-        temp[i] = array_[i];
-      }
-
-      delete[] array_;
-      array_ = temp;
-    }
-
-    array_[++curr_size_] = data;
+    curr_size_++;
+    ensureCapacity();
+    array_[curr_size_] = data;
   }
 
   // Access
-  T peek() const override { return array_[0]; }
+  T peek() const override {
+    if (size_ == 0) {
+      throw std::runtime_error("Cannot peek from empty queue");
+    }
+
+    return array_[0];
+  }
 
   // Deletion
   T dequeue() override {
-    T temp = array_[0];
-
-    for (size_t i = 0; i < curr_size_ - 1; i++) {
-      array_[i] = array_[i + 1];
+    if (size_ == 0) {
+      throw std::runtime_error("Cannot deque from empty queue");
     }
 
+    T temp = array_[curr_size_];
     curr_size_--;
-
+    shrinkIfNeeded();
     return temp;
   }
 
 private:
+  void ensureCapacity() {
+    if (size_ <= capacity_) {
+      return;
+    }
+
+    capacity_ *= scale_factor_;
+
+    T *temp = new T[capacity_];
+
+    for (size_t i = 0; i < curr_size_; i++) {
+      temp[i] = array_[i];
+    }
+
+    delete[] data_;
+    data_ = temp;
+  }
+
+  void shrinkIfNeeded() {
+    if (size_ >= capacity_ / 4) {
+      return;
+    }
+
+    capacity_ /= scale_factor_;
+
+    T *temp = new T[capacity_];
+
+    for (size_t i = 0; i < curr_size_; i++) {
+      temp[i] = array_[i];
+    }
+
+    delete[] data_;
+    data_ = temp;
+  }
+
   size_t capacity_;
   size_t curr_size_;
   T *array_;
