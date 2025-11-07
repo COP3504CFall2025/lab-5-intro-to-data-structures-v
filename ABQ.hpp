@@ -83,7 +83,7 @@ public:
 
   // Access
   T peek() const override {
-    if (size_ == 0) {
+    if (curr_size_ == 0) {
       throw std::runtime_error("Cannot peek from empty queue");
     }
 
@@ -92,7 +92,7 @@ public:
 
   // Deletion
   T dequeue() override {
-    if (size_ == 0) {
+    if (curr_size_ == 0) {
       throw std::runtime_error("Cannot deque from empty queue");
     }
 
@@ -104,7 +104,7 @@ public:
 
 private:
   void ensureCapacity() {
-    if (size_ <= capacity_) {
+    if (curr_size_ <= capacity_) {
       return;
     }
 
@@ -116,12 +116,12 @@ private:
       temp[i] = array_[i];
     }
 
-    delete[] data_;
-    data_ = temp;
+    delete[] array_;
+    array_ = temp;
   }
 
   void shrinkIfNeeded() {
-    if (size_ >= capacity_ / 4) {
+    if (curr_size_ >= capacity_ / 4) {
       return;
     }
 
@@ -133,8 +133,8 @@ private:
       temp[i] = array_[i];
     }
 
-    delete[] data_;
-    data_ = temp;
+    delete[] array_;
+    array_ = temp;
   }
 
   size_t capacity_;
