@@ -78,8 +78,8 @@ public:
         else { tail = nullptr; }
 
         delete oldHead;
-        return true;
         count--;
+        return true;
     }
 
 	bool removeTail() {
@@ -92,8 +92,8 @@ public:
         else { head = nullptr; }
 
         delete oldTail;
-        return true;
         count--;
+        return true;
     }
 
 	void Clear() {
