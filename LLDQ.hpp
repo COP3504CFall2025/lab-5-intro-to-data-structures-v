@@ -38,7 +38,7 @@ public:
     T popBack() override {
         const typename LinkedList<T>::Node* temp = list.getTail();
         if (temp) {
-            list.getTail();
+            list.removeTail();
             return temp->data;
         } else {
             throw std::runtime_error("sldkfj");

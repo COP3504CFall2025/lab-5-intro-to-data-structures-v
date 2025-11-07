@@ -33,7 +33,6 @@ public:
     T peek() const override {
         const typename LinkedList<T>::Node* temp = list.getTail();
         if (temp) {
-            list.removeTail();
             return temp->data;
         } else {
             throw std::runtime_error("sldkfj");

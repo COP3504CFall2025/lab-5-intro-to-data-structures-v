@@ -18,17 +18,52 @@ private:
     static constexpr std::size_t SCALE_FACTOR = 2;
     void resize_capacity(double scale) {
         T stack_array[size_];
-        for (size_t i = 0; i < size_; i++) {
-            stack_array[i] = data_[i];
+
+        T begin_part[size_ / 2];
+        T end_part[size_ / 2];
+        std::size_t front_disp;
+        if (front_ < back_) {
+            for (size_t i = 0; i < size_; i++) {
+                stack_array[i] = data_[i];
+            }
+        } else {
+            front_disp = capacity_ - front_;
+            for (size_t i = 0; i < back_; i++) {
+                begin_part[i] = data_[i];
+            }
+            for (size_t i = front_; i < capacity_; i++) {
+                end_part[i - front_] = data_[i];
+            }
         }
+
         delete[] data_;
         capacity_ *= scale;
         data_ = new T[capacity_];
-        for (size_t i = 0; i < size_; i++) {
-            data_[i] = stack_array[i];
+
+        // std::cout << "front disp: " << front_disp << std::endl;
+        // for (size_t i = 0; i < size_ / 2; i++) {
+        //     std::cout << end_part[i] << " ";
+        // }
+        // std::cout << std::endl;
+
+        if (front_ < back_) {
+            for (size_t i = 0; i < size_; i++) {
+                data_[i] = stack_array[i];
+            }
+        } else {
+            for (size_t i = 0; i < back_; i++) {
+                data_[i] = begin_part[i];
+            }
+            // std::cout << "end index: " << capacity_ - front_disp << std::endl;
+            // std::cout << "cap: " << capacity_ << std::endl;
+            for (size_t i = capacity_ - front_disp; i < capacity_; i++) {
+                // std::cout << "accessing end part idx: " << i - (capacity_ - front_disp) << std::endl;
+                data_[i] = end_part[i - (capacity_ - front_disp)];
+            }
         }
+
     }
-    void insert_at(int idx, const T& item) {
+    size_t insert_at(int idx, const T& item) {
         if (idx == -1) {
             idx = capacity_ - 1;
 
@@ -36,17 +71,45 @@ private:
             idx = 0;
         }
         data_[idx] = item;
-        front_ = idx;
+        return idx;
     }
 
 public:
     // Big 5
     ABDQ(): data_(new T[4]) {}
     explicit ABDQ(std::size_t capacity): capacity_(capacity), data_(new T[capacity]) {}
-    ABDQ(const ABDQ& other);
-    ABDQ(ABDQ&& other) noexcept;
-    ABDQ& operator=(const ABDQ& other);
-    ABDQ& operator=(ABDQ&& other) noexcept;
+    ABDQ(const ABDQ& other): capacity_(other.capacity_), size_(other.size_), front_(other.front_), back_(other.back_) {
+        data_ = new T[capacity_];
+        for (size_t i = 0; i < capacity_; i++) {
+            data_[i] = other.data[i];
+        }
+    }
+
+    ABDQ(ABDQ&& other): capacity_(other.capacity_), size_(other.size_), front_(other.front_), back_(other.back_), data_(other.data_) noexcept {
+        other.capacity_ = 0;
+        other.size_ = 0;
+        other.front_ = 0;
+        other.back_ = 0;
+        other.data_ = nullptr;
+    }
+
+    ABDQ& operator=(const ABDQ& other): capacity_(other.capacity_), size_(other.size_), front_(other.front_), back_(other.back_) {
+        if (data_ == other.data_) {return *this;}
+        delete[] data_;
+        data_ = new T[capacity_];
+        for (size_t i = 0; i < capacity_; i++) {
+            data_[i] = other.data[i];
+        }
+    }
+    ABDQ& operator=(ABDQ&& other): capacity_(other.capacity_), size_(other.size_), front_(other.front_), back_(other.back_) noexcept {
+        if (data_ == other.data_) {return *this;}
+        delete[] data_;
+        other.capacity_ = 0;
+        other.size_ = 0;
+        other.front_ = 0;
+        other.back_ = 0;
+        other.data_ = nullptr;
+    }
     ~ABDQ() {delete[] data_;}
 
     // Insertion
@@ -54,10 +117,21 @@ public:
         if (size_ == capacity_) {
             resize_capacity(2);
         }
-        insert_at(front_ - 1, item);
+        size_++;
+        size_t idx = insert_at(front_ - 1, item);
+
+        front_ = idx;
+        if (size_ == 1) {back_ = idx;}
     }
     void pushBack(const T& item) override {
+        if (size_ == capacity_) {
+            resize_capacity(2);
+        }
+        size_++;
+        size_t idx = insert_at(back_ + 1, item);
 
+        back_ = idx;
+        if (size_ == 1) {front_ = idx;}
     }
 
     // Deletion

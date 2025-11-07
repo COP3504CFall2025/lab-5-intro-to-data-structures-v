@@ -50,8 +50,14 @@ int main() {
     dq.pushFront(10);
     dq.pushFront(5);
     dq.pushFront(20);
+    dq.print();
     dq.pushFront(30);
     dq.pushFront(40);
+    dq.print();
+    dq.pushBack(50);
+    dq.pushBack(60);
+    dq.pushBack(70);
+    dq.pushBack(80);
     dq.print();
 
     return 0;
