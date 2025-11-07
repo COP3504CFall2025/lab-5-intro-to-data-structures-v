@@ -122,7 +122,7 @@ private:
   }
 
   void shrinkIfNeeded() {
-    if (curr_size_ >= capacity_ / 4) {
+    if (curr_size_ > capacity_ / 4) {
       return;
     }
 
