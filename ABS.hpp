@@ -89,9 +89,19 @@ public:
     array_[curr_size_ - 1] = data;
   }
 
-  T peek() const override { return array_[curr_size_ - 1]; }
+  T peek() const override {
+    if (curr_size_ == 0) {
+      throw std::runtime_error("Cannot peak empty stack");
+    }
+
+    return array_[curr_size_ - 1];
+  }
 
   T pop() override {
+    if (curr_size_ == 0) {
+      throw std::runtime_error("Cannot peak empty stack");
+    }
+
     curr_size_--;
     shrinkIfNeeded();
     return array_[curr_size_ - 1];
@@ -99,7 +109,7 @@ public:
 
 private:
   void ensureCapacity() {
-    if (curr_size_ < capacity_) {
+    if (curr_size_ <= capacity_) {
       return;
     }
 

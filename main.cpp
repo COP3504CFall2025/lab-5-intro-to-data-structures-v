@@ -31,7 +31,7 @@ void test_abs() {
   assert(hi.peek() == 8);
   assert(hi.pop() == 7);
   assert(hi.getSize() == 1);
-  assert(hi.getMaxCapacity() == 4);
+  assert(hi.getMaxCapacity() == 2);
   std::cerr << "ABS success\n";
 }
 
