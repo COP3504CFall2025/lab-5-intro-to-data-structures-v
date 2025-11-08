@@ -152,9 +152,9 @@ public:
 		}
 	};
 	LinkedList(LinkedList<T>&& other) noexcept {
-		head = other.head;
-		tail = other.tail;
-		count = other.count;
+		head = other.getHead();
+		tail = other.getTail();
+		count = other.getCount();
 
 		other.head = nullptr;
 		other.tail = nullptr;
