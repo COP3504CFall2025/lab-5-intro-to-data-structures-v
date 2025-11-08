@@ -24,7 +24,7 @@ private:
         T* temp = new T[capacity_];
 
         for (size_t i = 0; i < size_; i++) {
-            size_t index = (front_ + i) % capacity_;
+            size_t index = (front_ + i) % oldCapacity;
             temp[i] = data_[index];
         }
 
