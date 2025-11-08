@@ -136,9 +136,10 @@ public:
 		if (this != &rhs) {
 			clear();
 			count = rhs.getCount();
-			head = rhs.getHead();
-			Node<T>* temp = head;
-			for (size_t i = 0; i < count; i++) {
+			Node<T>* temp = rhs.getHead();
+			addHead(temp->data);
+			temp = temp->next;
+			for (size_t i = 0; i < count-1; i++) {
 				addTail(temp->data);
 				temp = temp->next;
 			}
@@ -150,9 +151,10 @@ public:
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
 	LinkedList(const LinkedList<T>& list) {
 		count = list.getCount();
-		head = list.getHead();
-		Node<T>* temp = head;
-		for (size_t i = 0; i < count; i++) {
+		Node<T>* temp = list.getHead();
+		addHead(temp->data);
+		temp = temp->next;
+		for (size_t i = 0; i < count-1; i++) {
 			addTail(temp->data);
 			temp = temp->next;
 		}
