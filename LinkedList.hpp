@@ -78,8 +78,9 @@ public:
 
 	// Removal
 	bool removeHead() {
-		if(head == nullptr)
+		if(head == nullptr) {
 			return false;
+		}
 
 		Node<T>* temp = head;
 		if (temp->next) {
@@ -92,9 +93,9 @@ public:
 		return true;
 	};
 	bool removeTail() {
-		if(tail == nullptr)
-			return false;
-
+		if(tail == nullptr){
+		return false;
+		}
 		Node<T>* temp = tail;
 		if (temp->prev) {
 			temp = temp->prev;
@@ -109,8 +110,10 @@ public:
 		while (head != nullptr) {
 			Node<T>* temp = head->next;
 			delete head;
+			temp->prev = nullptr;
 			head = temp;
 		}
+		head = nullptr;
 		tail = nullptr;
 		count = 0;
 	};
