@@ -34,13 +34,7 @@ public:
 	Node<T>* getHead() {
 		return head;
 	};
-	const Node<T>* getHead() const {
-		return head;
-	};
 	Node<T>* getTail() {
-		return tail;
-	};
-	const Node<T>* getTail() const {
 		return tail;
 	};
 
