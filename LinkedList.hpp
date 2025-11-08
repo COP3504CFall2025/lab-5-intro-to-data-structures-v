@@ -47,17 +47,19 @@ public:
 	// Insertion
 	void addHead(const T& data) {
 		Node<T>* addHead = new Node<T>;
-		addHead->data = data;
-		if (head != nullptr) {
-			addHead->next = head;
+		if (addHead) {
+			addHead->data = data;
+			if (head != nullptr) {
+				addHead->next = head;
+			}
+			else {
+				addHead->next = nullptr;
+				tail = addHead;
+			}
+			addHead->prev = nullptr;
+			head = addHead;
+			count++;
 		}
-		else {
-			addHead->next = nullptr;
-			tail = addHead;
-		}
-		addHead->prev = nullptr;
-		head = addHead;
-		count++;
 	};
 	void addTail(const T& data) {
 		Node<T>* addTail = new Node<T>;
@@ -109,6 +111,8 @@ public:
 			delete head;
 			head = temp;
 		}
+		tail = nullptr;
+		count = 0;
 	};
 
 	// Operators
@@ -142,6 +146,7 @@ public:
 	// Construction/Destruction
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
 	LinkedList(const LinkedList<T>& list) {
+		count = list.getCount();
 		head = list.getHead();
 		Node<T>* temp = head;
 		for (size_t i = 0; i < count; i++) {

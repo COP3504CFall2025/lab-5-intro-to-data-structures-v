@@ -6,7 +6,9 @@
 
 template <typename T>
 class StackInterface {
-    void push(const T& item);
+    void push(const T& item) {
+
+    };
     T pop();
     T peek() const;
     std::size_t getSize() const noexcept;
