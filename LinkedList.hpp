@@ -34,7 +34,13 @@ public:
 	Node<T>* getHead() {
 		return head;
 	};
+	Node<T>* getHead() const {
+		return head;
+	};
 	Node<T>* getTail() {
+		return tail;
+	};
+	Node<T>* getTail() const{
 		return tail;
 	};
 
@@ -118,16 +124,14 @@ public:
 		return *this;
 	};
 	LinkedList<T>& operator=(const LinkedList<T>& rhs){
-
 		if (this != &rhs) {
 			clear();
 			count = rhs.getCount();
 			head = rhs.getHead();
-			for (size_t i = 0; i < rhs.getCount(); i++) {
-				addTail(head->data);
-				if (head->next != nullptr) {
-					head = head->next;
-				}
+			Node<T>* temp = head;
+			for (size_t i = 0; i < count; i++) {
+				addTail(temp->data);
+				temp = temp->next;
 			}
 		}
 		return *this;
@@ -136,13 +140,11 @@ public:
 	// Construction/Destruction
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
 	LinkedList(const LinkedList<T>& list) {
-		count = list.getCount();
 		head = list.getHead();
-		for (size_t i = 0; i < list.getCount(); i++) {
-			addTail(head->data);
-			if (head->next != nullptr) {
-				head = head->next;
-			}
+		Node<T>* temp = head;
+		for (size_t i = 0; i < count; i++) {
+			addTail(temp->data);
+			temp = temp->next;
 		}
 	};
 	LinkedList(LinkedList<T>&& other) noexcept {
