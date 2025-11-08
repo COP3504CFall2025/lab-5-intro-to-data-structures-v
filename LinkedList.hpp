@@ -53,6 +53,7 @@ public:
 		}
 		else {
 			addHead->next = nullptr;
+			tail = addHead;
 		}
 		addHead->prev = nullptr;
 		head = addHead;
@@ -66,6 +67,7 @@ public:
 		}
 		else {
 			addTail->prev = nullptr;
+			head = addTail;
 		}
 		addTail->next = nullptr;
 		tail = addTail;
