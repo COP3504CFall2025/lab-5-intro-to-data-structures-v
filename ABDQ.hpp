@@ -167,7 +167,7 @@ public:
         if (size_ == 0) { throw std::runtime_error("Array is empty!"); }
 
         T front = data_[front_];
-        front_ = (front_ + capacity_) % capacity_;
+        front_ = (front_ + 1) % capacity_;
         size_--;
 
         shrinkIfNeeded();
@@ -177,8 +177,8 @@ public:
     T popBack() override {
         if (size_ == 0) { throw std::runtime_error("Array is empty!"); }
         
-        T back = data_[back_-1];
         back_ = (back_ - 1 + capacity_) % capacity_;
+        T back = data_[back_];
         size_--;
         
         shrinkIfNeeded();
