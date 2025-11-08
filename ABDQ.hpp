@@ -193,7 +193,7 @@ public:
     const T& back() const override { 
         if (size_ == 0) { throw std::runtime_error("Array is empty!"); }
         size_t lastIndex = (back_ - 1 + capacity_) % capacity_;
-        return data_[back_-1];
+        return data_[lastIndex];
     }
 
     // Getters
