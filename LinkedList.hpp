@@ -47,25 +47,25 @@ public:
 	// Insertion
 	void addHead(const T& data) {
 		Node<T>* addHead = new Node<T>;
-		if (addHead) {
-			addHead->data = data;
-			if (head != nullptr) {
-				addHead->next = head;
-			}
-			else {
-				addHead->next = nullptr;
-				tail = addHead;
-			}
-			addHead->prev = nullptr;
-			head = addHead;
-			count++;
+		addHead->data = data;
+		if (head != nullptr) {
+			addHead->next = head;
+			head->prev = addHead;
 		}
+		else {
+			addHead->next = nullptr;
+			tail = addHead;
+		}
+		addHead->prev = nullptr;
+		head = addHead;
+		count++;
 	};
 	void addTail(const T& data) {
 		Node<T>* addTail = new Node<T>;
 		addTail->data = data;
 		if (tail != nullptr) {
 			addTail->prev = tail;
+			tail->next = addTail;
 		}
 		else {
 			addTail->prev = nullptr;
