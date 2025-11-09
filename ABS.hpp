@@ -76,20 +76,20 @@ public:
         return array_;
     };
 
-    void resize() {
-        capacity_ *= scale_factor_;
-        T* temp = new T[capacity_];
+    void resize(size_t new_capacity) {
+        T* temp = new T[new_capacity];
         for (size_t i = 0; i < curr_size_; i++) {
             temp[i] = array_[i];
         }
         delete[] array_;
         array_ = temp;
+        capacity_ = new_capacity;
     }
 
     // Push item onto the stack
     void push(const T& data) override {
         if (curr_size_ == capacity_) {
-            resize();
+            resize(capacity_ * scale_factor_);
         }
         array_[curr_size_++] = data;
     };
@@ -108,6 +108,9 @@ public:
         T value = array_[curr_size_ -1];
         array_[curr_size_ - 1] = 0;
         curr_size_--;
+        if (capacity_ / scale_factor_ >= curr_size_) {
+            resize(capacity_ / scale_factor_);
+        }
         return value;
     };
     void printForward() {
