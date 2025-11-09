@@ -145,7 +145,7 @@ public:
 	LinkedList<T>& operator=(const LinkedList<T>& rhs){
 		if (this != &rhs) {
 			clear();
-			count = rhs.getCount();
+			count = 0;
 			Node<T>* temp = rhs.getHead();
 			while (temp != nullptr) {
 				addTail(temp->data);
@@ -158,7 +158,6 @@ public:
 	// Construction/Destruction
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
 	LinkedList(const LinkedList<T>& list) : head(nullptr), tail(nullptr), count(0){
-		count = list.getCount();
 		Node<T>* temp = list.getHead();
 		while (temp != nullptr) {
 			addTail(temp->data);
