@@ -89,6 +89,7 @@ public:
 		}
 		else {
 			temp = nullptr;
+			tail = nullptr;
 		}
 		delete head;
 		head = temp;
@@ -106,6 +107,7 @@ public:
 		}
 		else {
 			temp = nullptr;
+			head = nullptr;
 		}
 		delete tail;
 		tail = temp;
