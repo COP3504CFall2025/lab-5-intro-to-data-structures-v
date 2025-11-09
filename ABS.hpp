@@ -124,12 +124,41 @@ public:
 
         for (size_t i = 0; i < this->curr_size_; i++)
         {
-
             temp[i] = this->array_[i];
         }
 
         delete[] this->array_;
         this->array_ = temp;
+    }
+
+    void shrink()
+    {
+        if (capacity_ > 1)
+        {
+            T *temp = new T[capacity_ / 2];
+            this->capacity_ /= 2;
+
+            for (size_t i = 0; i < this->curr_size_; i++)
+            {
+                temp[i] = this->array_[i];
+            }
+
+            delete[] this->array_;
+            this->array_ = temp;
+        }
+        else
+        {
+            T *temp = new T[1];
+            this->capacity_ = 1;
+
+            for (size_t i = 0; i < this->curr_size_; i++)
+            {
+                temp[i] = this->array_[i];
+            }
+
+            delete[] this->array_;
+            this->array_ = temp;
+        }
     }
 
     // Push item onto the stack
@@ -159,6 +188,12 @@ public:
         {
             T temp = this->array_[curr_size_ - 1];
             --curr_size_;
+
+            if (curr_size_ <= (capacity_ /= 2))
+            {
+                shrink();
+            }
+
             return temp;
         }
         throw std::runtime_error("Current size is 0");
