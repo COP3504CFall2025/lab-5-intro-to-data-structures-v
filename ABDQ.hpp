@@ -124,11 +124,8 @@ public:
             throw std::runtime_error("Empty queue");
         }
         T value = data_[front_];
-        for (size_t i = 0; i < size_ - 1; i++) {
-            data_[i] = data_[i + 1];
-        }
+        front_ = (front_ + 1) % capacity_;
         size_--;
-        front_ = 0;
         if (capacity_ / SCALE_FACTOR > size_) {
             shrinkIfNeeded();
         }
@@ -138,9 +135,9 @@ public:
         if (size_ == 0) {
             throw std::runtime_error("Empty queue");
         }
+        back_ = (back_ - 1 + capacity_) % capacity_;
         T value = data_[back_];
         size_--;
-        back_ = size_ - 1;
         if (capacity_ / SCALE_FACTOR > size_) {
             shrinkIfNeeded();
         }
