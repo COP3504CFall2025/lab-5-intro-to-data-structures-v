@@ -115,7 +115,7 @@ public:
 			}
 				head = temp;
 		}
-		head = nullptr;
+		//head = nullptr;
 		tail = nullptr;
 		count = 0;
 	};
