@@ -87,6 +87,9 @@ public:
 			temp = temp->next;
 			temp->prev = nullptr;
 		}
+		else {
+			temp = nullptr;
+		}
 		delete head;
 		head = temp;
 		count--;
@@ -100,6 +103,9 @@ public:
 		if (temp->prev) {
 			temp = temp->prev;
 			temp->next = nullptr;
+		}
+		else {
+			temp = nullptr;
 		}
 		delete tail;
 		tail = temp;
@@ -115,7 +121,7 @@ public:
 			}
 				head = temp;
 		}
-		//head = nullptr;
+		head = nullptr;
 		tail = nullptr;
 		count = 0;
 	};
