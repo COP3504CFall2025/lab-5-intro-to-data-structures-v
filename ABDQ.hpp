@@ -128,6 +128,7 @@ public:
             data_[i] = data_[i + 1];
         }
         size_--;
+        front_ = 0;
         if (capacity_ / SCALE_FACTOR > size_) {
             shrinkIfNeeded();
         }
@@ -139,6 +140,7 @@ public:
         }
         T value = data_[back_];
         size_--;
+        back_ = size_ - 1;
         if (capacity_ / SCALE_FACTOR > size_) {
             shrinkIfNeeded();
         }
