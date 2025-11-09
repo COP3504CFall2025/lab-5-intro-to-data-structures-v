@@ -24,7 +24,7 @@ public:
 
         Node<T> *current = head;
 
-        for (int i = 0; i < count; i++)
+        for (size_t i = 0; i < count; i++)
         {
             std::cout << current->data << std::endl;
             current = current->next;
@@ -39,7 +39,7 @@ public:
 
         Node<T> *current = tail;
 
-        for (int i = 0; i < count; i++)
+        for (size_t i = 0; i < count; i++)
         {
             std::cout << current->data << std::endl;
             current = current->prev;
@@ -174,9 +174,9 @@ LinkedList<T>::LinkedList() : head(nullptr), tail(nullptr), count(0) {}
 template <typename T>
 LinkedList<T>::LinkedList(const LinkedList<T> &list)
 {
-    head = list->head;
-    tail = list->tail;
-    count = list->count;
+    head = list.head;
+    tail = list.tail;
+    count = list.count;
 }
 
 template <typename T>
@@ -205,7 +205,6 @@ LinkedList<T> &LinkedList<T>::operator=(LinkedList<T> &&other) noexcept
 
     delete head;
     delete tail;
-    delete count;
 
     head = newHead;
     tail = newTail;
@@ -225,17 +224,17 @@ LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T> &rhs)
     {
         return *this;
     }
-    Node<T> *newHead = rhs->head;
-    Node<T> *newTail = rhs->tail;
-    unsigned int newCount = rhs->count;
+    Node<T> *newHead = rhs.head;
+    Node<T> *newTail = rhs.tail;
+    unsigned int newCount = rhs.count;
 
     delete head;
     delete tail;
-    delete count;
+    count = 0;
 
-    head = rhs->head;
-    tail = rhs->tail;
-    count = rhs->count;
+    head = rhs.head;
+    tail = rhs.tail;
+    count = rhs.count;
 
     return *this;
 }
@@ -245,5 +244,5 @@ LinkedList<T>::~LinkedList()
 {
     delete head;
     delete tail;
-    delete count;
+    count = 0;
 }
