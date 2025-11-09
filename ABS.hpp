@@ -33,7 +33,7 @@ public:
         }
         return *this;
     };
-    ABS(ABS&& other) noexcept : capacity_(1),curr_size_(0), array_(new T[capacity_]) {
+    ABS(ABS&& other) noexcept : capacity_(1),curr_size_(0), array_(nullptr) {
         capacity_ = other.getMaxCapacity();
         curr_size_ = other.getSize();
         array_ = other.getData();
@@ -96,14 +96,14 @@ public:
 
     T peek() const override {
         if (curr_size_ == 0) {
-            throw std::out_of_range("Empty ABS");
+            throw std::runtime_error("Empty ABS");
         }
         return array_[curr_size_ - 1];
     };
 
     T pop() override {
         if (curr_size_ == 0) {
-            throw std::out_of_range("Empty ABS");
+            throw std::runtime_error("Empty ABS");
         }
         T value = array_[curr_size_ -1];
         array_[curr_size_ - 1] = 0;
