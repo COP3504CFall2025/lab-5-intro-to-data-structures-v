@@ -111,6 +111,7 @@ public:
 
     void resize()
     {
+
         T *temp = new T[capacity_ * scale_factor_];
         this->capacity_ *= scale_factor_;
 
@@ -121,6 +122,23 @@ public:
 
         delete[] this->array_;
         this->array_ = temp;
+    }
+
+    void shrink()
+    {
+        if (capacity_ > 1 && curr_size_ <= capacity_ / 4)
+        {
+            T *temp = new T[capacity_ / 2];
+            this->capacity_ /= 2;
+
+            for (size_t i = 0; i < this->curr_size_; i++)
+            {
+                temp[i] = this->array_[i];
+            }
+
+            delete[] this->array_;
+            this->array_ = temp;
+        }
     }
 
     // Insertion
