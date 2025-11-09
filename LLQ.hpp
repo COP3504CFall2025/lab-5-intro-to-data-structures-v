@@ -11,18 +11,42 @@ private:
     LinkedList<T> list;
 public:
     // Constructor
-    LLQ();
+    LLQ() : list() {};
 
     // Insertion
-    void enqueue(const T& item) override;
+    void enqueue(const T& item) override {
+        list.addTail(item);
+    };
 
     // Deletion
-    T dequeue() override;
+    T dequeue() override {
+        if (list.getCount() == 0) {
+            throw std::runtime_error("LLS::peek() called on an empty LLS");
+        }
+        T head = list.getHead()->data;
+        list.removeHead();
+        return head;
+    };
 
     // Access
-    T peek() const override;
+    T peek() const override {
+        if (list.getCount() == 0) {
+            throw std::runtime_error("LLS::peek() called on an empty LLS");
+        }
+        return list.getHead()->data;
+    };
 
     // Getter
-    std::size_t getSize() const noexcept override;
+    std::size_t getSize() const noexcept override {
+        return list.getCount();
+    };
+
+    void printForward() {
+        list.printForward();
+    }
+
+    void printReverse() {
+        list.printReverse();
+    }
 
 };
