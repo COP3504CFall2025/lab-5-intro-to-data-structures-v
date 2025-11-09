@@ -11,7 +11,7 @@ private:
     LinkedList<T> list;
 public:
     // Constructor
-    LLS() : list(new LinkedList<T>()) {};
+    LLS() : list() {};
 
     // Insertion
     void push(const T& item) override {
@@ -20,17 +20,17 @@ public:
 
     // Deletion
     T pop() override {
-        if (!list) {
+        if (list.getCount() == 0) {
             throw std::runtime_error("LLS::peek() called on an empty LLS");
         }
-        T head = list.getHead();
+        T head = list.getHead()->data;
         list.removeHead();
         return head;
     };
 
     // Access
     T peek() const override {
-        if (!list) {
+        if (list.getCount() == 0) {
             throw std::runtime_error("LLS::peek() called on an empty LLS");
         }
         return list.getHead()->data;
