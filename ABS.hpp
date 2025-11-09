@@ -150,6 +150,7 @@ public:
         {
             return this->array_[curr_size_ - 1];
         }
+        throw std::runtime_error("Current size is 0");
     }
 
     T pop() override
