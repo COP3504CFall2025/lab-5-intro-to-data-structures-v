@@ -60,8 +60,15 @@ public:
         Node<T> *newNode = new Node<T>;
 
         newNode->data = data;
+        if (getCount() == 0)
+        {
+            newNode->next = nullptr;
+        }
+        else
+        {
+            newNode->next = head;
+        }
         newNode->prev = nullptr;
-        newNode->next = head;
 
         if (head != nullptr)
         {
@@ -77,7 +84,14 @@ public:
         Node<T> *newNode = new Node<T>;
 
         newNode->data = data;
-        newNode->prev = tail;
+        if (getCount() == 0)
+        {
+            newNode->prev = nullptr;
+        }
+        else
+        {
+            newNode->prev = tail;
+        }
         newNode->next = nullptr;
 
         if (tail != nullptr)
