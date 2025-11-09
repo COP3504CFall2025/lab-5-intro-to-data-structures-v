@@ -119,8 +119,8 @@ public:
     void resize()
     {
 
-        T *temp = new T[capacity_ * 2];
-        this->capacity_ *= 2;
+        T *temp = new T[capacity_ * scale_factor_];
+        this->capacity_ *= scale_factor_;
 
         for (size_t i = 0; i < this->curr_size_; i++)
         {
@@ -174,9 +174,9 @@ public:
 
     void PrintReverse()
     {
-        for (size_t i = curr_size_ - 1; i >= 0; i--)
+        for (size_t i = curr_size_; i > 0; i--)
         {
-            std::cout << array_[i] << std::endl;
+            std::cout << array_[i - 1] << std::endl;
         }
     }
 
