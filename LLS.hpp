@@ -6,46 +6,56 @@
 #include <stdexcept>
 
 template <typename T>
-class LLS : public StackInterface<T> {
+class LLS : public StackInterface<T>
+{
 private:
     LinkedList<T> list;
+
 public:
     // Constructor
     LLS() {}
 
     // Insertion
-    void push(const T& item) override {
+    void push(const T &item) override
+    {
         list.addHead(item);
     }
 
     // Deletion
-    T pop() override {
-        if (list.getCount() > 0) {
+    T pop() override
+    {
+        if (list.getCount() > 0)
+        {
             T temp = list.head->data;
             list.removeHead();
             return temp;
         }
-        throw std::out_of_range("No head found");
+        throw std::runtime_error("No head found");
     }
 
     // Access
-    T peek() const override {
-        if (list.getCount() > 0) {
+    T peek() const override
+    {
+        if (list.getCount() > 0)
+        {
             return list.head->data;
         }
-        throw std::out_of_range("No head found");
+        throw std::runtime_error("No head found");
     }
 
-    //Getters
-    std::size_t getSize() const noexcept override {
+    // Getters
+    std::size_t getSize() const noexcept override
+    {
         return static_cast<size_t>(list.getCount());
     }
 
-    void PrintForward() {
+    void PrintForward()
+    {
         list.printForward();
     }
 
-    void PrintReverse() {
+    void PrintReverse()
+    {
         list.printReverse();
     }
 };

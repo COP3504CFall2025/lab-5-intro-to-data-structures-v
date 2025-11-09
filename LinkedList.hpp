@@ -182,13 +182,13 @@ LinkedList<T>::LinkedList(const LinkedList<T> &list)
 template <typename T>
 LinkedList<T>::LinkedList(LinkedList<T> &&other) noexcept
 {
-    head = other->head;
-    tail = other->tail;
-    count = other->count;
+    head = other.head;
+    tail = other.tail;
+    count = other.count;
 
-    other->head = nullptr;
-    other->tail = nullptr;
-    other->count = 0;
+    other.head = nullptr;
+    other.tail = nullptr;
+    other.count = 0;
 }
 
 template <typename T>
@@ -199,9 +199,9 @@ LinkedList<T> &LinkedList<T>::operator=(LinkedList<T> &&other) noexcept
         return *this;
     }
 
-    Node<T> *newHead = other->head;
-    Node<T> *newTail = other->tail;
-    unsigned int newCount = other->count;
+    Node<T> *newHead = other.head;
+    Node<T> *newTail = other.tail;
+    unsigned int newCount = other.count;
 
     delete head;
     delete tail;
@@ -211,9 +211,9 @@ LinkedList<T> &LinkedList<T>::operator=(LinkedList<T> &&other) noexcept
     tail = newTail;
     count = newCount;
 
-    other->head = nullptr;
-    other->tail = nullptr;
-    other->count = 0;
+    other.head = nullptr;
+    other.tail = nullptr;
+    other.count = 0;
 
     return *this;
 }
