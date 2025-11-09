@@ -108,7 +108,7 @@ public:
         T value = array_[curr_size_ -1];
         array_[curr_size_ - 1] = 0;
         curr_size_--;
-        if (capacity_ / scale_factor_ >= curr_size_) {
+        if (capacity_ / scale_factor_ > curr_size_) {
             resize(capacity_ / scale_factor_);
         }
         return value;
