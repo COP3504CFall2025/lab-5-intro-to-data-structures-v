@@ -110,8 +110,10 @@ public:
 		while (head != nullptr) {
 			Node<T>* temp = head->next;
 			delete head;
-			temp->prev = nullptr;
-			head = temp;
+			if (temp != nullptr) {
+				temp->prev = nullptr;
+			}
+				head = temp;
 		}
 		head = nullptr;
 		tail = nullptr;
@@ -137,9 +139,7 @@ public:
 			clear();
 			count = rhs.getCount();
 			Node<T>* temp = rhs.getHead();
-			addHead(temp->data);
-			temp = temp->next;
-			for (size_t i = 0; i < count-1; i++) {
+			for (size_t i = 0; i < count; i++) {
 				addTail(temp->data);
 				temp = temp->next;
 			}
@@ -152,9 +152,7 @@ public:
 	LinkedList(const LinkedList<T>& list) {
 		count = list.getCount();
 		Node<T>* temp = list.getHead();
-		addHead(temp->data);
-		temp = temp->next;
-		for (size_t i = 0; i < count-1; i++) {
+		for (size_t i = 0; i < count; i++) {
 			addTail(temp->data);
 			temp = temp->next;
 		}
