@@ -241,7 +241,6 @@ LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T> &rhs)
 template <typename T>
 LinkedList<T>::~LinkedList()
 {
-    delete head;
-    delete tail;
+    clear();
     count = 0;
 }
