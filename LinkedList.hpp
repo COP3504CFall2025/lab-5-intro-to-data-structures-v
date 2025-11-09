@@ -147,7 +147,7 @@ public:
 			clear();
 			count = rhs.getCount();
 			Node<T>* temp = rhs.getHead();
-			for (size_t i = 0; i < count; i++) {
+			while (temp != nullptr) {
 				addTail(temp->data);
 				temp = temp->next;
 			}
@@ -157,15 +157,15 @@ public:
 
 	// Construction/Destruction
 	LinkedList() : head(nullptr), tail(nullptr), count(0) {};
-	LinkedList(const LinkedList<T>& list) {
+	LinkedList(const LinkedList<T>& list) : head(nullptr), tail(nullptr), count(0){
 		count = list.getCount();
 		Node<T>* temp = list.getHead();
-		for (size_t i = 0; i < count; i++) {
+		while (temp != nullptr) {
 			addTail(temp->data);
 			temp = temp->next;
 		}
 	};
-	LinkedList(LinkedList<T>&& other) noexcept {
+	LinkedList(LinkedList<T>&& other) noexcept : head(nullptr), tail(nullptr), count(0){
 		head = other.getHead();
 		tail = other.getTail();
 		count = other.getCount();
