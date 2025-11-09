@@ -161,7 +161,6 @@ public:
     LinkedList(LinkedList<T> &&other) noexcept;
     ~LinkedList();
 
-private:
     // Stores pointers to first and last Node<T>s and count
     Node<T> *head;
     Node<T> *tail;

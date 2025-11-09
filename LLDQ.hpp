@@ -31,10 +31,9 @@ public:
     {
         if (list.getCount() > 0)
         {
-            Node<T> temp = list.head;
-            T tempData = temp->data;
+            T temp = list.head->data;
             list.removeHead();
-            return tempData;
+            return temp;
         }
         throw std::runtime_error("No head found");
     }
@@ -43,10 +42,9 @@ public:
     {
         if (list.getCount() > 0)
         {
-            Node<T> temp = list.tail;
-            T tempData = temp->data;
+            T temp = list.tail->data;
             list.removeTail();
-            return tempData;
+            return temp;
         }
         throw std::runtime_error("No tail found");
     }
@@ -56,8 +54,7 @@ public:
     {
         if (list.getCount() > 0)
         {
-            Node<T> temp = list.head;
-            return temp->data;
+            return list.head->data;
         }
         throw std::runtime_error("No head found");
     }
@@ -65,8 +62,7 @@ public:
     {
         if (list.getCount() > 0)
         {
-            Node<T> temp = list.tail;
-            return temp->data;
+            return list.tail->data;
         }
         throw std::runtime_error("No tail found");
     }
