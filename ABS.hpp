@@ -133,7 +133,7 @@ public:
 
     void shrink()
     {
-        if (capacity_ > 1)
+        if (capacity_ > 1 && curr_size_ <= capacity_ / 4)
         {
             T *temp = new T[capacity_ / 2];
             this->capacity_ /= 2;
@@ -176,10 +176,7 @@ public:
             T temp = this->array_[curr_size_ - 1];
             --curr_size_;
 
-            if (curr_size_ <= (capacity_ / 2))
-            {
-                shrink();
-            }
+            shrink();
 
             return temp;
         }
