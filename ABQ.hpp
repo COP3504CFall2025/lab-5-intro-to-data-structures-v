@@ -111,7 +111,6 @@ public:
 
     void resize()
     {
-
         T *temp = new T[capacity_ * scale_factor_];
         this->capacity_ *= scale_factor_;
 
@@ -174,6 +173,7 @@ public:
                 this->array_[i - 1] = this->array_[i];
             }
             --curr_size_;
+            shrink();
             return temp;
         }
         throw std::runtime_error("Current size is 0");
