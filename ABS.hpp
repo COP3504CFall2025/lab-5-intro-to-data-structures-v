@@ -133,16 +133,19 @@ public:
 
     void shrink()
     {
-        T *temp = new T[capacity_ / 2];
-        this->capacity_ /= 2;
-
-        for (size_t i = 0; i < this->curr_size_; i++)
+        if (capacity_ > 1)
         {
-            temp[i] = this->array_[i];
-        }
+            T *temp = new T[capacity_ / 2];
+            this->capacity_ /= 2;
 
-        delete[] this->array_;
-        this->array_ = temp;
+            for (size_t i = 0; i < this->curr_size_; i++)
+            {
+                temp[i] = this->array_[i];
+            }
+
+            delete[] this->array_;
+            this->array_ = temp;
+        }
     }
 
     // Push item onto the stack
@@ -173,7 +176,7 @@ public:
             T temp = this->array_[curr_size_ - 1];
             --curr_size_;
 
-            if ((curr_size_ <= (capacity_ / 2)) && (capacity_ > 1))
+            if (curr_size_ <= (capacity_ / 2))
             {
                 shrink();
             }
