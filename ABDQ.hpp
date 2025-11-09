@@ -105,14 +105,14 @@ public:
     // Insertion
     void pushFront(const T& item) override {
         if (size_ == capacity_) {
-            ensureCapacity(capacity_ * SCALE_FACTOR);
+            ensureCapacity();
         }
         size_++;
         data_[front_] = item;
     };
     void pushBack(const T& item) override {
         if (size_ == capacity_) {
-            ensureCapacity(capacity_ * SCALE_FACTOR);
+            ensureCapacity();
         }
         size_++;
         data_[back_] = item;
@@ -124,7 +124,7 @@ public:
             throw std::runtime_error("Empty queue");
         }
         T value = data_[front_];
-        for (size_t i = 0; i < data_ - 1; i++) {
+        for (size_t i = 0; i < size_ - 1; i++) {
             data_[i] = data_[i + 1];
         }
         size_--;
