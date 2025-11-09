@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 #include <cstddef>
 #include <stdexcept>
 #include "Interfaces.hpp"
@@ -90,6 +90,16 @@ public:
         curr_size_--;
         return value;
     };
+    void printForward() {
+        for (size_t i = 0; i < curr_size_; i++) {
+            std::cout << array_[i] << std::endl;
+        }
+    }
+    void printBackward() {
+        for (int i = static_cast<int>(curr_size_) - 1; i >= 0; i--) {
+            std::cout << array_[i] << std::endl;
+        }
+    }
 
 private:
     size_t capacity_;
