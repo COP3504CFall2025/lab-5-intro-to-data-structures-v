@@ -13,8 +13,11 @@ public:
     // Big 5 + Parameterized Constructor
     ABS() : capacity_(1),curr_size_(0), array_(new T[capacity_]) {};
     explicit ABS(const size_t capacity) : capacity_(capacity), curr_size_(0), array_(new T[capacity_]) {};
-    ABS(const ABS& other) : capacity_(1),curr_size_(0), array_(new T[capacity_]) {
-        for (size_t i = 0; i < capacity_; i++) {
+    ABS(const ABS& other){
+        capacity_ = other.getMaxCapacity();
+        curr_size_ = other.getSize();
+        array_ = new T[capacity_];
+        for (size_t i = 0; i < curr_size_; i++) {
             array_[i] = other.getData()[i];
         }
     };
@@ -24,7 +27,7 @@ public:
             capacity_ = rhs.getMaxCapacity();
             curr_size_ = rhs.getSize();
             array_ = new T[capacity_];
-            for (size_t i = 0; i < capacity_; i++) {
+            for (size_t i = 0; i < curr_size_; i++) {
                 array_[i] = rhs.getData()[i];
             }
         }
@@ -35,9 +38,9 @@ public:
         curr_size_ = other.getSize();
         array_ = other.getData();
 
-        other.getMaxCapacity() = 0;
-        other.getSize() = 0;
-        other.getData() = nullptr;
+        other.capacity_ = 0;
+        other.curr_size_ = 0;
+        other.array_ = nullptr;
     };
     ABS& operator=(ABS&& rhs) noexcept {
         if (this != &rhs) {
@@ -46,16 +49,16 @@ public:
             curr_size_ = rhs.getSize();
             array_ = rhs.getData();
 
-            rhs.getMaxCapacity() = 0;
-            rhs.getSize() = 0;
-            rhs.getData() = nullptr;
+            rhs.capacity_ = 0;
+            rhs.curr_size_ = 0;
+            rhs.array_ = nullptr;
         }
         return *this;
     };
     ~ABS() noexcept override {
-        delete[] array_;
         capacity_ = 0;
         curr_size_ = 0;
+        delete[] array_;
     };
 
     // Get the number of items in the ABS
@@ -73,20 +76,37 @@ public:
         return array_;
     };
 
+    void resize() {
+        capacity_ *= scale_factor_;
+        T* temp = new T[capacity_];
+        for (size_t i = 0; i < curr_size_; i++) {
+            temp[i] = array_[i];
+        }
+        delete[] array_;
+        array_ = temp;
+    }
+
     // Push item onto the stack
     void push(const T& data) override {
         if (curr_size_ == capacity_) {
-            capacity_ *= scale_factor_;
+            resize();
         }
         array_[curr_size_++] = data;
     };
 
     T peek() const override {
+        if (curr_size_ == 0) {
+            throw std::out_of_range("Empty ABS");
+        }
         return array_[curr_size_ - 1];
     };
 
     T pop() override {
+        if (curr_size_ == 0) {
+            throw std::out_of_range("Empty ABS");
+        }
         T value = array_[curr_size_ -1];
+        array_[curr_size_ - 1] = 0;
         curr_size_--;
         return value;
     };
