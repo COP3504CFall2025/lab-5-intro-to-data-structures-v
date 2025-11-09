@@ -97,7 +97,7 @@ public:
         return *this;
     }
 
-    ~ABS() noexcept override
+    ~ABS() noexcept
     {
 
         delete[] this->array_;
@@ -160,10 +160,7 @@ public:
             --curr_size_;
             return temp;
         }
-        else
-        {
-            return;
-        }
+        throw std::runtime_error("Current size is 0");
     }
 
     void PrintForward()
