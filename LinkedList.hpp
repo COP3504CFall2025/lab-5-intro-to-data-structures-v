@@ -76,6 +76,10 @@ public:
         }
 
         head = newNode;
+        if (getCount() == 0)
+        {
+            tail = newNode;
+        }
         count++;
     }
 
@@ -100,6 +104,10 @@ public:
         }
 
         tail = newNode;
+        if (getCount() == 0)
+        {
+            head = newNode;
+        }
         count++;
     }
 
@@ -138,10 +146,15 @@ public:
         {
             Node<T> *temp = tail;
 
-            if (tail->prev != nullptr)
+            tail = tail->prev;
+
+            if (tail != nullptr)
             {
-                tail->prev->next = nullptr;
-                tail = tail->prev;
+                tail->next = nullptr;
+            }
+            else
+            {
+                head = nullptr;
             }
 
             temp->prev = nullptr;
@@ -155,6 +168,7 @@ public:
         }
         return false;
     }
+
     void clear()
     {
         while (head != nullptr)
