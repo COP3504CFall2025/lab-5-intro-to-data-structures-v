@@ -157,7 +157,7 @@ public:
         return data_[front_];
     };
     const T& back() const override {
-        return data_[back_];
+        return data_[(back_ - 1 + capacity_) % capacity_];
     };
 
     // Getters
