@@ -83,10 +83,11 @@ public:
     };
 
     void ensureCapacity() {
+        size_t old_capacity = capacity_;
         capacity_ *= SCALE_FACTOR;
         T* temp = new T[capacity_];
         for (size_t i = 0; i < size_; i++) {
-            temp[i] = data_[(front_ + i) % capacity_];
+            temp[i] = data_[(front_ + i) % old_capacity];
         }
         delete[] data_;
         data_ = temp;
@@ -95,10 +96,11 @@ public:
     }
 
     void shrinkIfNeeded() {
+        size_t old_capacity = capacity_;
         capacity_ /= SCALE_FACTOR;
         T* temp = new T[capacity_];
         for (size_t i = 0; i < size_; i++) {
-            temp[i] = data_[(front_ + i) % capacity_];
+            temp[i] = data_[(front_ + i) % old_capacity];
         }
         delete[] data_;
         data_ = temp;
@@ -165,12 +167,12 @@ public:
 
     void printForward() {
         for (size_t i = 0; i < size_; i++) {
-            std::cout << data_[i] << std::endl;
+            std::cout << data_[(front_ + i) % capacity_] << std::endl;
         }
     };
     void printBackward() {
         for (int i = static_cast<int>(size_) - 1; i >= 0; i--) {
-            std::cout << data_[i] << std::endl;
+            std::cout << data_[(back_ - 1 - i + capacity_) % capacity_] << std::endl;
         }
     };
 
