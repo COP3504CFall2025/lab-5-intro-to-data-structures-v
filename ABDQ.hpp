@@ -86,20 +86,24 @@ public:
         capacity_ *= SCALE_FACTOR;
         T* temp = new T[capacity_];
         for (size_t i = 0; i < size_; i++) {
-            temp[i] = data_[i];
+            temp[i] = data_[(front_ + i) % capacity_];
         }
         delete[] data_;
         data_ = temp;
+        front_ = 0;
+        back_ = size_;
     }
 
     void shrinkIfNeeded() {
         capacity_ /= SCALE_FACTOR;
         T* temp = new T[capacity_];
         for (size_t i = 0; i < size_; i++) {
-            temp[i] = data_[i];
+            temp[i] = data_[(front_ + i) % capacity_];
         }
         delete[] data_;
         data_ = temp;
+        front_ = 0;
+        back_ = size_;
     }
 
     // Insertion
@@ -107,15 +111,17 @@ public:
         if (size_ == capacity_) {
             ensureCapacity();
         }
-        size_++;
+        front_ = (front_ - 1 + capacity_) % capacity_;
         data_[front_] = item;
+        size_++
     };
     void pushBack(const T& item) override {
         if (size_ == capacity_) {
             ensureCapacity();
         }
-        size_++;
         data_[back_] = item;
+        back_ = (back_ + 1) % capacity_;
+        size_++;
     };
 
     // Deletion
