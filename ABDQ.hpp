@@ -113,7 +113,7 @@ public:
         }
         front_ = (front_ - 1 + capacity_) % capacity_;
         data_[front_] = item;
-        size_++
+        size_++;
     };
     void pushBack(const T& item) override {
         if (size_ == capacity_) {
