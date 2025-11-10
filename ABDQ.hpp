@@ -131,24 +131,24 @@ public:
         if (size_ == 0) {
             throw std::runtime_error("Empty queue");
         }
-        T value = data_[front_];
-        front_ = (front_ + 1) % capacity_;
-        size_--;
         if (capacity_ / SCALE_FACTOR > size_) {
             shrinkIfNeeded();
         }
+        T value = data_[front_];
+        front_ = (front_ + 1) % capacity_;
+        size_--;
         return value;
     };
     T popBack() override {
         if (size_ == 0) {
             throw std::runtime_error("Empty queue");
         }
-        back_ = (back_ - 1 + capacity_) % capacity_;
-        T value = data_[back_];
-        size_--;
         if (capacity_ / SCALE_FACTOR > size_) {
             shrinkIfNeeded();
         }
+        back_ = (back_ - 1 + capacity_) % capacity_;
+        T value = data_[back_];
+        size_--;
         return value;
     };
 
