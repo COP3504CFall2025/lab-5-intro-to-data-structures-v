@@ -176,12 +176,12 @@ public:
             this->front_ = (this->front_ + 1) % this->capacity_;
             return temp;
         }
-        throw std::runtime_error("Array empty")
+        throw std::runtime_error("Array empty");
     }
     T popBack() override {
         if (this->size_ > 0) {
             T temp = this->back();
-            this->back_ = (this->back__ - 1) % this->capacity_;
+            this->back_ = (this->back_ - 1) % this->capacity_;
             return temp;
         }
     }
