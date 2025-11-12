@@ -130,6 +130,7 @@ public:
 
         this->data_[this->front_] = item;
         this->front_ = (this->front_ - 1) % this->capacity_;
+        ++this->size_;
     }
 
     void pushBack(const T &item) override
@@ -140,6 +141,7 @@ public:
 
         this->data_[back_] = item;
         this->back_ = (this->back_ + 1) % capacity_;
+        ++this->size_;
     }
 
     void resize()
@@ -175,6 +177,7 @@ public:
             T temp = this->front();
             this->front_ = (this->front_ + 1) % this->capacity_;
             return temp;
+            --this->size_;
         }
         throw std::runtime_error("Array empty");
     }
@@ -183,6 +186,7 @@ public:
             T temp = this->back();
             this->back_ = (this->back_ - 1) % this->capacity_;
             return temp;
+            --this->size_;
         }
         throw std::runtime_error("Array empty");
     }
