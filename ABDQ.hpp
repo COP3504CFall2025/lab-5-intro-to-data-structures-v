@@ -120,36 +120,67 @@ public:
     // Insertion
     void pushFront(const T &item) override
     {
-        if (size_ > capacity_)
-        {
-            //     resize();
+        if (this->size_ >= this->capacity_) {
+            resize();
         }
 
-        // this->data_[front_ - 1] = item;
-        // --front_;
-        // ++size_;
+        this->data_[this->front_] = item;
+        this->front_ = (this->front_ - 1) % this->capacity_;
     }
 
     void pushBack(const T &item) override
     {
+        if (this->size_ >= this->capacity_) {
+            resize();   
+        }
+
+        this->data_[back_] = item;
+        this->back_ = (this->back_ + 1) % capacity_;
     }
 
-    /*void resize()
+    void resize()
     {
-        T *temp = new T[capacity_ * 2];
+        T *temp = new T[this->capacity_ * 2];
         this->capacity_ *= 2;
 
-        for (size)
-    }*/
+        for (size_t i = 0; i < this->size_; i++) {
+            temp[i] = this->data_[(this->front_ + i) % this->capacity_];
+        }
+
+        delete[] this->data_;
+        this->data_ = temp;
+    }
+
+    void shrink()
+    {
+        T* temp = new T[this->capacity_ / 2];
+        this->capacity_ /= 2;
+
+        for (size_t i = 0; i < this->size_; i++) {
+            temp[i] = this->data_[(this->front_ + 1) % this->capacity_];
+        }
+
+        delete[] this->data_;
+        this->data_ = temp;
+    }
 
     // Deletion
-    T popFront() override;
-    T popBack() override;
+    T popFront() override 
+    {
+        T temp = this->front();
+        this->front_ = (this->front_ + 1) % this->capacity_;
+        return temp;
+    }
+    T popBack() override {
+        T temp = this->back();
+        this->back_ = (this->back__ - 1) % this->capacity_;
+        return temp;
+    }
 
     // Access
-    const T &front() const override;
-    const T &back() const override;
+    const T &front() const override { return this->data_[(this->front_ + 1) % this->capacity_]; }
+    const T &back() const override { return this->data_[(this->back_ - 1) % this->capacity_]; }
 
     // Getters
-    std::size_t getSize() const noexcept override;
+    std::size_t getSize() const noexcept override { return this->size_; }
 };
