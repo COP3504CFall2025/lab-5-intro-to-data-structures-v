@@ -174,6 +174,9 @@ public:
     T popFront() override 
     {
         if (this->size_ > 0) {
+            if (this->size_ <= capacity / 4) {
+                shrink();
+            }
             T temp = this->front();
             this->front_ = (this->front_ + 1) % this->capacity_;
             return temp;
@@ -183,6 +186,9 @@ public:
     }
     T popBack() override {
         if (this->size_ > 0) {
+            if (this->size_ <= capacity / 4) {
+                shrink();
+            }
             T temp = this->back();
             this->back_ = (this->back_ - 1) % this->capacity_;
             return temp;
