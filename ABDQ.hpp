@@ -184,6 +184,7 @@ public:
             this->back_ = (this->back_ - 1) % this->capacity_;
             return temp;
         }
+        throw std::runtime_error("Array empty");
     }
 
     // Access
