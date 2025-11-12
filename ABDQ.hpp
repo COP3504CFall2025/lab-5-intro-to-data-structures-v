@@ -85,6 +85,8 @@ public:
         {
             this->data_[i] = other.data_[i];
         }
+
+        return *this;
     }
     ABDQ &operator=(ABDQ &&other) noexcept
     {
@@ -105,9 +107,11 @@ public:
         other.front_ = 0;
         other.back_ = 0;
         other.data_ = nullptr;
+
+        return *this;
     }
 
-    ~ABDQ() override
+    ~ABDQ()
     {
         delete[] this->data_;
         this->data_ = nullptr;
@@ -167,19 +171,36 @@ public:
     // Deletion
     T popFront() override 
     {
-        T temp = this->front();
-        this->front_ = (this->front_ + 1) % this->capacity_;
-        return temp;
+        if (this->size_ > 0) {
+            T temp = this->front();
+            this->front_ = (this->front_ + 1) % this->capacity_;
+            return temp;
+        }
+        throw std::runtime_error("Array empty")
     }
     T popBack() override {
-        T temp = this->back();
-        this->back_ = (this->back__ - 1) % this->capacity_;
-        return temp;
+        if (this->size_ > 0) {
+            T temp = this->back();
+            this->back_ = (this->back__ - 1) % this->capacity_;
+            return temp;
+        }
     }
 
     // Access
-    const T &front() const override { return this->data_[(this->front_ + 1) % this->capacity_]; }
-    const T &back() const override { return this->data_[(this->back_ - 1) % this->capacity_]; }
+    const T &front() const override 
+    {
+        if (this->size_ > 0) { 
+            return this->data_[(this->front_ + 1) % this->capacity_]; 
+        }
+        throw std::runtime_error("No size found");
+    }
+    const T &back() const override 
+    { 
+        if (this->size_ > 0) {
+            return this->data_[(this->back_ - 1) % this->capacity_];
+        }
+        throw std::runtime_error("No size found");
+    }
 
     // Getters
     std::size_t getSize() const noexcept override { return this->size_; }
