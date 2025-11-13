@@ -23,7 +23,7 @@ public:
     {
         this->capacity_ = 4;
         this->size_ = 0;
-        this->front_ = 0;
+        this->front_ = capacity_ - 1;
         this->back_ = 0;
         this->data_ = new T[this->capacity_];
     }
@@ -32,7 +32,7 @@ public:
     {
         this->capacity_ = capacity;
         this->size_ = 0;
-        this->front_ = 0;
+        this->front_ = this->capacity_ - 1;
         this->back_ = 0;
         this->data_ = new T[this->capacity_];
     }
@@ -129,7 +129,7 @@ public:
         }
 
         this->data_[this->front_] = item;
-        this->front_ = (this->front_ - 1) % this->capacity_;
+        this->front_ = (this->front_ - 1 + this->capacity_) % this->capacity_;
         ++this->size_;
     }
 
@@ -139,7 +139,7 @@ public:
             resize();   
         }
 
-        this->data_[back_] = item;
+        this->data_[this->back_] = item;
         this->back_ = (this->back_ + 1) % capacity_;
         ++this->size_;
     }
@@ -147,11 +147,15 @@ public:
     void resize()
     {
         T *temp = new T[this->capacity_ * 2];
-        this->capacity_ *= 2;
+        this->front_ = (this->front_ + 1) % this->capacity_;
 
         for (size_t i = 0; i < this->size_; i++) {
             temp[i] = this->data_[(this->front_ + i) % this->capacity_];
         }
+
+        this->capacity_ *= 2;
+        this->front_ = this->capacity_ - 1;
+        this->back_ = this->size_;
 
         delete[] this->data_;
         this->data_ = temp;
@@ -160,11 +164,15 @@ public:
     void shrink()
     {
         T* temp = new T[this->capacity_ / 2];
-        this->capacity_ /= 2;
+        this->front_ = (this->front_ + 1) % this->capacity_;
 
         for (size_t i = 0; i < this->size_; i++) {
-            temp[i] = this->data_[(this->front_ + 1) % this->capacity_];
+            temp[i] = this->data_[(this->front_ + i) % this->capacity_];
         }
+
+        this->capacity_ /= 2;
+        this->front_ = this->capacity_ - 1;
+        this->back_ = this->size_;
 
         delete[] this->data_;
         this->data_ = temp;
@@ -178,9 +186,9 @@ public:
                 shrink();
             }
             T temp = this->front();
-            this->front_ = (this->front_ + 1) % this->capacity_;
-            return temp;
+            this->front_ = ((this->front_ + 1) % this->capacity_);
             --this->size_;
+            return temp;
         }
         throw std::runtime_error("Array empty");
     }
@@ -191,8 +199,8 @@ public:
             }
             T temp = this->back();
             this->back_ = (this->back_ - 1) % this->capacity_;
-            return temp;
             --this->size_;
+            return temp;
         }
         throw std::runtime_error("Array empty");
     }

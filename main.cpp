@@ -19,6 +19,19 @@
 */
 
 int main() {
+    ABDQ<int> nutty {};
+    nutty.pushFront(20);
+    nutty.pushFront(30);
+    nutty.pushFront(40);
+    nutty.pushFront(50);
+    nutty.pushFront(60);
+    std::cout << nutty.popFront() << std::endl;
+    std::cout << nutty.popFront() << std::endl;
+    std::cout << nutty.popFront() << std::endl;
+    std::cout << nutty.popFront() << std::endl;
+    std::cout << nutty.popFront() << std::endl;
+    std::cout << nutty.popFront() << std::endl;
+
 }
 
 
